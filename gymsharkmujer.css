@@ -1,0 +1,458 @@
+#gymsharkmujer-container {
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+body.gymshark .header {
+  min-height: 60px !important;
+  background-color: #000000;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 20px !important;
+}
+
+
+
+
+#img-perfil {
+  width: 65px;       /* ancho fijo */
+  height: 40px;      /* alto fijo para que sea cuadrado */
+  object-fit: cover; /* para que no se deforme */
+  border-radius: 50%; /* para que sea redondo */
+  cursor: pointer;    /* para que se note que es clickeable */
+}
+
+/* boton cerrar sesion*/
+#cerrar-sesion-text {
+  background-color: transparent;
+  color: rgb(255, 255, 255);  /* cambia a negro para que contraste con fondo blanco */
+  border: 2px solid rgb(255, 255, 255);
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#cerrar-sesion-text:hover {
+  background-color: black;
+  color: white;
+}
+
+
+.perfil-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+
+  visibility: visible;
+  .perfil-menu {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+  pointer-events: auto; 
+}
+
+.perfil-menu button {
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.perfil-menu button:hover {
+  color: red;
+}
+
+
+/* Selector */
+.selector-ordenar-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;  /* <-- Aquí agregas espacio arriba */
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #000000;
+}
+
+.selector-label {
+  font-size: 1rem;
+}
+
+.selector-ordenar {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 2px solid #888;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #222;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 200px;
+}
+
+.selector-ordenar:hover,
+.selector-ordenar:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+
+body.gymshark #gymsharkmujer-container {
+  padding-top: 60px;
+}
+
+
+
+
+/* Banner con imagen y título */
+.gymsharkmujer-banner {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: 500px;
+  background-image: url('images/gymsharkmujerportada.png');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  background-color: transparent !important;
+  transition: transform 0.6s ease;
+}
+
+.gymsharkmujer-banner:hover {
+  transform: scale(1.02);
+}
+
+.gymsharkmujer-banner h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 4rem;
+  color: white;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  z-index: 2;
+}
+
+/* Contenedor blanco con botones de imagen */
+.gymsharkmujer-buttons {
+  height: auto;         /* sin altura fija */
+  padding: 10px 0;      /* menos padding */
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+/* Botones con imagen */
+.gymsharkmujer-buttons .btn-image {
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.gymsharkmujer-buttons .btn-image img {
+  max-height: 280px; /* menos que el contenedor para evitar overflow */
+  width: auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.gymsharkmujer-buttons .btn-image:hover {
+  transform: scale(1.05);
+}
+
+.gymsharkmujer-txt {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+  user-select: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Catálogo de ropa */
+.products {
+  padding: 40px 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+}
+
+.products h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+.product-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.product {
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fafafa;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* sube el contenido */
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+/* Contenedor imagen con efecto hover */
+.product-img {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  padding-top: 112%;
+  height: 0;
+  margin-bottom: 4px; /* menos espacio debajo imagen */
+}
+
+.product-img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease;
+  display: block;
+}
+
+.img-front {
+  opacity: 1;
+  z-index: 1;
+}
+
+.img-back {
+  opacity: 0;
+  z-index: 2;
+}
+
+.product-img:hover .img-front {
+  opacity: 0;
+}
+
+.product-img:hover .img-back {
+  opacity: 1;
+}
+
+/* Texto de producto */
+.product-txt {
+  padding: 2px 15px 10px 15px; /* poco padding arriba para subir texto */
+  margin-top: 0; /* sin margen arriba */
+  text-align: center;
+}
+
+.product-txt h3 {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 0 4px 0; /* margen inferior pequeño */
+  color: #111;
+}
+
+.product-txt .precio {
+  color: #888;
+  font-weight: 700;
+  margin: 0 0 4px 0; /* margen inferior pequeño */
+  font-size: 1.1rem;
+}
+
+/* Botón agregar carrito */
+.agregar-carrito {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #222;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-top: 0;    /* sin margen arriba */
+  margin-bottom: 0; /* sin margen abajo */
+}
+
+.agregar-carrito:hover {
+  background-color: #555;
+}
+
+.product > img {
+  display: block;   /* quita espacio debajo por inline */
+  margin-bottom: 4px; /* o menos, 2px o 0 */
+  border-radius: 10px; /* para que combine con el resto */
+  width: 100%; /* que la imagen tome todo el ancho del contenedor */
+  height: auto;
+  object-fit: cover;
+}
+
+
+@media (max-width: 991px) {
+
+  .franja-negra {
+    padding-top: 50px; /* si tienes esa clase */
+  }
+
+  .header-content {
+    margin-top: 10px;
+  }
+
+  /* Header y menú */
+  .menu.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+    position: relative;
+  }
+
+  /* Logo */
+  .logo-img {
+    width: 90px;
+    height: auto;
+  }
+  .logo span {
+    font-size: 1.2rem;
+  }
+
+  /* Ocultar navbar por defecto en móvil */
+  .navbar {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(25, 25, 25, 0.85);
+    color: white;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 160px;
+    border-radius: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 999;
+  }
+
+  /* Lista de menú vertical */
+  .navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .navbar ul li a,
+  .navbar ul li span {
+    display: block;
+    padding: 13px 16px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+    font-size: 17px;
+    transition: background-color 0.3s ease;
+  }
+  .navbar ul li a:hover {
+    background-color: #444;
+  }
+
+  /* Checkbox menú hamburguesa oculto */
+  #menu {
+    display: none;
+  }
+
+  /* Label menú hamburguesa (imagen) */
+  label[for="menu"] {
+    cursor: pointer;
+    display: block;
+    width: 35px;
+    height: 35px;
+  }
+  label[for="menu"] img.menu-icono {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Mostrar menú cuando el checkbox está activo */
+  #menu:checked + label + .iconos-derecha + .navbar {
+    display: flex;
+  }
+
+  /* Iconos derecho (carrito, perfil) */
+  .iconos-derecha {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .iconos-derecha img {
+    width: 28px;
+    cursor: pointer;
+  }
+
+  /* Ajuste header para móvil */
+  .header {
+    min-height: 75px !important;
+    padding: 8px 20px !important;
+  }
+
+  /* Otros estilos responsive que tienes */
+  .header-content {
+    padding: 0 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Ajuste productos y otros bloques */
+  .products .product-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* ... agrega aquí el resto de tus estilos responsive que necesites ... */
+
+}

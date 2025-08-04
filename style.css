@@ -1,0 +1,1007 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Oswald:wght@200..700&family=Pacifico&family=Playwrite+AU+QLD:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sacramento&display=swap');
+
+
+.mobile-menu {
+  display: none;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+
+body{
+    font-family: 'popins', sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* NOMBRE USUARIO */
+#nombre-usuario {
+  color: white;
+}
+
+#img-perfil {
+  width: 65px;       /* ancho fijo */
+  height: 40px;      /* alto fijo para que sea cuadrado */
+  object-fit: cover; /* para que no se deforme */
+  border-radius: 50%; /* para que sea redondo */
+  cursor: pointer;    /* para que se note que es clickeable */
+}
+
+
+/* boton cerrar sesion*/
+#cerrar-sesion-text {
+  background-color: transparent;
+  color: rgb(255, 255, 255);  /* cambia a negro para que contraste con fondo blanco */
+  border: 2px solid rgb(255, 255, 255);
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#cerrar-sesion-text:hover {
+  background-color: black;
+  color: white;
+}
+
+
+.perfil-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+
+  visibility: visible;
+  .perfil-menu {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+  pointer-events: auto; 
+}
+
+.perfil-menu button {
+  background-color: white;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.perfil-menu button:hover {
+  color: red;
+}
+
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+
+}
+
+.header{
+ min-height: 60px !important;
+  background-color: black;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 20px !important;
+  background-color: #000000;
+}
+
+.franja-negra {
+  width: 100%;
+  background-color: #000;
+  padding: 20px 0;  /* espacio arriba y abajo */
+  box-sizing: border-box;
+  color: white; /* para que el texto se vea blanco sobre negro */
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinea el logo a la izquierda */
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    
+    font-weight: 800;
+    padding-left: 10px;
+    gap: 10px; /* Espacio entre logo y texto */
+}
+
+.logo span {
+    color: #41636f;
+   font-family: 'Sacramento', cursive;
+   font-size: 30px;
+    
+}
+
+
+
+.iconos-derecha {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto; /* Esto empuja todo a la derecha */
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px; /* Añade algo de espacio lateral */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+
+
+
+.logo-img {
+    width: 100px; /* Puedes ajustar este valor */
+    height: auto;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+
+.menu .navbar ul li {
+    position: relative;
+    float: left;
+}
+
+.menu .navbar ul li a{
+    font-size: 18px;
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    display: block;
+}
+
+#menu{
+    display: none;
+}
+
+.menu-icono{
+    width: 25px;
+}
+
+.menu label{
+    cursor: pointer;
+    display: none;
+}
+
+.submenu{
+    position: relative;
+    width: 60px; /* o el tamaño que quieras */
+    height: auto; /* mantiene la proporción */
+    margin-bottom: 10px;
+
+}
+
+
+
+#lista-carrito th, #lista-carrito td {
+    vertical-align: middle;
+}
+
+
+
+/* SUBMENU DENTRO DE CARRITO*/
+.submenu:hover #carrito{
+    display: block;
+    position: absolute;
+    right: 0;
+    backdrop-filter: blur(10px);
+    top: 100%;
+    z-index: 1;
+    background-color: #4E4B5076;
+    padding: 20px;
+   min-width: 400px;
+
+   
+}
+
+.submenu #carrito {
+  display: none;
+}
+
+.submenu.activo #carrito {
+  display: block !important;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  backdrop-filter: blur(10px);
+  background-color: rgba(78, 75, 80, 0.6);
+  padding: 20px;
+  min-width: 400px;
+  z-index: 1;
+}
+
+
+.submenu.mostrar-carrito #carrito {
+  display: block !important;
+  position: absolute;
+  right: 0;
+  backdrop-filter: blur(10px);
+  top: 100%;
+  z-index: 1;
+  background-color: #4E4B5076;
+  padding: 20px;
+  min-width: 400px;
+}
+
+table{
+    width: 100%;
+}
+
+th, td{
+    color: beige;
+}
+
+.borrar{
+    background-color: black;
+    border-radius: 50%;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: azure;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+
+/* SECCION 1 CABECERA*/
+.header-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding: 0 200px;
+}
+
+.header-img{
+    flex-basis: 50%;
+    text-align: center;
+}
+
+/* Todos los textos centrados*/
+
+.header-txt{
+    flex-basis: 50%;
+    text-align: center;
+}
+
+.header-txt h1{
+    font-size: 90px;
+    text-transform: uppercase;
+    line-height: 1;
+    color: rgb(0, 0, 0);
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 15px;
+}
+
+
+
+.header-txt p{
+    font-size: 20px;
+    text-transform: uppercase;
+   margin-bottom: 20px;
+}
+#vaciar-carrito {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+#lista-carrito {
+    width: 100%;
+}
+
+#lista-carrito table {
+    width: 100%;
+    table-layout: fixed; /* Forzar ancho fijo en columnas */
+    border-collapse: collapse;
+}
+
+#lista-carrito th, 
+#lista-carrito td {
+    padding: 10px;
+    vertical-align: middle;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    word-wrap: break-word; /* Forzar salto de línea en palabras largas */
+    overflow-wrap: break-word;
+    white-space: normal; /* Permite saltos de línea */
+}
+
+/* Controlar ancho máximo de la columna nombre para que no se vea apachurrado */
+#lista-carrito th:nth-child(2),
+#lista-carrito td:nth-child(2) {
+    max-width: 200px;  /* Ajusta este valor a lo que quieras */
+}
+
+/* Ajustar imagen para que no crezca demasiado */
+#lista-carrito img {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 5px;
+    margin: 10px 0;
+    flex-shrink: 0;
+}
+
+
+
+/* boton*/
+
+.btn-1{
+    display: inline-block;
+    padding: 11px 25px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(10, 10, 0);
+    border-radius: 5px;
+}
+
+
+/* SECCION DOS*/
+.ofert {
+    padding: 20px 0 0 0;
+    display: flex;
+    justify-content: center; /* centra el grupo de cajas */
+    gap: 30px; /* espacio entre cajas, puedes poner 0 si quieres que estén pegadas */
+
+    background-image: url('images/fondo4.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+
+
+.ofert-1 {
+    display: flex;
+    align-items: center;
+    flex-basis: calc(30% - 20px);
+    background-color: rgb(255, 255, 255);
+    padding: 15px 20px; /* era 35px, ahora menos alto */
+    margin-bottom: 40px;
+    margin-top: 40px;
+    border-radius: 12px;
+
+    height: auto; /* asegura que no tenga altura fija innecesaria */
+    max-height: 200px; /* si quieres limitar la altura */
+    overflow: hidden; /* por si algo se sale de la caja */
+}
+
+
+
+
+.ofert-img{
+    flex-basis: 50%;
+    margin-right:  15px; ;
+}
+
+.ofert-img img {
+  width: 100%;  /* antes: 100vw */
+  height: auto;
+  display: block;
+}
+
+
+
+.full-width-img img {
+  width: 60vw;
+  height: auto;
+  display: block;
+}
+
+
+
+.ofert-txt{
+    flex-basis: 50%;
+    text-align: center;
+}
+
+.ofert-txt h3{
+    color: black;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.header-txt h1,
+.header-txt p {
+    color: white;
+}
+
+
+.btn-2{
+    display: inline-block;
+    padding: 7px 10px;
+    background-color: black;
+    color: azure;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+
+
+/* SECCION Tres Productos*/
+
+
+.product{
+    padding: 50px 0;
+    text-align: center;
+}
+
+.products h2{
+    color: rgb(0, 0, 0);
+    font-family: 'Oswald', sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.product-content{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+
+.product{
+    text-align: center;
+    padding: 30px;
+    box-shadow: 0 0 20px rgb(0, 0, 0, 0.1);
+}
+
+.product img {
+    width: 100%;
+    height: 370px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+
+.product h3{
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.product p, .precio{
+    font-size: 16px;
+    color: black;
+    margin-bottom: 15px;
+
+}
+
+.products {
+    margin-bottom: 80px; /* Ajusta el valor según cuánto espacio quieras */
+}
+
+
+.precio {
+font-weight: 800;
+}
+
+/* SECCION VIDEO */
+
+.video-franja {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Puedes ajustar la altura de la franja */
+    overflow: hidden;
+}
+
+.video-franja video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Evita distorsión y mantiene proporción */
+    display: block;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.video-overlay h2 {
+    font-size: 48px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.video-overlay p {
+    font-size: 20px;
+}
+
+
+/* SECCION 4 icons*/
+
+
+.icons{
+    padding: 50px 0 100px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-1 {
+    flex-basis: calc(33.3% - 30px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;       /* Menor padding vertical, más ancho lateral */
+    background-color: #263a42;
+    border-radius: 12px;
+    height: 200px;             /* Altura fija para que se vea bajita */
+    box-sizing: border-box;  /* Asegura que el padding no sume más a la altura */
+}
+
+
+.icon-img img {
+    height: 250px;
+    object-fit: contain;
+}
+
+
+.icon-txt h3{
+font-size: 20px;
+color: rgb(255, 255, 255);
+font-family: 'Oswald', sans-serif;
+text-transform: uppercase;
+}
+
+.icon-txt p{
+    font-size: 10px;
+    color: rgb(255, 255, 255);
+}
+
+
+/* SECCION 5 vlog*/
+
+.btn-4 {
+    display: inline-block;
+    padding: 9px 15px;        /* Más espacio interno */
+    background-color: black;
+    color: azure;
+    border-radius: 10px;       /* Bordes más redondeados */
+    font-size: 18px;           /* Texto más grande */
+    font-weight: bold;         /* (opcional) Texto en negritas */
+    cursor: pointer;           /* Cambia el cursor al pasar por encima */
+    transition: 0.3s ease;     /* Suaviza cualquier cambio visual */
+}
+
+.btn-4:hover {
+    background-color: #333;    /* (opcional) efecto al pasar el mouse */
+}
+
+
+
+
+.blog {
+    display: flex;
+    justify-content: center; /* Esto centra los elementos hijos */
+   
+    gap: 70px;               /* Espacio entre las cajas */
+    padding-bottom: 100px;
+}
+.blog-1 {
+    width: 300px; /* o el ancho que quieras */
+    text-align: center; /* Esto centra el texto dentro de cada caja */
+}
+
+
+.blog-1 img{
+    margin-bottom: 20px;
+
+}
+
+.blog-1 h3{
+font-size: 20px;
+color: black;
+font-family: 'Oswald', sans-serif;
+text-transform: uppercase;
+margin-bottom: 15px;
+}
+
+.blog-1 p{
+    font-size: 16px;
+    color: black;
+}
+
+
+/* SECCION LOG IN*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  text-align: center;
+}
+
+.modal-content h2 {
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 20px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 10px; right: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+/* FOOTER*/
+.footer {
+  width: 100vw;       /* ancho total del viewport */
+  position: relative; /* para que no haya desplazamiento */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: black;
+  padding: 50px 0;
+  box-sizing: border-box;
+  color: white;
+  z-index: 10;
+}
+
+
+.footer-content {
+   max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.link h3{
+    font-size: 18px;
+    color: azure;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.link a{
+    font-size: 16px;
+    color: aliceblue;
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+
+
+#lista-carrito img {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 5px;
+    margin: 10px 0; /* esto da espacio arriba y abajo */
+}
+@media (max-width: 991px) {
+
+
+
+  .franja-negra {
+    padding-top: 50px; /* o ajusta el valor hasta que se vea bien */
+  }
+
+  /* Opcional: si quieres que el contenido baje un poco más */
+  .header-content {
+    margin-top: 10px; /* espacio extra */
+  }
+  .menu.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+  }
+
+  .mobile-menu {
+    position: relative;
+    display: block;
+  }
+
+  .menu-icon {
+    width: 35px;
+    height: auto;
+    cursor: pointer;
+  }
+
+  .menu-icono {
+    display: block;
+    width: 35px;
+    cursor: pointer;
+  }
+
+  /* --- SUBMENÚ HAMBURGUESA --- */
+
+  .menu-desplegable {
+    display: none;
+    position: absolute;
+    top: 60px; /* ajustado para navbar 75px */
+    left: 0;
+    background-color: rgba(25, 25, 25, 0.85); /* fondo gris oscuro traslúcido */
+    color: white;
+    width: 160px;
+    border-radius: 0; /* sin curvas */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 999;
+  }
+
+  .menu-desplegable ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-desplegable li a {
+    display: block;
+    padding: 13px 16px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+    transition: background-color 0.3s ease;
+    font-size: 17px;
+  }
+
+  .menu-desplegable li a:hover {
+    background-color: #444;
+  }
+
+  /* --- MENÚ HORIZONTAL CLÁSICO (ESCONDIDO EN MÓVIL) --- */
+
+  .navbar {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 75px; /* navbar menor altura */
+    right: 0;
+    width: 200px;
+    border-radius: 0 0 0 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .navbar li a {
+    display: block;
+    padding: 18px 22px;
+    color: white;
+    border-bottom: 1px solid #555;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Mostrar el menú horizontal si se activa por checkbox */
+  #menu:checked + label + .iconos-derecha + .navbar {
+    display: flex;
+  }
+
+  /* --- HEADER RESPONSIVE --- */
+
+  .header {
+    min-height: 75px !important;
+    padding: 8px 20px !important;
+  }
+
+  .logo-img {
+    width: 90px; /* un poco más grande que original */
+    height: auto;
+  }
+
+  .menu .navbar ul li a {
+    font-size: 18px;
+    padding: 20px 16px;
+  }
+
+  .iconos-derecha {
+    gap: 20px;
+  }
+
+  .menu img {
+    max-height: 50px;
+    height: auto;
+    width: auto;
+  }
+
+  /* Mantén lo demás igual */
+
+  .header-content {
+    padding: 0 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .header-img {
+    display: block;
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .header-img img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .header-txt {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .header-txt h1 {
+    font-size: 60px;
+  }
+
+  .header-txt p {
+    font-size: 16px;
+  }
+
+  /* Resto de estilos responsive que ya tenías sin cambios */
+
+  .products .product-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .ofert {
+    flex-direction: column;
+    padding: 80px 0 30px;
+  }
+
+  .ofert-1 {
+    flex-basis: 100%;
+    max-height: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    box-sizing: border-box;
+  }
+
+  .ofert-1 img {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .ofert-1 .ofert-txt {
+    text-align: left;
+  }
+
+  .ofert-1 .ofert-txt h3 {
+    font-size: 18px;
+    margin: 0 0 5px;
+  }
+
+  .ofert-1 .ofert-txt p {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .icon-1 {
+    flex-basis: 100%;
+    height: auto;
+    margin-bottom: 30px;
+  }
+
+  .blog {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .blog-1 {
+    width: 100%;
+  }
+
+  .icons .icon-1 {
+    flex-basis: 80%;
+    max-width: 170px;
+    height: 150px;
+    padding: 10px 15px;
+    margin: 0 auto 20px;
+    box-sizing: border-box;
+  }
+
+  .icons .icon-img img {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .icons .icon-txt h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .icons .icon-txt p {
+    font-size: 14px;
+  }
+
+  .blog-1 img {
+    width: 350px;
+    height: auto;
+    margin: 0 auto 15px;
+    display: block;
+  }
+
+}

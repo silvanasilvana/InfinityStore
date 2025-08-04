@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comprar - Infinity Store</title>
+
+  <!-- Fuentes Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="comprar.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="menu container">
+
+      
+      
+ <!-- Imagen de menú (hamburguesa) -->
+    <div class="mobile-menu">
+      <img src="images/barra.jpg" class="menu-icon" alt="Menú" id="menuToggle" />
+      <div class="menu-desplegable" id="menuDesplegable">
+        <ul>
+          <li><a href="gymsharkmujer.html">Mujer</a></li>
+          <li><a href="gymsharkhombre.html">Hombre</a></li>
+          <li><a href="accesorios.html">Accesorios</a></li>
+        </ul>
+      </div>
+    </div>
+    
+      <a href="index.html" class="logo">
+        <img src="images/logo.PNG" alt="Logo" class="logo-img" />
+        <span>Infinity Store</span>
+      </a>
+
+      <nav class="navbar">
+        <ul>
+          <li><a href="gymsharkmujer.html"> Mujer </a></li>
+          <li><a href="gymsharkhombre.html"> Hombre </a></li>
+          <li><a href="accesorios.html"> Accesorios </a></li>
+          <li><a href="comprar.html" style="color:#5b6973; font-weight:700;">Comprar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Carrito de Compra</h1>
+    <div class="checkout-wrapper">
+      <!-- Productos lado izquierdo -->
+      <section class="cart-section">
+        <h2>Productos en tu bolsa</h2>
+
+        <table id="lista-carrito" class="cart-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí se inyectan los productos -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Resumen y formulario lado derecho -->
+      <section class="summary-section">
+        <div class="total-section">
+          <h2>Resumen de compra</h2>
+          <p>Total a pagar:</p>
+          <p class="total-amount"><strong>$0.00</strong></p>
+        </div>
+
+        <div class="form-section">
+          <h2>Datos para la compra</h2>
+          <form id="checkout-form">
+            <label for="name">Nombre completo:</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required />
+
+            <!-- ...dentro de form id="checkout-form" -->
+<label for="direccion">Dirección de entrega:</label>
+<textarea id="direccion" name="direccion" rows="3" placeholder="Ingresa Tu Dirección." required></textarea>
+
+            
+
+            <label for="phone">Teléfono:</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Ejemplo: 8711234567" required />
+
+            <button type="submit" class="btn-pay">Pagar</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Configura Firebase aquí con tus datos
+   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyChkZHqONT27CD5CkV02KZUPSKyGrPFojc",
+  authDomain: "infinity-store-191c9.firebaseapp.com",
+  projectId: "infinity-store-191c9",
+  storageBucket: "infinity-store-191c9.firebasestorage.app",
+  messagingSenderId: "185404166630",
+  appId: "1:185404166630:web:898dcdb0c6891e811b4627",
+  measurementId: "G-9SWGH5N226"
+};
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Simulación de carrito, cambia por tu lógica real en script.js
+    const carritoProductos = [
+      { nombre: "Leggings", cantidad: 2, precio: 500 },
+      { nombre: "Top deportivo", cantidad: 1, precio: 200 }
+    ];
+
+    // Escucha el submit del formulario
+    document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+
+      let productosStr = carritoProductos.map(p => `${p.nombre} x${p.cantidad}`).join(', ');
+      let total = carritoProductos.reduce((acc, p) => acc + (p.cantidad * p.precio), 0);
+
+      try {
+        await db.collection('compras').add({
+          nombre: name,
+          email: email,
+          telefono: phone,
+          productos: productosStr,
+          total: `$${total.toFixed(2)}`,
+          fecha: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        alert('Gracias por tu compra. Pronto recibirás información para el pago.');
+
+        // Aquí puedes limpiar carrito y formulario si quieres
+        // document.getElementById('checkout-form').reset();
+        // carritoProductos = [];
+
+      } catch(error) {
+        alert('Error guardando el pedido: ' + error.message);
+      }
+    });
+  </script>
+
+  
+ 
+ <!--  MENU HAMBURGUESA MEDIA MOVIL--> 
+
+<script>
+  const menuIcon = document.getElementById('menuToggle');
+  const menuDesplegable = document.getElementById('menuDesplegable');
+
+  let timeoutId;
+
+  // Función para mostrar menú y reiniciar temporizador
+  function mostrarMenu() {
+    menuDesplegable.style.display = 'block';
+
+    if (timeoutId) clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      menuDesplegable.style.display = 'none';
+    }, 5000);
+  }
+
+  menuIcon.addEventListener('click', (e) => {
+    e.stopPropagation(); // Para que no se dispare el listener del documento
+    if (menuDesplegable.style.display === 'block') {
+      menuDesplegable.style.display = 'none';
+      if (timeoutId) clearTimeout(timeoutId);
+    } else {
+      mostrarMenu();
+    }
+  });
+
+  // Cancela temporizador si haces clic dentro del menú
+  menuDesplegable.addEventListener('click', (e) => {
+    e.stopPropagation(); // Evita que el clic se propague y cierre el menú
+    if (timeoutId) clearTimeout(timeoutId);
+  });
+
+  // Cierra el menú al hacer clic fuera del icono o menú
+  document.addEventListener('click', () => {
+    menuDesplegable.style.display = 'none';
+    if (timeoutId) clearTimeout(timeoutId);
+  });
+</script>
+
+
+
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

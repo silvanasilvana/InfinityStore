@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel Propietario - Pedidos</title>
+
+  <link rel="stylesheet" href="propietario.css">
+  <style>
+    /* Navbar ocupa todo el ancho */
+    .navbar {
+      background-color: #000;
+      padding: 10px 30px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      margin-bottom: 30px;
+      width: 100vw;      /* ancho completo de la ventana */
+      position: relative; /* para poder usar width 100vw sin problema */
+      left: 0;           /* aseguramos que quede pegada a la izquierda */
+      top: 0;
+      box-sizing: border-box; /* para que padding no sume más ancho */
+    }
+    .navbar img.logo {
+      height: 40px;
+      cursor: pointer;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;            /* elimina margenes para que navbar quede en borde */
+      background: #ddd;     /* fondo gris claro */
+      padding: 0 30px 30px; /* padding horizontal para el contenido */
+      min-height: 100vh;
+    }
+    h1 {
+      color: #333;
+      margin-top: 0;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #596a75;
+      color: white;
+    }
+    img.product-photo {
+      max-width: 80px;
+      border-radius: 5px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      background: transparent; /* para que fondo gris se vea */
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="index.html" class="logo-link">
+    <img src="images/logo.PNG" alt="Logo Infinity Store" class="logo" />
+    <span class="regresar-text" style="color:white; margin-left:10px;">Regresar</span>
+  </a>
+</div>
+
+<script>
+  const password = prompt("Ingresa la contraseña de propietario:");
+  if(password !== "Pedro2025") { // Cambia la contraseña aquí
+    alert("Contraseña incorrecta. Redirigiendo...");
+    window.location.href = "index.html";
+  }
+</script>
+
+<div class="container">
+  <h1>Pedidos Recibidos</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Productos</th>
+        <th>Total</th>
+        <th>Dirección de entrega</th>
+        <th>Foto</th>
+      </tr>
+    </thead>
+    <tbody id="pedidos-body">
+      <!-- Aquí se inyectan los pedidos -->
+    </tbody>
+  </table>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // Configura Firebase aquí con tus datos
+ // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyChkZHqONT27CD5CkV02KZUPSKyGrPFojc",
+  authDomain: "infinity-store-191c9.firebaseapp.com",
+  projectId: "infinity-store-191c9",
+  storageBucket: "infinity-store-191c9.firebasestorage.app",
+  messagingSenderId: "185404166630",
+  appId: "1:185404166630:web:898dcdb0c6891e811b4627",
+  measurementId: "G-9SWGH5N226"
+};
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  const tbody = document.getElementById('pedidos-body');
+
+  // Escuchar cambios en la colección "compras" y mostrar pedidos
+  db.collection('compras').orderBy('fecha', 'desc').onSnapshot(snapshot => {
+    tbody.innerHTML = ''; // Limpiar tabla
+
+   snapshot.forEach(doc => {
+  const pedido = doc.data();
+
+  // Si productos es array, puedes armar un texto con los títulos
+  const productosTexto = Array.isArray(pedido.productos)
+    ? pedido.productos.map(p => p.titulo).join(', ')
+    : pedido.productos || '';
+
+  // Tomar la imagen del primer producto, si existe
+  const fotoUrl = pedido.productos && pedido.productos.length > 0
+    ? pedido.productos[0].imagen
+    : 'https://via.placeholder.com/80';
+
+  const direccion = pedido.direccionEntrega || pedido.direccion || 'No proporcionada';
+
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${pedido.nombre || ''}</td>
+    <td>${pedido.email || ''}</td>
+    <td>${pedido.telefono || ''}</td>
+    <td>${productosTexto}</td>
+    <td>${pedido.total || ''}</td>
+    <td>${direccion}</td>
+    <td><img src="${fotoUrl}" alt="Foto producto" class="product-photo"></td>
+  `;
+  tbody.appendChild(tr);
+});
+
+
+    if(snapshot.empty) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;">No hay pedidos aún</td></tr>`;
+    }
+  });
+</script>
+
+</body>
+</html>

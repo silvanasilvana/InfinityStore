@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gymshark Hombre</title>
+
+  <!-- Tus estilos generales -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Estilos específicos Gymshark Mujer -->
+  <link rel="stylesheet" href="gymsharkhombre.css" />
+
+  <!-- Fuente de Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Oswald:wght@200..700&family=Pacifico&family=Playwrite+AU+QLD:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sacramento&display=swap" rel="stylesheet">
+
+  <!-- Firebase -->
+  <script type="module">
+    // (tu código Firebase aquí, sin cambios)
+  </script>
+</head>
+<script>
+  function ordenarProductos() {
+    const valor = document.getElementById("ordenar").value;
+    const contenedor = document.querySelector(".product-content");
+    const productos = Array.from(contenedor.querySelectorAll(".product"));
+
+    productos.forEach(p => p.style.display = ""); // Mostrar todos al inicio
+
+    if (valor === "precio-asc" || valor === "precio-desc") {
+      productos.sort((a, b) => {
+        const precioA = parseFloat(a.querySelector(".precio").textContent.replace("$", ""));
+        const precioB = parseFloat(b.querySelector(".precio").textContent.replace("$", ""));
+        return valor === "precio-asc" ? precioA - precioB : precioB - precioA;
+      });
+      productos.forEach(p => contenedor.appendChild(p));
+    } else if (valor === "talla-xs" || valor === "talla-s" || valor === "talla-m") {
+      const tallaFiltrar = valor.split("-")[1].toUpperCase();
+      productos.forEach(p => {
+        const tallaProducto = p.querySelector(".product-size").textContent.replace(/[()]/g, "").toUpperCase();
+        if (tallaProducto === tallaFiltrar) {
+          p.style.display = ""; // Mostrar solo talla seleccionada
+        } else {
+          p.style.display = "none"; // Ocultar otras tallas
+        }
+      });
+    } else {
+      // Mostrar todos si no hay filtro ni orden
+      productos.forEach(p => p.style.display = "");
+    }
+  }
+</script>
+
+
+
+<body class="gymshark">
+
+  <header class="header">
+    <div class="menu container">
+
+      
+      
+ <!-- Imagen de menú (hamburguesa) -->
+    <div class="mobile-menu">
+      <img src="images/barra.jpg" class="menu-icon" alt="Menú" id="menuToggle" />
+      <div class="menu-desplegable" id="menuDesplegable">
+        <ul>
+          <li><a href="gymsharkmujer.html">Mujer</a></li>
+          <li><a href="gymsharkhombre.html">Hombre</a></li>
+          <li><a href="accesorios.html">Accesorios</a></li>
+        </ul>
+      </div>
+    </div>
+
+    
+      <a href="index.html" class="logo">
+        <img src="images/logo.PNG" alt="Logo" class="logo-img" />
+        <span>Infinity Store</span>
+      </a>
+
+      <input type="checkbox" id="menu" />
+      <label for="menu">
+        <img src="images/menu.png" class="menu-icono" alt="menu" />
+      </label>
+
+      <div class="iconos-derecha"></div>
+  <nav class="navbar">
+  <ul>
+    <li><a href="gymsharkmujer.html"> Mujer </a></li>
+    <li><a href="gymsharkhombre.html"> Hombre </a></li>
+    <li><a href="accesorios.html"> Accesorios </a></li>
+    <li>
+      <span id="nombre-usuario"></span>  <!-- Aquí -->
+    </li>
+  </ul>
+</nav>
+      <div>
+        <ul>
+          <li class="submenu">
+            <img src="images/bolsa.png" id="img-carrito" alt="carrito" />
+            <div id="carrito">
+              <table id="lista-carrito">
+                <thead>
+                  <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <a href="#" id="vaciar-carrito" class="btn-2"> Vaciar Carrito </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+        <!-- SCRIPT PARA DIRIJIRME DE LA BOLSA A CARRITO -->
+<script>
+  document.getElementById('img-carrito').addEventListener('click', () => {
+    window.location.href = 'comprar.html';
+  });
+</script>
+
+      <div>
+        <ul>
+          <li class="submenu">
+            <img src="images/perfil.png" id="img-perfil" alt="perfil" style="cursor:pointer;" onclick="mostrarLogin()" />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Franja principal con imagen y título -->
+  <div id="gymsharkmujer-container" class="container">
+    <div class="gymsharkhombre-banner">
+      <h1>New drops of<br>your next style</h1>
+    </div>
+  </div>
+
+  <!-- MODAL LOGIN -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarLogin()">&times;</span>
+      <h2>Iniciar Sesión</h2>
+      <form id="login-form">
+        <input type="email" id="email" placeholder="Correo electrónico" required />
+        <input type="password" id="password" placeholder="Contraseña" required />
+        <button type="submit" class="btn-2">Entrar</button>
+        <p>¿No tienes cuenta? <a href="#" onclick="mostrarRegistro()">Registrarme</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL REGISTRO -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarRegistro()">&times;</span>
+      <h2>Registrarse</h2>
+      <form id="register-form">
+        <input type="text" placeholder="Nombre completo" required />
+        <input type="email" id="reg-email" placeholder="Correo electrónico" required />
+        <input type="password" id="reg-password" placeholder="Contraseña" required />
+        <button type="submit" class="btn-2">Crear cuenta</button>
+        <p>¿Ya tienes cuenta? <a href="#" onclick="mostrarLogin()">Iniciar sesión</a></p>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+   <!-- Selector ROPA -->
+<div class="selector-ordenar-container">
+  <label for="ordenar" class="selector-label">Ordenar / Filtrar:</label>
+  <select id="ordenar" onchange="ordenarProductos()" class="selector-ordenar">
+    <option value="">-- Selecciona --</option>
+    <option value="precio-asc">Precio: menor a mayor</option>
+    <option value="precio-desc">Precio: mayor a menor</option>
+    <option value="talla-xs">Mostrar solo XS</option>
+    <option value="talla-s">Mostrar solo S</option>
+    <option value="talla-m">Mostrar solo M</option>
+  </select>
+</div>
+
+
+  <!-- CATALOGO ROPA -->
+
+  <!-- Seccion 3 productos -->
+
+  
+   <main id="lista-1">
+        
+    <div id="carrito-submenu">
+    <main class="products container" id="lista-1"> 
+
+    <h2> Productos Populares</h2>
+
+    
+    
+    <div class="product-content" id="lista-1">
+
+
+
+      <!--Producto-->
+ 
+
+
+
+<div class="product">
+  <div class="product-img">
+    <img src="images/gymsharkhombre/s2.jpg" alt="Producto 20 - Vista Frontal" class="img-front" />
+    <img src="images/gymsharkhombre/s2.2.jpg" alt="Producto 20 - Vista Posterior" class="img-back" />
+  </div>
+  <div class="product-txt">
+    <h3 class="product-name">Power T-Shirt</h3>
+    <p class="product-size">(S)</p>
+    <p class="precio">$72</p>
+   <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
+  </div>
+</div>
+
+<div class="product">
+  <div class="product-img">
+    <img src="images/gymsharkhombre/s3.jpg" alt="Producto 21 - Vista Frontal" class="img-front" />
+    <img src="images/gymsharkhombre/s3.2.jpg" alt="Producto 21 - Vista Posterior" class="img-back" />
+  </div>
+  <div class="product-txt">
+    <h3 class="product-name">Power T-Shirt</h3>
+    <p class="product-size">(S)</p>
+    <p class="precio">$72</p>
+   <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
+  </div>
+</div>
+
+<div class="product">
+  <div class="product-img">
+    <img src="images/gymsharkhombre/s4.jpg" alt="Producto 22 - Vista Frontal" class="img-front" />
+    <img src="images/gymsharkhombre/s4.2.jpg" alt="Producto 22 - Vista Posterior" class="img-back" />
+  </div>
+  <div class="product-txt">
+    <h3 class="product-name">Ribbed Tank 3 Pack</h3>
+    <p class="product-size">(M)</p>
+    <p class="precio">$72</p>
+   <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
+  </div>
+</div>
+
+<div class="product">
+  <div class="product-img">
+    <img src="images/gymsharkhombre/s5.jpg" alt="Producto 23 - Vista Frontal" class="img-front" />
+    <img src="images/gymsharkhombre/s2.2.jpg" alt="Producto 23 - Vista Posterior" class="img-back" />
+  </div>
+  <div class="product-txt">
+    <h3 class="product-name">Arrival Tank</h3>
+    <p class="product-size">(M)</p>
+    <p class="precio">$40</p>
+    <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
+  </div>
+</div>
+
+<div class="product">
+  <div class="product-img">
+    <img src="images/gymsharkhombre/s6.jpg" alt="Producto 24 - Vista Frontal" class="img-front" />
+    <img src="images/gymsharkhombre/s6.2.jpg" alt="Producto 24 - Vista Posterior" class="img-back" />
+  </div>
+  <div class="product-txt">
+    <h3 class="product-name">Power T-Shirt</h3>
+    <p class="product-size">(S)</p>
+    <p class="precio">$72</p>
+    <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
+  </div>
+</div>
+
+
+<div class="product">
+  <div class="product-img">
+    <img src="images/gymsharkhombre/s7.jpg" alt="Producto 24 - Vista Frontal" class="img-front" />
+    <img src="images/gymsharkhombre/s7.2.jpg" alt="Producto 24 - Vista Posterior" class="img-back" />
+  </div>
+  <div class="product-txt">
+    <h3 class="product-name"> Cut Off Tank</h3>
+    <p class="product-size">(S)</p>
+    <p class="precio">$72</p>
+    <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
+  </div>
+</div>
+
+<div class="product">
+  <div class="product-img">
+    <img src="images/gymsharkhombre/s8.jpg" alt="Producto 24 - Vista Frontal" class="img-front" />
+    <img src="images/gymsharkhombre/s8.2.jpg" alt="Producto 24 - Vista Posterior" class="img-back" />
+  </div>
+  <div class="product-txt">
+    <h3 class="product-name">Running 1/4 Zip</h3>
+    <p class="product-size">(M)</p>
+    <p class="precio">$116</p>
+    <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
+  </div>
+</div>
+
+
+
+
+<!-- Firebase App -->
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const submenu = document.querySelector('.submenu');
+    let timeout;
+
+    // Mostrar carrito al pasar el mouse (opcional)
+    submenu.addEventListener('mouseenter', () => {
+      submenu.classList.add('mostrar-carrito');
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        submenu.classList.remove('mostrar-carrito');
+      }, 5000);
+    });
+
+    // Mostrar carrito al hacer clic en "Agregar al carrito"
+    function mostrarSubmenuCarrito() {
+      submenu.classList.add('mostrar-carrito');
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        submenu.classList.remove('mostrar-carrito');
+      }, 3000);
+    }
+
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('agregar-carrito')) {
+        mostrarSubmenuCarrito();
+      }
+    });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+  </main>
+
+  <!-- NUEVA SECCION--> 
+
+  
+ 
+ <!--  MENU HAMBURGUESA MEDIA MOVIL--> 
+
+<script>
+  const menuIcon = document.getElementById('menuToggle');
+  const menuDesplegable = document.getElementById('menuDesplegable');
+
+  let timeoutId;
+
+  // Función para mostrar menú y reiniciar temporizador
+  function mostrarMenu() {
+    menuDesplegable.style.display = 'block';
+
+    if (timeoutId) clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      menuDesplegable.style.display = 'none';
+    }, 5000);
+  }
+
+  menuIcon.addEventListener('click', (e) => {
+    e.stopPropagation(); // Para que no se dispare el listener del documento
+    if (menuDesplegable.style.display === 'block') {
+      menuDesplegable.style.display = 'none';
+      if (timeoutId) clearTimeout(timeoutId);
+    } else {
+      mostrarMenu();
+    }
+  });
+
+  // Cancela temporizador si haces clic dentro del menú
+  menuDesplegable.addEventListener('click', (e) => {
+    e.stopPropagation(); // Evita que el clic se propague y cierre el menú
+    if (timeoutId) clearTimeout(timeoutId);
+  });
+
+  // Cierra el menú al hacer clic fuera del icono o menú
+  document.addEventListener('click', () => {
+    menuDesplegable.style.display = 'none';
+    if (timeoutId) clearTimeout(timeoutId);
+  });
+</script>
+
+
+
+<footer class="footer">
+   <div class="footer-content container">
+       
+       <div class="link"> 
+           <h3>Mi cuenta</h3>
+           <ul> 
+               <li><a href="propietario.html">Ingresar</a></li>
+              
+           </ul>
+       </div>
+
+         <div class="link"> 
+           <h3>Ayuda</h3>
+           <ul> 
+               <li><a href="https://wa.me/5218715952461?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Infinity%20Store" target="_blank">Contáctanos</a></li>
+              <li><a href="tel:+5218715952461">Teléfono</a></li>
+              <li><a href="https://www.instagram.com/infinitylstore?igsh=Nmx1YTNxeDA1N3Ft" target="_blank">Instagram</a></li>
+             
+              
+           </ul>
+       </div>
+
+       <div class="link"> 
+           <h3>Sobre Nosotros</h3>
+           <ul> 
+               <li><a href="quienessomos.html">Quienes Somos</a></li>
+               <li><a href="devoluciones.html">Devoluciones</a></li>
+               <li><a href="pago.html">Pago</a></li>
+           </ul>
+       </div>
+
+     
+
+   </div>
+</footer>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>
