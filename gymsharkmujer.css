@@ -393,13 +393,8 @@ body.gymshark #gymsharkmujer-container {
 
   /* Texto Infinity Store reducido y con límite para no salirse */
   .brand-name,
-  .infinity-store-text {
-    font-size: 10px;
-    max-width: 120px;       /* limita ancho para que no desborde */
-    white-space: nowrap;    /* evita salto de línea */
-    overflow: hidden;       /* oculta texto que se salga */
-    text-overflow: ellipsis; /* añade "..." si es muy largo */
-    display: inline-block;
+   .infinity-store-text {
+    display: none !important;
   }
 
   /* Menú hamburguesa (barra menú) más pequeña */
