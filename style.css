@@ -742,8 +742,7 @@ margin-bottom: 15px;
     object-fit: contain;
     border-radius: 5px;
     margin: 10px 0; /* esto da espacio arriba y abajo */
-}
-@media (max-width: 991px) {
+}@media (max-width: 991px) {
 
   .franja-negra {
     padding-top: 50px; /* o ajusta el valor hasta que se vea bien */
@@ -755,6 +754,9 @@ margin-bottom: 15px;
     padding: 0 20px;
     flex-direction: column;
     gap: 20px;
+    flex-wrap: nowrap; /* evitar que elementos se desborden */
+    position: relative; /* para z-index */
+    overflow: visible !important; /* permitir overflow para submenu */
   }
 
   .menu.container {
@@ -762,16 +764,31 @@ margin-bottom: 15px;
     align-items: center;
     justify-content: space-between;
     padding: 8px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: visible !important; /* permitir overflow para submenu */
+    position: relative; /* para z-index */
+  }
+
+  /* Ajustes para el texto Infinity Store */
+  .brand-name,
+  .infinity-store-text {
+    font-size: 10px;
+    max-width: 150px; /* límite de ancho */
+    white-space: nowrap; /* evita salto de línea */
+    overflow: hidden; /* oculta contenido que se salga */
+    text-overflow: ellipsis; /* agrega ... si es muy largo */
   }
 
   .mobile-menu {
     position: relative;
     display: block;
+    z-index: 1100; /* para que esté encima */
   }
 
   .menu-icon,
   .menu-icono {
-    width: 20px; /* reducido de 35px */
+    width: 30px; /* reducido de 35px */
     height: auto;
     cursor: pointer;
   }
@@ -779,16 +796,27 @@ margin-bottom: 15px;
   /* --- SUBMENÚ HAMBURGUESA --- */
   .menu-desplegable {
     display: none;
-    position: absolute;
+    position: absolute !important;
     top: 60px; /* ajustado para navbar 75px */
     left: 0;
-    background-color: rgba(25, 25, 25, 0.85); /* fondo gris oscuro traslúcido */
+    background-color: rgba(25, 25, 25, 0.95) !important; /* fondo gris oscuro traslúcido */
     color: white;
     width: 160px;
     border-radius: 0; /* sin curvas */
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    z-index: 999;
+    z-index: 9999 !important; /* más alto para que no lo tape nada */
   }
+
+  /* SUBMENÚ DEL CARRITO AJUSTADO PARA MÓVIL */
+.submenu.mostrar-carrito #carrito,
+.submenu.activo #carrito {
+  top: 120%; /* baja más el submenú */
+  left: 50%; /* centrado horizontalmente */
+  transform: translateX(-50%); /* corrige el centrado */
+  right: auto; /* anula el right: 0 */
+  min-width: 90vw; /* para que se vea bien en pantallas chicas */
+}
+
 
   .menu-desplegable ul {
     list-style: none;
@@ -815,13 +843,14 @@ margin-bottom: 15px;
     display: none;
     flex-direction: column;
     background-color: #333;
-    position: absolute;
+    position: absolute !important;
     top: 75px; /* navbar menor altura */
     right: 0;
     width: 200px;
     border-radius: 0 0 0 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    z-index: 1000;
+    z-index: 9999 !important; /* más alto que otros elementos */
+    overflow: visible !important; /* permitir overflow */
   }
 
   .navbar ul {
@@ -843,18 +872,35 @@ margin-bottom: 15px;
 
   /* Mostrar el menú horizontal si se activa por checkbox */
   #menu:checked + label + .iconos-derecha + .navbar {
-    display: flex;
+    display: flex !important;
+  }
+
+  /* --- BOTÓN CERRAR SESIÓN (ajusta la clase o id que tengas) --- */
+  .btn-cerrar-sesion {
+    position: relative !important;
+    z-index: 10000 !important; /* encima de todo */
+  }
+
+  /* --- Evitar que otros fondos oscuros tapen el submenu o boton */
+  .fondo-negro-que-tapa, /* reemplaza por el selector correcto si tienes */
+  .overlay-negro,
+  .background-dark {
+    z-index: 1 !important;  /* muy bajo */
+    pointer-events: none !important; /* no bloquear clicks */
+    background-color: transparent !important;
   }
 
   /* --- HEADER RESPONSIVE --- */
   .header {
     min-height: 75px !important;
     padding: 8px 20px !important;
+    overflow: visible !important;
   }
 
   .logo-img {
-    width: 50px; /* reducido de 90px */
+    width: 70px; /* reducido de 90px */
     height: auto;
+    flex-shrink: 0;
   }
 
   /* Reducir tamaño de íconos a la derecha (bolsa, perfil, etc) */
@@ -870,11 +916,15 @@ margin-bottom: 15px;
     width: auto;
   }
 
-  /* Reducir tamaño del texto "Infinity Store" */
-  .brand-name,
-  .infinity-store-text {
-    font-size: 10px;
-  }
+
+  .perfil-menu {
+  top: 120% !important; /* baja más el submenú */
+  left: 50% !important; /* centra horizontalmente */
+  transform: translateX(-50%) !important;
+  right: auto !important;
+  min-width: 200px !important; /* ajusta el ancho si es necesario */
+  text-align: center; /* centra el contenido si quieres */
+}
 
   /* Mantén lo demás igual */
   .header-img {
