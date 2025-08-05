@@ -771,7 +771,7 @@ margin-bottom: 15px;
 
   .menu-icon,
   .menu-icono {
-    width: 28px; /* reducido de 35px */
+    width: 20px; /* reducido de 35px */
     height: auto;
     cursor: pointer;
   }
@@ -853,7 +853,7 @@ margin-bottom: 15px;
   }
 
   .logo-img {
-    width: 60px; /* reducido de 90px */
+    width: 50px; /* reducido de 90px */
     height: auto;
   }
 
@@ -873,7 +873,7 @@ margin-bottom: 15px;
   /* Reducir tamaño del texto "Infinity Store" */
   .brand-name,
   .infinity-store-text {
-    font-size: 18px;
+    font-size: 10px;
   }
 
   /* Mantén lo demás igual */

@@ -335,103 +335,164 @@ body.gymshark #gymsharkmujer-container {
   object-fit: cover;
 }
 
-
 @media (max-width: 991px) {
 
+
+
+   #carrito {
+    position: fixed !important;
+    top: 100px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90vw !important;
+    max-width: 320px !important;
+    background-color: rgba(25, 25, 25, 0.95) !important;
+    border-radius: 8px !important;
+    padding: 10px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4) !important;
+    z-index: 1500 !important;
+    overflow-y: auto !important;
+    max-height: 60vh !important;
+  }
+
+  
+
   .franja-negra {
-    padding-top: 50px; /* si tienes esa clase */
+    padding-top: 50px; /* o ajusta el valor hasta que se vea bien */
   }
 
+  /* Opcional: si quieres que el contenido baje un poco más */
   .header-content {
-    margin-top: 10px;
+    margin-top: 10px; /* espacio extra */
+    padding: 0 20px;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  /* Header y menú */
   .menu.container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 8px 20px;
-    position: relative;
   }
 
-  /* Logo */
+  .mobile-menu {
+    position: relative;
+    display: block;
+  }
+
+  /* Logo más pequeño */
   .logo-img {
-    width: 90px;
+    width: 50px; /* reducido de 90px */
     height: auto;
   }
-  .logo span {
-    font-size: 1.2rem;
+
+  /* Texto Infinity Store reducido y con límite para no salirse */
+  .brand-name,
+  .infinity-store-text {
+    font-size: 10px;
+    max-width: 120px;       /* limita ancho para que no desborde */
+    white-space: nowrap;    /* evita salto de línea */
+    overflow: hidden;       /* oculta texto que se salga */
+    text-overflow: ellipsis; /* añade "..." si es muy largo */
+    display: inline-block;
   }
 
-  /* Ocultar navbar por defecto en móvil */
-  .navbar {
+  /* Menú hamburguesa (barra menú) más pequeña */
+  .menu-icon,
+  .menu-icono {
+    width: 20px; /* reducido de 35px */
+    height: auto;
+    cursor: pointer;
+  }
+
+  /* --- SUBMENÚ HAMBURGUESA --- */
+  .menu-desplegable {
     display: none;
-    flex-direction: column;
-    background-color: rgba(25, 25, 25, 0.85);
-    color: white;
     position: absolute;
-    top: 60px;
+    top: 60px; /* ajustado para navbar 75px */
     left: 0;
+    background-color: rgba(25, 25, 25, 0.85); /* fondo gris oscuro traslúcido */
+    color: white;
     width: 160px;
-    border-radius: 0;
+    border-radius: 0; /* sin curvas */
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     z-index: 999;
   }
 
-  /* Lista de menú vertical */
-  .navbar ul {
+  .menu-desplegable ul {
     list-style: none;
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
-  .navbar ul li a,
-  .navbar ul li span {
+
+  .menu-desplegable li a {
     display: block;
     padding: 13px 16px;
     color: white;
     text-decoration: none;
     border-bottom: 1px solid #444;
-    font-size: 17px;
     transition: background-color 0.3s ease;
+    font-size: 17px;
   }
-  .navbar ul li a:hover {
+
+  .menu-desplegable li a:hover {
     background-color: #444;
   }
 
-  /* Checkbox menú hamburguesa oculto */
-  #menu {
+  /* --- MENÚ HORIZONTAL CLÁSICO (ESCONDIDO EN MÓVIL) --- */
+  .navbar {
     display: none;
+    flex-direction: column;
+    background-color: #333;
+    position: absolute;
+    top: 75px; /* navbar menor altura */
+    right: 0;
+    width: 200px;
+    border-radius: 0 0 0 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 1000;
   }
 
-  /* Label menú hamburguesa (imagen) */
-  label[for="menu"] {
-    cursor: pointer;
+  .navbar ul {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .navbar li a {
     display: block;
-    width: 35px;
-    height: 35px;
-  }
-  label[for="menu"] img.menu-icono {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    padding: 10px 12px; /* reducido de 18px 22px */
+    color: white;
+    border-bottom: 1px solid #555;
+    text-decoration: none;
+    font-size: 14px; /* reducido de 18px */
+    transition: background-color 0.3s ease;
   }
 
-  /* Mostrar menú cuando el checkbox está activo */
+  /* Mostrar el menú horizontal si se activa por checkbox */
   #menu:checked + label + .iconos-derecha + .navbar {
     display: flex;
   }
 
-  /* Iconos derecho (carrito, perfil) */
+  /* Reducir tamaño de íconos a la derecha (bolsa, perfil, etc) */
   .iconos-derecha {
-    display: flex;
-    gap: 20px;
-    align-items: center;
+    gap: 12px; /* menos espacio entre iconos */
   }
 
-  .iconos-derecha img {
-    width: 28px;
-    cursor: pointer;
+  .iconos-derecha img,
+  .iconos-derecha svg,
+  .icon-bolsa,
+  .icon-perfil {
+    max-height: 30px; /* reducido de 50px */
+    width: auto;
+  }
+
+  /* Imagen carrito aún más pequeña usando id */
+  #img-carrito {
+    max-height: 40px !important;
+    width: auto !important;
   }
 
   /* Ajuste header para móvil */
@@ -440,19 +501,121 @@ body.gymshark #gymsharkmujer-container {
     padding: 8px 20px !important;
   }
 
-  /* Otros estilos responsive que tienes */
-  .header-content {
-    padding: 0 20px;
-    flex-direction: column;
-    gap: 20px;
+  /* Mantén lo demás igual */
+  .header-img {
+    display: block;
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 20px;
   }
-  
-  /* Ajuste productos y otros bloques */
+
+  .header-img img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .header-txt {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .header-txt h1 {
+    font-size: 60px;
+  }
+
+  .header-txt p {
+    font-size: 16px;
+  }
+
   .products .product-content {
-    grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+
+  .ofert {
+    flex-direction: column;
+    padding: 80px 0 30px;
+  }
+
+  .ofert-1 {
+    flex-basis: 100%;
+    max-height: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    box-sizing: border-box;
+  }
+
+  .ofert-1 img {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .ofert-1 .ofert-txt {
+    text-align: left;
+  }
+
+  .ofert-1 .ofert-txt h3 {
+    font-size: 18px;
+    margin: 0 0 5px;
+  }
+
+  .ofert-1 .ofert-txt p {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .icon-1 {
+    flex-basis: 100%;
+    height: auto;
+    margin-bottom: 30px;
+  }
+
+  .blog {
+    flex-direction: column;
     gap: 30px;
   }
 
-  /* ... agrega aquí el resto de tus estilos responsive que necesites ... */
+  .blog-1 {
+    width: 100%;
+  }
 
+  .icons .icon-1 {
+    flex-basis: 80%;
+    max-width: 170px;
+    height: 150px;
+    padding: 10px 15px;
+    margin: 0 auto 20px;
+    box-sizing: border-box;
+  }
+
+  .icons .icon-img img {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .icons .icon-txt h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .icons .icon-txt p {
+    font-size: 14px;
+  }
+
+  .blog-1 img {
+    width: 350px;
+    height: auto;
+    margin: 0 auto 15px;
+    display: block;
+  }
 }
