@@ -923,7 +923,7 @@ margin-bottom: 15px;
 
 
   .perfil-menu {
-  top: 120% !important; /* baja más el submenú */
+  top: 190% !important; /* baja más el submenú */
   left: 50% !important; /* centra horizontalmente */
   transform: translateX(-50%) !important;
   right: auto !important;
