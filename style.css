@@ -997,8 +997,18 @@ margin-bottom: 15px;
     font-size: 14px;
   }
 
+
+  .perfil-menu {
+  position: absolute !important;
+  top: calc(100% + 120px) !important;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+
    .perfil-menu {
-  top: calc(100% + 150px);
+  top: calc(100% + 150px)!important;
 }
 
 
