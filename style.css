@@ -788,7 +788,7 @@ margin-bottom: 15px;
 
   .menu-icon,
   .menu-icono {
-    width: 30px; /* reducido de 35px */
+    width: 40px; /* reducido de 35px */
     height: auto;
     cursor: pointer;
   }
@@ -898,7 +898,7 @@ margin-bottom: 15px;
   }
 
   .logo-img {
-    width: 70px; /* reducido de 90px */
+    width: 90px; /* reducido de 90px */
     height: auto;
     flex-shrink: 0;
   }
