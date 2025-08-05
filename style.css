@@ -903,6 +903,11 @@ margin-bottom: 15px;
     flex-shrink: 0;
   }
 
+  .submenu-perfil {
+    margin-top: 60px; /* Aumenta este valor si quieres más espacio */
+    text-align: center; /* Opcional: para centrar el submenú */
+  }
+
   /* Reducir tamaño de íconos a la derecha (bolsa, perfil, etc) */
   .iconos-derecha {
     gap: 12px; /* menos espacio entre iconos */
