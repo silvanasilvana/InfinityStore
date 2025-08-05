@@ -371,13 +371,18 @@ body.gymshark #gymsharkmujer-container {
     background-color: rgba(25, 25, 25, 0.85);
     color: white;
     position: absolute;
-    top: 60px;
+    top: 100px;
     left: 0;
     width: 160px;
     border-radius: 0;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     z-index: 999;
   }
+
+  .perfil-menu {
+  top: calc(100% + 20px);
+}
+
 
   /* Lista de menú vertical */
   .navbar ul {
