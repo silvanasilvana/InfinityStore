@@ -745,8 +745,6 @@ margin-bottom: 15px;
 }
 @media (max-width: 991px) {
 
-
-
   .franja-negra {
     padding-top: 50px; /* o ajusta el valor hasta que se vea bien */
   }
@@ -754,7 +752,11 @@ margin-bottom: 15px;
   /* Opcional: si quieres que el contenido baje un poco más */
   .header-content {
     margin-top: 10px; /* espacio extra */
+    padding: 0 20px;
+    flex-direction: column;
+    gap: 20px;
   }
+
   .menu.container {
     display: flex;
     align-items: center;
@@ -767,20 +769,14 @@ margin-bottom: 15px;
     display: block;
   }
 
-  .menu-icon {
-    width: 35px;
+  .menu-icon,
+  .menu-icono {
+    width: 28px; /* reducido de 35px */
     height: auto;
     cursor: pointer;
   }
 
-  .menu-icono {
-    display: block;
-    width: 35px;
-    cursor: pointer;
-  }
-
   /* --- SUBMENÚ HAMBURGUESA --- */
-
   .menu-desplegable {
     display: none;
     position: absolute;
@@ -815,7 +811,6 @@ margin-bottom: 15px;
   }
 
   /* --- MENÚ HORIZONTAL CLÁSICO (ESCONDIDO EN MÓVIL) --- */
-
   .navbar {
     display: none;
     flex-direction: column;
@@ -838,11 +833,11 @@ margin-bottom: 15px;
 
   .navbar li a {
     display: block;
-    padding: 18px 22px;
+    padding: 10px 12px; /* reducido de 18px 22px */
     color: white;
     border-bottom: 1px solid #555;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 14px; /* reducido de 18px */
     transition: background-color 0.3s ease;
   }
 
@@ -852,40 +847,36 @@ margin-bottom: 15px;
   }
 
   /* --- HEADER RESPONSIVE --- */
-
   .header {
     min-height: 75px !important;
     padding: 8px 20px !important;
   }
 
   .logo-img {
-    width: 90px; /* un poco más grande que original */
+    width: 60px; /* reducido de 90px */
     height: auto;
   }
 
-  .menu .navbar ul li a {
-    font-size: 18px;
-    padding: 20px 16px;
-  }
-
+  /* Reducir tamaño de íconos a la derecha (bolsa, perfil, etc) */
   .iconos-derecha {
-    gap: 20px;
+    gap: 12px; /* menos espacio entre iconos */
   }
 
-  .menu img {
-    max-height: 50px;
-    height: auto;
+  .iconos-derecha img,
+  .iconos-derecha svg,
+  .icon-bolsa,
+  .icon-perfil {
+    max-height: 30px; /* reducido de 50px */
     width: auto;
   }
 
-  /* Mantén lo demás igual */
-
-  .header-content {
-    padding: 0 20px;
-    flex-direction: column;
-    gap: 20px;
+  /* Reducir tamaño del texto "Infinity Store" */
+  .brand-name,
+  .infinity-store-text {
+    font-size: 18px;
   }
 
+  /* Mantén lo demás igual */
   .header-img {
     display: block;
     flex-basis: 100%;
@@ -912,8 +903,6 @@ margin-bottom: 15px;
   .header-txt p {
     font-size: 16px;
   }
-
-  /* Resto de estilos responsive que ya tenías sin cambios */
 
   .products .product-content {
     grid-template-columns: 1fr;
@@ -1003,5 +992,4 @@ margin-bottom: 15px;
     margin: 0 auto 15px;
     display: block;
   }
-
 }
