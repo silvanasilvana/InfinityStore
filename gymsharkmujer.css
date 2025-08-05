@@ -381,9 +381,13 @@ body.gymshark #gymsharkmujer-container {
     display: block;
   }
 
+  .gymsharkmujer-banner h1 {
+    font-size: 1.5rem;
+  }
+
   /* Logo más pequeño */
   .logo-img {
-    width: 50px; /* reducido de 90px */
+     width: 40px !important;
     height: auto;
   }
 
