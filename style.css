@@ -784,7 +784,7 @@ margin-bottom: 15px;
   .menu-desplegable {
     display: none;
     position: absolute;
-    top: 60px; /* ajustado para navbar 75px */
+    top: 80px; /* ajustado para navbar 75px */
     left: 0;
     background-color: rgba(25, 25, 25, 0.85); /* fondo gris oscuro traslúcido */
     color: white;
@@ -996,6 +996,11 @@ margin-bottom: 15px;
   .icons .icon-txt p {
     font-size: 14px;
   }
+
+   .perfil-menu {
+  top: calc(100% + 80px);
+}
+
 
   .blog-1 img {
     width: 350px;
