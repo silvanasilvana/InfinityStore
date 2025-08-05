@@ -821,7 +821,7 @@ margin-bottom: 15px;
     flex-direction: column;
     background-color: #333;
     position: absolute;
-    top: 75px; /* navbar menor altura */
+    top: 85px; /* navbar menor altura */
     right: 0;
     width: 200px;
     border-radius: 0 0 0 10px;
@@ -998,7 +998,7 @@ margin-bottom: 15px;
   }
 
    .perfil-menu {
-  top: calc(100% + 80px);
+  top: calc(100% + 150px);
 }
 
 
