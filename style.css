@@ -742,7 +742,9 @@ margin-bottom: 15px;
     object-fit: contain;
     border-radius: 5px;
     margin: 10px 0; /* esto da espacio arriba y abajo */
-}@media (max-width: 991px) {
+}
+
+@media (max-width: 991px) {
   .franja-negra {
     padding-top: 50px;
   }
@@ -775,17 +777,21 @@ margin-bottom: 15px;
   }
 
   /* --- SUBMENÚ HAMBURGUESA --- */
-  .menu-desplegable {
-    display: none;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    background-color: rgba(25, 25, 25, 0.85);
-    color: white;
-    width: 160px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    z-index: 999;
-  }
+ .menu-desplegable {
+  display: none;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: rgba(25, 25, 25, 0.85);
+  color: white;
+  width: 140px; /* más angosto que antes */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 999;
+  border-radius: 8px; /* opcional para que se vea más limpio */
+}
+
 
   .menu-desplegable ul {
     list-style: none;
