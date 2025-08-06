@@ -334,19 +334,35 @@ body.gymshark #gymsharkmujer-container {
   height: auto;
   object-fit: cover;
 }
-
-
 @media (max-width: 991px) {
-
+  /* --- ESPACIADO GENERAL --- */
   .franja-negra {
-    padding-top: 50px; /* si tienes esa clase */
+    padding-top: 50px;
+  }
+
+  .header {
+    min-height: 75px !important;
+    padding: 8px 20px !important;
   }
 
   .header-content {
     margin-top: 10px;
+    padding: 0 20px;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  /* Header y menú */
+  /* --- LOGO Y TEXTO --- */
+  .logo-img {
+    width: 75px !important;
+    height: auto;
+  }
+
+  .logo span {
+    font-size: 1.2rem;
+  }
+
+  /* --- MENÚ PRINCIPAL / NAVBAR --- */
   .menu.container {
     display: flex;
     align-items: center;
@@ -355,16 +371,6 @@ body.gymshark #gymsharkmujer-container {
     position: relative;
   }
 
-  /* Logo */
-  .logo-img {
-    width: 90px;
-    height: auto;
-  }
-  .logo span {
-    font-size: 1.2rem;
-  }
-
-  /* Ocultar navbar por defecto en móvil */
   .navbar {
     display: none;
     flex-direction: column;
@@ -374,60 +380,32 @@ body.gymshark #gymsharkmujer-container {
     top: 100px;
     left: 0;
     width: 160px;
-    border-radius: 0;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     z-index: 999;
   }
 
-  .perfil-menu {
-  top: calc(100% + 80px);
-}
-
-
-  /* Lista de menú vertical */
   .navbar ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .navbar ul li a,
-  .navbar ul li span {
+
+  .navbar li a,
+  .navbar li span {
     display: block;
-    padding: 13px 16px;
+    padding: 18px 22px;
     color: white;
+    border-bottom: 1px solid #555;
     text-decoration: none;
-    border-bottom: 1px solid #444;
-    font-size: 17px;
+    font-size: 18px;
     transition: background-color 0.3s ease;
   }
-  .navbar ul li a:hover {
+
+  .navbar li a:hover {
     background-color: #444;
   }
 
-  /* Checkbox menú hamburguesa oculto */
-  #menu {
-    display: none;
-  }
-
-  /* Label menú hamburguesa (imagen) */
-  label[for="menu"] {
-    cursor: pointer;
-    display: block;
-    width: 35px;
-    height: 35px;
-  }
-  label[for="menu"] img.menu-icono {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  /* Mostrar menú cuando el checkbox está activo */
-  #menu:checked + label + .iconos-derecha + .navbar {
-    display: flex;
-  }
-
-  /* Iconos derecho (carrito, perfil) */
+  /* --- ICONOS DERECHA (Carrito, Perfil) --- */
   .iconos-derecha {
     display: flex;
     gap: 20px;
@@ -439,28 +417,242 @@ body.gymshark #gymsharkmujer-container {
     cursor: pointer;
   }
 
-  /* Ajuste header para móvil */
-  .header {
-    min-height: 75px !important;
-    padding: 8px 20px !important;
+  /* --- HAMBURGUESA --- */
+  #menu {
+    display: none;
   }
 
-  /* Otros estilos responsive que tienes */
-  .header-content {
-    padding: 0 20px;
-    flex-direction: column;
-    gap: 20px;
+  label[for="menu"] {
+    cursor: pointer;
+    display: block;
+    width: 35px;
+    height: 35px;
   }
-  
-  /* Ajuste productos y otros bloques */
-  .products .product-content {
-    grid-template-columns: 1fr;
+
+  label[for="menu"] img.menu-icono {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #menu:checked + label + .iconos-derecha + .navbar {
+    display: flex;
+  }
+
+  /* --- SUBMENÚ HAMBURGUESA --- */
+  .mobile-menu {
+    position: relative;
+    display: block;
+  }
+
+  .menu-icon,
+  .menu-icono {
+    display: block;
+    width: 25px !important;
+    height: auto;
+    cursor: pointer;
+  }
+
+  .menu-desplegable {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    background-color: rgba(25, 25, 25, 0.85);
+    color: white;
+    width: 160px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    z-index: 999;
+  }
+
+  .menu-desplegable ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-desplegable li a {
+    display: block;
+    padding: 13px 16px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+    transition: background-color 0.3s ease;
+    font-size: 17px;
+  }
+
+  .menu-desplegable li a:hover {
+    background-color: #444;
+  }
+
+  /* --- BOTÓN CERRAR SESIÓN --- */
+  #cerrar-sesion-text {
+    background-color: white !important;
+    color: black !important;
+    display: inline-block !important;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: none !important;
+    text-align: center;
+    user-select: none;
+  }
+
+  #cerrar-sesion-text:hover {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  /* --- SUBMENÚ PERFIL --- */
+  #perfil-menu {
+    position: absolute !important;
+    top: 85px !important;
+    right: 10px;
+    background-color: #fff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    display: none;
+  }
+
+  .perfil-menu {
+    top: calc(100% + 80px);
+  }
+
+  /* --- HEADER IMAGE Y TEXTO --- */
+  .header-img {
+    display: block;
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .header-img img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .header-txt {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .header-txt h1 {
+    font-size: 60px;
+  }
+
+  .header-txt p {
+    font-size: 16px;
+  }
+
+  /* --- PRODUCTOS --- */
+ .products .product-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  gap: 20px;
+}
+
+
+  /* --- OFERTAS --- */
+  .ofert {
+    flex-direction: column;
+    padding: 80px 0 30px;
+  }
+
+  .ofert-1 {
+    flex-basis: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    box-sizing: border-box;
+  }
+
+  .ofert-1 img {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .ofert-1 .ofert-txt {
+    text-align: left;
+  }
+
+  .ofert-1 .ofert-txt h3 {
+    font-size: 18px;
+    margin: 0 0 5px;
+  }
+
+  .ofert-1 .ofert-txt p {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  /* --- ICONOS --- */
+  .icon-1 {
+    flex-basis: 100%;
+    height: auto;
+    margin-bottom: 30px;
+  }
+
+  .icons .icon-1 {
+    flex-basis: 80%;
+    max-width: 170px;
+    height: 150px;
+    padding: 10px 15px;
+    margin: 0 auto 20px;
+    box-sizing: border-box;
+  }
+
+  .icons .icon-img img {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .icons .icon-txt h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .icons .icon-txt p {
+    font-size: 14px;
+  }
+
+  /* --- BLOG --- */
+  .blog {
+    flex-direction: column;
     gap: 30px;
   }
 
+  .blog-1 {
+    width: 100%;
+  }
+
+  .blog-1 img {
+    width: 350px;
+    height: auto;
+    margin: 0 auto 15px;
+    display: block;
+  }
+
+  /* --- MODAL --- */
+  .modal-content {
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  /* --- GYMSHARK MUJER TEXT --- */
   .gymsharkmujer-banner h1 {
     font-size: 2rem;
   }
-  /* ... agrega aquí el resto de tus estilos responsive que necesites ... */
-
 }

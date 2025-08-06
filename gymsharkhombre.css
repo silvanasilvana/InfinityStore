@@ -335,7 +335,7 @@ body.gymshark #gymsharkhombre-container {
   object-fit: cover;
 }@media (max-width: 991px) {
 
-  /* Contenedor menú: flex para distribuir logo y menú hamburguesa */
+  /* --- CONTENEDOR HEADER Y MENÚ --- */
   .menu.container {
     display: flex;
     align-items: center;
@@ -344,35 +344,49 @@ body.gymshark #gymsharkhombre-container {
     padding: 8px 20px;
   }
 
-  /* Logo más pequeño para móvil */
+  .header {
+    min-height: 75px !important;
+    padding: 8px 20px !important;
+  }
+
+  .header-content {
+    padding: 0 20px;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* --- LOGO --- */
   .logo-img {
-    width: 90px;
+    width: 75px !important;
     height: auto;
   }
 
-  /* Navbar inicialmente oculta, desplegable absoluto */
+  .logo span {
+    font-size: 1.2rem;
+  }
+
+  /* --- NAVBAR --- */
   .navbar {
     display: none;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.85); /* fondo negro traslúcido */
+    background-color: rgba(0, 0, 0, 0.85);
     position: absolute;
-    top: 75px; /* justo debajo del header */
+    top: 75px;
     left: 0;
     width: 160px;
-    border-radius: 0; /* sin curvas */
+    border-radius: 0;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     z-index: 1001;
   }
 
-  /* Lista sin estilo */
   .navbar ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  /* Links del menú: tamaño, color, padding */
-  .navbar ul li a {
+  .navbar ul li a,
+  .navbar ul li span {
     display: block;
     padding: 13px 16px;
     color: white;
@@ -381,16 +395,33 @@ body.gymshark #gymsharkhombre-container {
     border-bottom: 1px solid #444;
     transition: background-color 0.3s ease;
   }
+
   .navbar ul li a:hover {
     background-color: #444;
   }
 
-  /* Checkbox menú hamburguesa oculto */
+  /* --- ICONOS DERECHA --- */
+  .iconos-derecha {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .iconos-derecha img {
+    width: 28px;
+    cursor: pointer;
+  }
+
+  #img-perfil {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* --- MENÚ HAMBURGUESA --- */
   #menu {
     display: none;
   }
 
-  /* Label para menú hamburguesa: tamaño, cursor */
   label[for="menu"] {
     cursor: pointer;
     display: block;
@@ -398,88 +429,69 @@ body.gymshark #gymsharkhombre-container {
     height: 35px;
   }
 
-  /* Imagen dentro del label (icono hamburguesa) */
   label[for="menu"] img.menu-icono {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
 
-  /* Mostrar navbar cuando checkbox esté marcado */
-  /* Aquí depende el orden de tu HTML — si tienes .iconos-derecha entre label y navbar, debe ir así: */
   #menu:checked + label + .iconos-derecha + .navbar {
     display: flex;
   }
 
-  /* Si tu HTML no tiene .iconos-derecha justo después del label, usa esta regla: */
-  /* #menu:checked + label + .navbar { display: flex; } */
-
-  /* Iconos a la derecha (perfil, carrito), alineados */
-  .iconos-derecha {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-
-
-  .gymsharkhombre-banner h1 {
-    font-size: 2.5rem;
-  }
-  
-  /* Iconos tamaño */
-  .iconos-derecha img {
-    width: 28px;
-    cursor: pointer;
-  }
-
-  /* Ajustes para el perfil */
-  #img-perfil {
-    width: 40px;
-    height: 40px;
-  }
-
-  /* Botón cerrar sesión (en menú perfil) con tamaño menor */
+  /* --- BOTÓN CERRAR SESIÓN --- */
   #cerrar-sesion-text {
+    background-color: white !important;
+    color: black !important;
+    display: inline-block !important;
     padding: 6px 12px;
     font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    transition: none !important;
   }
 
-  /* Perfil menú: ya tiene estilos con fondo negro y sombra, se mantiene */
+  #cerrar-sesion-text:hover {
+    background-color: white !important;
+    color: black !important;
+  }
 
-  /* Ajuste general para el banner y botones si quieres */
+  /* --- BANNER GYMSHARK HOMBRE --- */
   .gymsharkhombre-banner {
-    height: 300px; /* más pequeño en móvil */
+    height: 300px;
   }
+
   .gymsharkhombre-banner h1 {
     font-size: 2.5rem;
   }
+
   .gymsharkhombre-buttons {
     flex-wrap: wrap;
     gap: 15px;
   }
+
   .gymsharkhombre-buttons .btn-image img {
     max-height: 150px;
   }
 
-  /* Catálogo productos: 1 columna */
-  .product-content {
-    flex-direction: column;
-    gap: 20px;
+  /* --- CATÁLOGO PRODUCTOS --- */
+.product-content {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
   }
 
-  .product {
-    width: 90%;
+
+ .product {
+    width: 100% !important;
     margin: 0 auto;
   }
 
-  .logo span {
-    font-size: 1.2rem;
-  }
-
-
-  /* Ajuste botón agregar carrito para móvil */
   .agregar-carrito {
     padding: 10px 20px;
     font-size: 1rem;
   }
+
 }
