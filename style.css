@@ -777,20 +777,20 @@ margin-bottom: 15px;
   }
 
   /* --- SUBMENÚ HAMBURGUESA --- */
- .menu-desplegable {
+.menu-desplegable {
   display: none;
   position: absolute;
   top: 80px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: rgba(25, 25, 25, 0.85);
   color: white;
-  width: 140px; /* más angosto que antes */
+  width: 140px; /* ancho más angosto */
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   z-index: 999;
-  border-radius: 8px; /* opcional para que se vea más limpio */
+  border-radius: 8px;
 }
+
 
 
   .menu-desplegable ul {
