@@ -998,13 +998,12 @@ margin-bottom: 15px;
   }
 
 
-  .perfil-menu {
-  position: absolute !important;
-  top: calc(100% + 120px) !important;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-}
+
+.perfil-menu {
+    top: calc(100% + 250px) !important;  /* Más abajo */
+    left: 50% !important;                  /* Centrado horizontal */
+    transform: translateX(-50%) !important;
+  }
 
 
    .perfil-menu {
