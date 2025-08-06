@@ -1046,15 +1046,22 @@ margin-bottom: 15px;
     margin: 0;
   }
 
-  .submenu #carrito {
+ .submenu #carrito {
+  position: fixed !important;
+  top: 100px !important;
   left: 50% !important;
   right: auto !important;
   transform: translateX(-50%) !important;
-  min-width: 90vw !important;
-  max-width: 400px !important;
+  width: 80vw !important;
+  max-width: 380px !important;
+  margin: 0 auto !important;
   padding: 20px !important;
   box-sizing: border-box;
+  z-index: 9999 !important;
+  background-color: white !important;
+  border-radius: 10px;
 }
+
 
 .submenu #carrito {
   max-height: 400px;
