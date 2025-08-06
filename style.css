@@ -1036,25 +1036,26 @@ margin-bottom: 15px;
   .submenu {
     position: relative; /* para que el carrito se posicione respecto a este contenedor */
   }
-
-  .submenu #carrito {
-    position: absolute !important;
-    top: 75px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 90vw !important;
-    max-width: 380px;
-    background-color: white;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    z-index: 9999;
-    display: none;
-    box-sizing: border-box;
-  }
+.submenu #carrito {
+  position: fixed !important; /* para centrar en toda la pantalla, no solo en relación al icono */
+  top: 90px !important;       /* distancia desde arriba, ajústalo si quieres más espacio */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 90vw !important;
+  max-width: 400px !important;
+  background-color: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  display: none;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 70vh;
+}
 
   .submenu.mostrar-carrito #carrito,
-  .submenu.activo #carrito {
-    display: block !important;
-  }
+.submenu.activo #carrito {
+  display: block !important;
+}
 }
