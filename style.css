@@ -744,6 +744,7 @@ margin-bottom: 15px;
     margin: 10px 0; /* esto da espacio arriba y abajo */
 }
 
+
 @media (max-width: 991px) {
   .franja-negra {
     padding-top: 50px;
@@ -795,17 +796,6 @@ margin-bottom: 15px;
     margin: 0;
   }
 
-  .submenu.mostrar-carrito #carrito,
-.submenu.activo #carrito {
-  left: 50% !important;
-  right: auto !important;
-  transform: translateX(-50%);
-  min-width: 90vw;  /* ancho relativo a pantalla, puedes ajustar a 80vw si lo quieres más angosto */
-  max-width: 400px; /* límite de ancho para que no se pase en tablets */
-  box-sizing: border-box;
-}
-
-
   .menu-desplegable li a {
     display: block;
     padding: 13px 16px;
@@ -820,7 +810,74 @@ margin-bottom: 15px;
     background-color: #444;
   }
 
-   
+  /* --- CARRITO CORREGIDO --- */
+  .submenu #carrito {
+    position: absolute !important;
+    top: 75px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90vw !important;
+    max-width: 380px;
+    background-color: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    display: none;
+    box-sizing: border-box;
+  }
+
+  .submenu.mostrar-carrito #carrito,
+  .submenu.activo #carrito {
+    display: block !important;
+  }
+
+  .submenu #carrito table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .submenu #carrito thead,
+  .submenu #carrito tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .submenu #carrito tbody {
+    display: block;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .submenu #carrito th,
+  .submenu #carrito td {
+    font-size: 14px;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .submenu #carrito img {
+    max-width: 40px;
+    height: auto;
+  }
+
+  .submenu #carrito .btn-2 {
+    display: block;
+    margin: 15px auto 0;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 14px;
+    background-color: #000;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+  }
+
+  .submenu #carrito .btn-2:hover {
+    background-color: #222;
+  }
 
   /* --- MENÚ NAVBAR MÓVIL --- */
   .navbar {
@@ -836,21 +893,21 @@ margin-bottom: 15px;
   }
 
   #cerrar-sesion-text {
-  background-color: white !important;
-  color: black !important;
-  display: inline-block !important; /* asegúrate que se muestre */
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: none !important; /* para que no cambie con hover */
-  text-align: center;
-  user-select: none;
-}
-#cerrar-sesion-text:hover {
-  background-color: white !important;
-  color: black !important;
-}
+    background-color: white !important;
+    color: black !important;
+    display: inline-block !important;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: none !important;
+    text-align: center;
+    user-select: none;
+  }
 
+  #cerrar-sesion-text:hover {
+    background-color: white !important;
+    color: black !important;
+  }
 
   .navbar ul {
     flex-direction: column;
@@ -1001,11 +1058,9 @@ margin-bottom: 15px;
     font-size: 14px;
   }
 
-
   .logo span {
     font-size: 1.2rem;
   }
-
 
   /* --- SUBMENÚ PERFIL CORREGIDO --- */
   #perfil-menu {
@@ -1045,28 +1100,4 @@ margin-bottom: 15px;
     transform: translate(-50%, -50%);
     margin: 0;
   }
-
- .submenu #carrito {
-  position: fixed !important;
-  top: 100px !important;
-  left: 50% !important;
-  right: auto !important;
-  transform: translateX(-50%) !important;
-  width: 80vw !important;
-  max-width: 380px !important;
-  margin: 0 auto !important;
-  padding: 20px !important;
-  box-sizing: border-box;
-  z-index: 9999 !important;
-  background-color: white !important;
-  border-radius: 10px;
-}
-
-
-.submenu #carrito {
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-
 }
