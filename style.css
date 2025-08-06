@@ -1045,4 +1045,21 @@ margin-bottom: 15px;
     transform: translate(-50%, -50%);
     margin: 0;
   }
+
+  .submenu #carrito {
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  min-width: 90vw !important;
+  max-width: 400px !important;
+  padding: 20px !important;
+  box-sizing: border-box;
+}
+
+.submenu #carrito {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+
 }
