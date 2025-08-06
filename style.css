@@ -820,6 +820,23 @@ margin-bottom: 15px;
     z-index: 1000;
   }
 
+  #cerrar-sesion-text {
+  background-color: white !important;
+  color: black !important;
+  display: inline-block !important; /* asegúrate que se muestre */
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: none !important; /* para que no cambie con hover */
+  text-align: center;
+  user-select: none;
+}
+#cerrar-sesion-text:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+
   .navbar ul {
     flex-direction: column;
     padding: 0;
