@@ -742,19 +742,18 @@ margin-bottom: 15px;
     object-fit: contain;
     border-radius: 5px;
     margin: 10px 0; /* esto da espacio arriba y abajo */
-}
-@media (max-width: 991px) {
-
-
-
+}@media (max-width: 991px) {
   .franja-negra {
-    padding-top: 50px; /* o ajusta el valor hasta que se vea bien */
+    padding-top: 50px;
   }
 
-  /* Opcional: si quieres que el contenido baje un poco más */
   .header-content {
-    margin-top: 10px; /* espacio extra */
+    margin-top: 10px;
+    padding: 0 20px;
+    flex-direction: column;
+    gap: 20px;
   }
+
   .menu.container {
     display: flex;
     align-items: center;
@@ -767,29 +766,23 @@ margin-bottom: 15px;
     display: block;
   }
 
-  .menu-icon {
+  .menu-icon,
+  .menu-icono {
+    display: block;
     width: 35px;
     height: auto;
     cursor: pointer;
   }
 
-  .menu-icono {
-    display: block;
-    width: 35px;
-    cursor: pointer;
-  }
-
   /* --- SUBMENÚ HAMBURGUESA --- */
-
   .menu-desplegable {
     display: none;
     position: absolute;
-    top: 80px; /* ajustado para navbar 75px */
+    top: 80px;
     left: 0;
-    background-color: rgba(25, 25, 25, 0.85); /* fondo gris oscuro traslúcido */
+    background-color: rgba(25, 25, 25, 0.85);
     color: white;
     width: 160px;
-    border-radius: 0; /* sin curvas */
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     z-index: 999;
   }
@@ -814,17 +807,15 @@ margin-bottom: 15px;
     background-color: #444;
   }
 
-  /* --- MENÚ HORIZONTAL CLÁSICO (ESCONDIDO EN MÓVIL) --- */
-
+  /* --- MENÚ NAVBAR MÓVIL --- */
   .navbar {
     display: none;
     flex-direction: column;
     background-color: #333;
     position: absolute;
-    top: 85px; /* navbar menor altura */
+    top: 85px;
     right: 0;
     width: 200px;
-    border-radius: 0 0 0 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     z-index: 1000;
   }
@@ -846,20 +837,18 @@ margin-bottom: 15px;
     transition: background-color 0.3s ease;
   }
 
-  /* Mostrar el menú horizontal si se activa por checkbox */
   #menu:checked + label + .iconos-derecha + .navbar {
     display: flex;
   }
 
-  /* --- HEADER RESPONSIVE --- */
-
+  /* --- HEADER --- */
   .header {
     min-height: 75px !important;
     padding: 8px 20px !important;
   }
 
   .logo-img {
-    width: 90px; /* un poco más grande que original */
+    width: 90px;
     height: auto;
   }
 
@@ -876,14 +865,6 @@ margin-bottom: 15px;
     max-height: 50px;
     height: auto;
     width: auto;
-  }
-
-  /* Mantén lo demás igual */
-
-  .header-content {
-    padding: 0 20px;
-    flex-direction: column;
-    gap: 20px;
   }
 
   .header-img {
@@ -913,13 +894,13 @@ margin-bottom: 15px;
     font-size: 16px;
   }
 
-  /* Resto de estilos responsive que ya tenías sin cambios */
-
+  /* --- PRODUCTOS --- */
   .products .product-content {
     grid-template-columns: 1fr;
     gap: 30px;
   }
 
+  /* --- OFERTAS --- */
   .ofert {
     flex-direction: column;
     padding: 80px 0 30px;
@@ -927,7 +908,6 @@ margin-bottom: 15px;
 
   .ofert-1 {
     flex-basis: 100%;
-    max-height: none;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -958,19 +938,11 @@ margin-bottom: 15px;
     margin: 0;
   }
 
+  /* --- ICONOS --- */
   .icon-1 {
     flex-basis: 100%;
     height: auto;
     margin-bottom: 30px;
-  }
-
-  .blog {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .blog-1 {
-    width: 100%;
   }
 
   .icons .icon-1 {
@@ -997,19 +969,28 @@ margin-bottom: 15px;
     font-size: 14px;
   }
 
-
-
-.perfil-menu {
-    top: calc(100% + 250px) !important;  /* Más abajo */
-    left: 50% !important;                  /* Centrado horizontal */
-    transform: translateX(-50%) !important;
+  /* --- SUBMENÚ PERFIL CORREGIDO --- */
+  #perfil-menu {
+    position: absolute !important;
+    top: 85px !important;
+    right: 10px;
+    background-color: #fff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    display: none;
   }
 
+  /* --- BLOG --- */
+  .blog {
+    flex-direction: column;
+    gap: 30px;
+  }
 
-   .perfil-menu {
-  top: calc(100% + 150px)!important;
-}
-
+  .blog-1 {
+    width: 100%;
+  }
 
   .blog-1 img {
     width: 350px;
@@ -1018,12 +999,12 @@ margin-bottom: 15px;
     display: block;
   }
 
- .modal-content {
-  position: fixed;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0; /* quitar márgenes si usas top */
-}
-
+  /* --- MODAL --- */
+  .modal-content {
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
 }
