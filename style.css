@@ -1017,9 +1017,13 @@ margin-bottom: 15px;
     margin: 0 auto 15px;
     display: block;
   }
-  
-   .modal-content {
-    margin: 25% auto 10% auto !important;
-  }
+
+ .modal-content {
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0; /* quitar márgenes si usas top */
+}
 
 }
