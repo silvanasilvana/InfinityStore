@@ -769,7 +769,7 @@ margin-bottom: 15px;
   .menu-icon,
   .menu-icono {
     display: block;
-    width: 35px;
+    width: 25px!important;
     height: auto;
     cursor: pointer;
   }
