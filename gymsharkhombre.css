@@ -1,347 +1,12 @@
-#gymsharkhombre-container {
-  width: 100%;
-  margin: 0 auto;
-  font-family: 'Poppins', sans-serif;
-}
-
-body.gymshark .header {
-  min-height: 60px !important;
-  background-color: #000000;
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 0 20px !important;
-}
-
-
-
-
-#img-perfil {
-  width: 65px;       /* ancho fijo */
-  height: 40px;      /* alto fijo para que sea cuadrado */
-  object-fit: cover; /* para que no se deforme */
-  border-radius: 50%; /* para que sea redondo */
-  cursor: pointer;    /* para que se note que es clickeable */
-}
-
-/* boton cerrar sesion*/
-#cerrar-sesion-text {
-  background-color: transparent;
-  color: rgb(255, 255, 255);  /* cambia a negro para que contraste con fondo blanco */
-  border: 2px solid rgb(255, 255, 255);
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  display: inline-block;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-#cerrar-sesion-text:hover {
-  background-color: black;
-  color: white;
-}
-
-
-.perfil-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: rgb(0, 0, 0);
-  border: 1px solid #000000;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
-  z-index: 1000;
-
-  visibility: visible;
-  .perfil-menu {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
-  pointer-events: auto; 
-}
-
-.perfil-menu button {
-  background-color: white;
-  border: none;
-  color: black;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.perfil-menu button:hover {
-  color: red;
-}
-
-
-/* Selector */
-.selector-ordenar-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;  /* <-- Aquí agregas espacio arriba */
-  margin-bottom: 20px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  color: #000000;
-}
-
-.selector-label {
-  font-size: 1rem;
-}
-
-.selector-ordenar {
-  padding: 8px 12px;
-  font-size: 1rem;
-  border: 2px solid #888;
-  border-radius: 6px;
-  background-color: #fff;
-  color: #222;
-  cursor: pointer;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  min-width: 200px;
-}
-
-.selector-ordenar:hover,
-.selector-ordenar:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
-  outline: none;
-}
-
-
-body.gymshark #gymsharkhombre-container {
-  padding-top: 60px;
-}
-
-
-
-
-/* Banner con imagen y título */
-.gymsharkhombre-banner {
-  position: relative;
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  height: 500px;
-  background-image: url('images/gymsharkportadahombre.jpg');
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-  background-color: transparent !important;
-  transition: transform 0.6s ease;
-}
-
-.gymsharkhombre-banner:hover {
-  transform: scale(1.02);
-}
-
-.gymsharkhombre-banner h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Oswald', sans-serif;
-  font-weight: 700;
-  font-size: 4rem;
-  color: white;
-  text-align: center;
-  margin: 0;
-  text-shadow: 0 0 10px rgba(0,0,0,0.8);
-  z-index: 2;
-}
-
-/* Contenedor blanco con botones de imagen */
-.gymsharkhombre-buttons {
-  height: auto;         /* sin altura fija */
-  padding: 10px 0;      /* menos padding */
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  box-sizing: border-box;
-  align-items: center;
-}
-
-/* Botones con imagen */
-.gymsharkhombre-buttons .btn-image {
-  border: none;
-  background: none;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.gymsharkhombre-buttons .btn-image img {
-  max-height: 280px; /* menos que el contenedor para evitar overflow */
-  width: auto;
-  display: block;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.gymsharkhombre-buttons .btn-image:hover {
-  transform: scale(1.05);
-}
-
-.gymsharkhombre-txt {
-  text-align: center;
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: #333;
-  margin: 0;
-  user-select: none;
-  font-family: 'Poppins', sans-serif;
-}
-
-/* Catálogo de ropa */
-.products {
-  padding: 40px 20px;
-  font-family: 'Poppins', sans-serif;
-  background-color: #fff;
-}
-
-.products h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-  color: #222;
-}
-
-.product-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
-
-.product {
-  width: 250px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #fafafa;
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* sube el contenido */
-}
-
-.product:hover {
-  transform: translateY(-5px);
-}
-
-/* Contenedor imagen con efecto hover */
-.product-img {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 10px;
-  padding-top: 112%;
-  height: 0;
-  margin-bottom: 4px; /* menos espacio debajo imagen */
-}
-
-.product-img img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.5s ease;
-  display: block;
-}
-
-.img-front {
-  opacity: 1;
-  z-index: 1;
-}
-
-.img-back {
-  opacity: 0;
-  z-index: 2;
-}
-
-.product-img:hover .img-front {
-  opacity: 0;
-}
-
-.product-img:hover .img-back {
-  opacity: 1;
-}
-
-/* Texto de producto */
-.product-txt {
-  padding: 2px 15px 10px 15px; /* poco padding arriba para subir texto */
-  margin-top: 0; /* sin margen arriba */
-  text-align: center;
-}
-
-.product-txt h3 {
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin: 0 0 4px 0; /* margen inferior pequeño */
-  color: #111;
-}
-
-.product-txt .precio {
-  color: #888;
-  font-weight: 700;
-  margin: 0 0 4px 0; /* margen inferior pequeño */
-  font-size: 1.1rem;
-}
-
-/* Botón agregar carrito */
-.agregar-carrito {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #222;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-  margin-top: 0;    /* sin margen arriba */
-  margin-bottom: 0; /* sin margen abajo */
-}
-
-.agregar-carrito:hover {
-  background-color: #555;
-}
-
-.product > img {
-  display: block;   /* quita espacio debajo por inline */
-  margin-bottom: 4px; /* o menos, 2px o 0 */
-  border-radius: 10px; /* para que combine con el resto */
-  width: 100%; /* que la imagen tome todo el ancho del contenedor */
-  height: auto;
-  object-fit: cover;
-}@media (max-width: 991px) {
+@media (max-width: 991px) {
 
   /* --- CONTENEDOR HEADER Y MENÚ --- */
   .menu.container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    padding: 8px 20px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    padding: 8px 20px !important;
   }
 
   .header {
@@ -350,93 +15,93 @@ body.gymshark #gymsharkhombre-container {
   }
 
   .header-content {
-    padding: 0 20px;
-    flex-direction: column;
-    gap: 20px;
+    padding: 0 20px !important;
+    flex-direction: column !important;
+    gap: 20px !important;
   }
 
   /* --- LOGO --- */
   .logo-img {
     width: 75px !important;
-    height: auto;
+    height: auto !important;
   }
 
   .logo span {
-    font-size: 1.2rem;
+    font-size: 1.2rem !important;
   }
 
   /* --- NAVBAR --- */
   .navbar {
-    display: none;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.85);
-    position: absolute;
-    top: 75px;
-    left: 0;
-    width: 160px;
-    border-radius: 0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    z-index: 1001;
+    display: none !important;
+    flex-direction: column !important;
+    background-color: rgba(0, 0, 0, 0.85) !important;
+    position: absolute !important;
+    top: 75px !important;
+    left: 0 !important;
+    width: 160px !important;
+    border-radius: 0 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+    z-index: 1001 !important;
   }
 
   .navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .navbar ul li a,
   .navbar ul li span {
-    display: block;
-    padding: 13px 16px;
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
-    border-bottom: 1px solid #444;
-    transition: background-color 0.3s ease;
+    display: block !important;
+    padding: 13px 16px !important;
+    color: white !important;
+    text-decoration: none !important;
+    font-size: 17px !important;
+    border-bottom: 1px solid #444 !important;
+    transition: background-color 0.3s ease !important;
   }
 
   .navbar ul li a:hover {
-    background-color: #444;
+    background-color: #444 !important;
   }
 
   /* --- ICONOS DERECHA --- */
   .iconos-derecha {
-    display: flex;
-    gap: 20px;
-    align-items: center;
+    display: flex !important;
+    gap: 20px !important;
+    align-items: center !important;
   }
 
   .iconos-derecha img {
-    width: 28px;
-    cursor: pointer;
+    width: 28px !important;
+    cursor: pointer !important;
   }
 
   #img-perfil {
-    width: 40px;
-    height: 40px;
+    width: 40px !important;
+    height: 40px !important;
   }
 
   /* --- MENÚ HAMBURGUESA --- */
   #menu {
-    display: none;
+    display: none !important;
   }
 
   label[for="menu"] {
-    cursor: pointer;
-    display: block;
-    width: 35px;
-    height: 35px;
+    cursor: pointer !important;
+    display: block !important;
+    width: 35px !important;
+    height: 35px !important;
   }
 
   label[for="menu"] img.menu-icono {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
   }
 
   #menu:checked + label + .iconos-derecha + .navbar {
-    display: flex;
+    display: flex !important;
   }
 
   /* --- BOTÓN CERRAR SESIÓN --- */
@@ -444,12 +109,12 @@ body.gymshark #gymsharkhombre-container {
     background-color: white !important;
     color: black !important;
     display: inline-block !important;
-    padding: 6px 12px;
-    font-size: 13px;
-    border-radius: 6px;
-    cursor: pointer;
-    text-align: center;
-    user-select: none;
+    padding: 6px 12px !important;
+    font-size: 13px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    user-select: none !important;
     transition: none !important;
   }
 
@@ -460,38 +125,38 @@ body.gymshark #gymsharkhombre-container {
 
   /* --- BANNER GYMSHARK HOMBRE --- */
   .gymsharkhombre-banner {
-    height: 300px;
+    height: 300px !important;
   }
 
   .gymsharkhombre-banner h1 {
-    font-size: 2.5rem;
+    font-size: 2.5rem !important;
   }
 
   .gymsharkhombre-buttons {
-    flex-wrap: wrap;
-    gap: 15px;
+    flex-wrap: wrap !important;
+    gap: 15px !important;
   }
 
   .gymsharkhombre-buttons .btn-image img {
-    max-height: 150px;
+    max-height: 150px !important;
   }
 
   /* --- CATÁLOGO PRODUCTOS --- */
-.product-content {
+  .product-content {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 20px !important;
+    justify-items: center !important;
   }
 
-
- .product {
+  .product {
     width: 100% !important;
-    margin: 0 auto;
+    margin: 0 auto !important;
   }
 
   .agregar-carrito {
-    padding: 10px 20px;
-    font-size: 1rem;
+    padding: 10px 20px !important;
+    font-size: 1rem !important;
   }
 
 }
