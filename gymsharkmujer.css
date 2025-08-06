@@ -334,8 +334,10 @@ body.gymshark #gymsharkmujer-container {
   height: auto;
   object-fit: cover;
 }
+
 @media (max-width: 991px) {
-  /* --- ESPACIADO GENERAL --- */
+
+  /* --- GENERAL --- */
   .franja-negra {
     padding-top: 50px;
   }
@@ -355,31 +357,31 @@ body.gymshark #gymsharkmujer-container {
   /* --- LOGO Y TEXTO --- */
   .logo-img {
     width: 75px !important;
-    height: auto;
+    height: auto !important;
   }
 
   .logo span {
-    font-size: 1.2rem;
+    font-size: 1.2rem !important;
   }
 
-  /* --- MENÚ PRINCIPAL / NAVBAR --- */
+  /* --- NAVBAR Y MENÚ HAMBURGUESA --- */
   .menu.container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 20px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 8px 20px !important;
     position: relative;
   }
 
   .navbar {
-    display: none;
-    flex-direction: column;
-    background-color: rgba(25, 25, 25, 0.85);
-    color: white;
-    position: absolute;
-    top: 100px;
-    left: 0;
-    width: 160px;
+    display: none !important;
+    flex-direction: column !important;
+    background-color: rgba(25, 25, 25, 0.85) !important;
+    color: white !important;
+    position: absolute !important;
+    top: 100px !important;
+    left: 0 !important;
+    width: 160px !important;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     z-index: 999;
   }
@@ -405,7 +407,7 @@ body.gymshark #gymsharkmujer-container {
     background-color: #444;
   }
 
-  /* --- ICONOS DERECHA (Carrito, Perfil) --- */
+  /* --- ICONOS DERECHA --- */
   .iconos-derecha {
     display: flex;
     gap: 20px;
@@ -413,8 +415,13 @@ body.gymshark #gymsharkmujer-container {
   }
 
   .iconos-derecha img {
-    width: 28px;
+    width: 28px !important;
     cursor: pointer;
+  }
+
+  #img-perfil {
+    width: 40px !important;
+    height: 40px !important;
   }
 
   /* --- HAMBURGUESA --- */
@@ -436,74 +443,14 @@ body.gymshark #gymsharkmujer-container {
   }
 
   #menu:checked + label + .iconos-derecha + .navbar {
-    display: flex;
-  }
-
-  /* --- SUBMENÚ HAMBURGUESA --- */
-  .mobile-menu {
-    position: relative;
-    display: block;
-  }
-
-  .menu-icon,
-  .menu-icono {
-    display: block;
-    width: 25px !important;
-    height: auto;
-    cursor: pointer;
-  }
-
-  .menu-desplegable {
-    display: none;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    background-color: rgba(25, 25, 25, 0.85);
-    color: white;
-    width: 160px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    z-index: 999;
-  }
-
-  .menu-desplegable ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .menu-desplegable li a {
-    display: block;
-    padding: 13px 16px;
-    color: white;
-    text-decoration: none;
-    border-bottom: 1px solid #444;
-    transition: background-color 0.3s ease;
-    font-size: 17px;
-  }
-
-  .menu-desplegable li a:hover {
-    background-color: #444;
-  }
-
-  /* --- BOTÓN CERRAR SESIÓN --- */
-  #cerrar-sesion-text {
-    background-color: white !important;
-    color: black !important;
-    display: inline-block !important;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: none !important;
-    text-align: center;
-    user-select: none;
-  }
-
-  #cerrar-sesion-text:hover {
-    background-color: white !important;
-    color: black !important;
+    display: flex !important;
   }
 
   /* --- SUBMENÚ PERFIL --- */
+  .perfil-menu {
+    top: calc(100% + 80px);
+  }
+
   #perfil-menu {
     position: absolute !important;
     top: 85px !important;
@@ -516,143 +463,59 @@ body.gymshark #gymsharkmujer-container {
     display: none;
   }
 
-  .perfil-menu {
-    top: calc(100% + 80px);
-  }
-
-  /* --- HEADER IMAGE Y TEXTO --- */
-  .header-img {
-    display: block;
-    flex-basis: 100%;
+  /* --- BOTÓN CERRAR SESIÓN --- */
+  #cerrar-sesion-text {
+    background-color: white !important;
+    color: black !important;
+    display: inline-block !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    border-radius: 6px !important;
+    cursor: pointer;
     text-align: center;
-    margin-bottom: 20px;
+    user-select: none;
+    transition: none !important;
   }
 
-  .header-img img {
-    width: 80%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 12px;
+  #cerrar-sesion-text:hover {
+    background-color: white !important;
+    color: black !important;
   }
 
-  .header-txt {
-    flex-basis: 100%;
-    text-align: center;
+  /* --- GYMSHARK MUJER BANNER --- */
+  .gymsharkmujer-banner {
+    height: 300px !important;
   }
 
-  .header-txt h1 {
-    font-size: 60px;
-  }
-
-  .header-txt p {
-    font-size: 16px;
-  }
-
-  /* --- PRODUCTOS --- */
- .products .product-content {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
-  gap: 20px;
-}
-
-
-  /* --- OFERTAS --- */
-  .ofert {
-    flex-direction: column;
-    padding: 80px 0 30px;
-  }
-
-  .ofert-1 {
-    flex-basis: 100%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto 20px;
-    box-sizing: border-box;
-  }
-
-  .ofert-1 img {
-    width: 70px;
-    height: auto;
-    object-fit: contain;
-    flex-shrink: 0;
-  }
-
-  .ofert-1 .ofert-txt {
-    text-align: left;
-  }
-
-  .ofert-1 .ofert-txt h3 {
-    font-size: 18px;
-    margin: 0 0 5px;
-  }
-
-  .ofert-1 .ofert-txt p {
-    font-size: 14px;
-    margin: 0;
-  }
-
-  /* --- ICONOS --- */
-  .icon-1 {
-    flex-basis: 100%;
-    height: auto;
-    margin-bottom: 30px;
-  }
-
-  .icons .icon-1 {
-    flex-basis: 80%;
-    max-width: 170px;
-    height: 150px;
-    padding: 10px 15px;
-    margin: 0 auto 20px;
-    box-sizing: border-box;
-  }
-
-  .icons .icon-img img {
-    height: 90px;
-    width: auto;
-    object-fit: contain;
-  }
-
-  .icons .icon-txt h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-
-  .icons .icon-txt p {
-    font-size: 14px;
-  }
-
-  /* --- BLOG --- */
-  .blog {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .blog-1 {
-    width: 100%;
-  }
-
-  .blog-1 img {
-    width: 350px;
-    height: auto;
-    margin: 0 auto 15px;
-    display: block;
-  }
-
-  /* --- MODAL --- */
-  .modal-content {
-    position: fixed;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-  }
-
-  /* --- GYMSHARK MUJER TEXT --- */
   .gymsharkmujer-banner h1 {
-    font-size: 2rem;
+    font-size: 2rem !important;
   }
+
+  .gymsharkmujer-buttons {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .gymsharkmujer-buttons .btn-image img {
+    max-height: 150px;
+  }
+
+  /* --- CATÁLOGO DE PRODUCTOS MUJER --- */
+  .products .product-content {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+    justify-items: center !important;
+  }
+
+  .product {
+    width: 100% !important;
+    margin: 0 auto;
+  }
+
+  .agregar-carrito {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
 }
