@@ -421,6 +421,11 @@ body.gymshark #gymsharkhombre-container {
     align-items: center;
   }
 
+
+  .gymsharkhombre-banner h1 {
+    font-size: 2.5rem;
+  }
+  
   /* Iconos tamaño */
   .iconos-derecha img {
     width: 28px;
@@ -466,6 +471,11 @@ body.gymshark #gymsharkhombre-container {
     width: 90%;
     margin: 0 auto;
   }
+
+  .logo span {
+    font-size: 1.2rem;
+  }
+
 
   /* Ajuste botón agregar carrito para móvil */
   .agregar-carrito {

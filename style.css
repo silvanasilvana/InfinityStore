@@ -807,9 +807,7 @@ margin-bottom: 15px;
     background-color: #444;
   }
 
-   .logo span {
-    font-size: 22px; /* ajusta el tamaño que quieras */
-  }
+   
 
   /* --- MENÚ NAVBAR MÓVIL --- */
   .navbar {
@@ -989,6 +987,12 @@ margin-bottom: 15px;
   .icons .icon-txt p {
     font-size: 14px;
   }
+
+
+  .logo span {
+    font-size: 1.2rem;
+  }
+
 
   /* --- SUBMENÚ PERFIL CORREGIDO --- */
   #perfil-menu {

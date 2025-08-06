@@ -458,6 +458,9 @@ body.gymshark #gymsharkmujer-container {
     gap: 30px;
   }
 
+  .gymsharkmujer-banner h1 {
+    font-size: 2rem;
+  }
   /* ... agrega aquí el resto de tus estilos responsive que necesites ... */
 
 }
