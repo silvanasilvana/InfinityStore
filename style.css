@@ -1017,5 +1017,9 @@ margin-bottom: 15px;
     margin: 0 auto 15px;
     display: block;
   }
+  
+   .modal-content {
+    margin: 25% auto 10% auto !important;
+  }
 
 }
