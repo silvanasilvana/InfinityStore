@@ -1038,19 +1038,21 @@ margin-bottom: 15px;
 }
 #perfil-menu {
   position: fixed !important;
-  top: 85px !important;
+  top: 90px !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  background-color: #fff;
+  background-color: #ff0000;
   padding: 12px 20px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   z-index: 9999;
   display: none;
-  max-width: 90vw;
+  max-width: 90vw;        /* máximo ancho relativo a la pantalla */
   width: auto;
   box-sizing: border-box;
+  overflow-wrap: break-word;
 }
+
 #perfil-menu.activo {
   display: block !important;
 }
