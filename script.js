@@ -40,7 +40,6 @@ const cerrarSesionText = document.getElementById("cerrar-sesion-text");
 const imgPerfil = document.getElementById("img-perfil");
 const lista = document.querySelector('#lista-carrito tbody');
 const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
-const elementos1 = document.querySelector('#lista-1, #lista-2, .product-content');
 const carrito = document.getElementById('carrito');
 
 // -- Funciones para Firestore --
@@ -99,9 +98,6 @@ async function cargarCarritoDesdeFirestore(userUid) {
   }
 }
 
-
- 
-
 // -- Control de autenticación --
 
 onAuthStateChanged(auth, async (user) => {
@@ -150,8 +146,6 @@ onAuthStateChanged(auth, async (user) => {
     actualizarTotal();
   }
 });
-
-
 
 // -- Registro --
 
@@ -214,6 +208,7 @@ loginForm?.addEventListener("submit", async (e) => {
 
 // -- Carrito --
 
+// Asigna ID a botones de agregar carrito al cargar
 window.onload = function () {
   const productos = document.querySelectorAll('.product');
   productos.forEach((producto, index) => {
@@ -222,23 +217,44 @@ window.onload = function () {
   });
 };
 
-function cargarEventListeners() {
-  if (elementos1) elementos1.addEventListener('click', comprarElemento);
-  if (carrito) carrito.addEventListener('click', eliminarElemento);
-  if (vaciarCarritoBtn) vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
-}
-cargarEventListeners();
-
-function comprarElemento(e) {
-  e.preventDefault();
+// Delegación global para clicks en "agregar-carrito"
+document.addEventListener('click', function(e) {
   if (e.target.classList.contains('agregar-carrito')) {
-    const elemento = e.target.closest('.product');
-    if (elemento) {
-      const infoElemento = leerDatosElemento(elemento);
+    e.preventDefault();
+    const producto = e.target.closest('.product');
+    if (producto) {
+      const infoElemento = leerDatosElemento(producto);
       insertarCarrito(infoElemento);
     }
   }
-}
+});
+
+// Delegación global para clicks en "borrar" del carrito
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('borrar')) {
+    e.preventDefault();
+    e.target.parentElement.parentElement.remove();
+    actualizarTotal();
+
+    const user = auth.currentUser;
+    if (user) {
+      guardarCarritoEnFirestore(user.uid);
+    }
+  }
+});
+
+// Vaciar carrito botón
+vaciarCarritoBtn?.addEventListener('click', function(e) {
+  e.preventDefault();
+  while (lista.firstChild) lista.removeChild(lista.firstChild);
+  actualizarTotal();
+
+  const user = auth.currentUser;
+  if (user) {
+    guardarCarritoEnFirestore(user.uid);
+  }
+  return false;
+});
 
 function leerDatosElemento(elemento) {
   return {
@@ -291,32 +307,6 @@ function insertarCarrito(elemento) {
   setTimeout(() => document.title = tituloOriginal, 5000);
 }
 
-function eliminarElemento(e) {
-  e.preventDefault();
-  if (e.target.classList.contains('borrar')) {
-    e.target.parentElement.parentElement.remove();
-
-    actualizarTotal();
-
-    const user = auth.currentUser;
-    if (user) {
-      guardarCarritoEnFirestore(user.uid);
-    }
-  }
-}
-
-function vaciarCarrito() {
-  while (lista.firstChild) lista.removeChild(lista.firstChild);
-
-  actualizarTotal();
-
-  const user = auth.currentUser;
-  if (user) {
-    guardarCarritoEnFirestore(user.uid);
-  }
-  return false;
-}
-
 // -- Modales --
 
 function mostrarLogin() {
@@ -366,7 +356,6 @@ function actualizarTotal() {
 
   lista.querySelectorAll('tr').forEach(tr => {
     const precioText = tr.children[2].textContent.trim();
-    // Quitar cualquier cosa que no sea número o punto o coma
     const precio = parseFloat(precioText.replace(/[^0-9.,]/g, '').replace(',', '.')) || 0;
     const cantidad = parseInt(tr.querySelector('.cantidad').textContent) || 0;
 
@@ -390,7 +379,6 @@ document.getElementById('checkout-form').addEventListener('submit', async functi
   const phone = document.getElementById('phone').value.trim();
   const direccion = document.getElementById('direccion').value.trim();
 
-  // Construir carritoProductos desde el carrito visible
   const carritoProductos = [];
   lista.querySelectorAll('tr').forEach(tr => {
     carritoProductos.push({
@@ -430,10 +418,4 @@ document.getElementById('checkout-form').addEventListener('submit', async functi
   } catch(error) {
     alert('Error guardando el pedido: ' + error.message);
   }
-
-
-
-  
 });
-
-
