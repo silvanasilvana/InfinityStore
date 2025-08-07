@@ -6,7 +6,9 @@ import {
   updateProfile,
   onAuthStateChanged,
   reload,
-  signOut
+  signOut,
+  setPersistence,
+  browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 import {
   getFirestore,
@@ -34,6 +36,11 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
+// Activar persistencia local para mantener sesión en móvil y web
+setPersistence(auth, browserLocalPersistence).catch((error) => {
+  console.error("Error con persistencia de sesión:", error);
+});
+
 // Elementos DOM
 const nombreUsuarioSpan = document.getElementById("nombre-usuario");
 const cerrarSesionText = document.getElementById("cerrar-sesion-text");
@@ -42,11 +49,10 @@ const lista = document.querySelector('#lista-carrito tbody');
 const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
 const carrito = document.getElementById('carrito');
 
-// -- Funciones para Firestore --
+// --- Funciones para Firestore ---
 
 async function guardarCarritoEnFirestore(userUid) {
   const productos = [];
-
   lista.querySelectorAll('tr').forEach(tr => {
     productos.push({
       id: tr.querySelector('a.borrar').getAttribute('data-id'),
@@ -98,9 +104,10 @@ async function cargarCarritoDesdeFirestore(userUid) {
   }
 }
 
-// -- Control de autenticación --
+// --- Control de autenticación ---
 
 onAuthStateChanged(auth, async (user) => {
+  console.log("Usuario actual:", user);
   if (user) {
     await reload(user);
     const nombre = user.displayName || "Usuario";
@@ -147,10 +154,9 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// -- Registro --
+// --- Registro ---
 
 const registerForm = document.getElementById("register-form");
-
 registerForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -180,10 +186,9 @@ registerForm?.addEventListener("submit", async (e) => {
   }
 });
 
-// -- Login --
+// --- Login ---
 
 const loginForm = document.getElementById("login-form");
-
 loginForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -206,18 +211,18 @@ loginForm?.addEventListener("submit", async (e) => {
   }
 });
 
-// -- Carrito --
-
-// Asigna ID a botones de agregar carrito al cargar
-window.onload = function () {
+// --- Inicializar IDs de productos cuando DOM esté listo ---
+document.addEventListener('DOMContentLoaded', () => {
   const productos = document.querySelectorAll('.product');
   productos.forEach((producto, index) => {
     const btn = producto.querySelector('.agregar-carrito');
     if (btn) btn.setAttribute('data-id', index + 1);
   });
-};
+});
 
-// Delegación global para clicks en "agregar-carrito"
+// --- Eventos de carrito ---
+
+// Delegación para agregar producto al carrito
 document.addEventListener('click', function(e) {
   if (e.target.classList.contains('agregar-carrito')) {
     e.preventDefault();
@@ -225,11 +230,17 @@ document.addEventListener('click', function(e) {
     if (producto) {
       const infoElemento = leerDatosElemento(producto);
       insertarCarrito(infoElemento);
+
+      // Cerrar menú móvil si está abierto (opcional)
+      const menuDesplegable = document.getElementById('menuDesplegable');
+      if (menuDesplegable && menuDesplegable.style.display === 'block') {
+        menuDesplegable.style.display = 'none';
+      }
     }
   }
 });
 
-// Delegación global para clicks en "borrar" del carrito
+// Delegación para borrar producto del carrito
 document.addEventListener('click', function(e) {
   if (e.target.classList.contains('borrar')) {
     e.preventDefault();
@@ -243,9 +254,14 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// Vaciar carrito botón
+// Vaciar carrito con botón
 vaciarCarritoBtn?.addEventListener('click', function(e) {
   e.preventDefault();
+  vaciarCarrito();
+});
+
+// Función para vaciar carrito
+function vaciarCarrito() {
   while (lista.firstChild) lista.removeChild(lista.firstChild);
   actualizarTotal();
 
@@ -254,7 +270,9 @@ vaciarCarritoBtn?.addEventListener('click', function(e) {
     guardarCarritoEnFirestore(user.uid);
   }
   return false;
-});
+}
+
+// --- Funciones carrito ---
 
 function leerDatosElemento(elemento) {
   return {
@@ -296,18 +314,13 @@ function insertarCarrito(elemento) {
     guardarCarritoEnFirestore(user.uid);
   }
 
-  const submenu = document.querySelector('.submenu');
-  if (submenu) {
-    submenu.classList.add('activo');
-    setTimeout(() => submenu.classList.remove('activo'), 5000);
-  }
-
+  // Notificación breve
   const tituloOriginal = document.title;
   document.title = 'Producto agregado al carrito 🛒';
-  setTimeout(() => document.title = tituloOriginal, 5000);
+  setTimeout(() => document.title = tituloOriginal, 2000);
 }
 
-// -- Modales --
+// --- Modales ---
 
 function mostrarLogin() {
   document.getElementById("loginModal").style.display = "block";
@@ -324,7 +337,7 @@ function cerrarRegistro() {
   document.getElementById("registerModal").style.display = "none";
 }
 
-// -- Submenú perfil --
+// --- Menú perfil usuario ---
 
 const menuPerfil = document.getElementById("perfil-menu");
 
@@ -344,13 +357,17 @@ imgPerfil?.addEventListener("click", () => {
 });
 
 document.addEventListener("click", (e) => {
-  if (!menuPerfil.contains(e.target) && !imgPerfil.contains(e.target)) {
-    menuPerfil.style.display = "none";
+  const clickEnMenu = menuPerfil ? menuPerfil.contains(e.target) : false;
+  const clickEnImgPerfil = imgPerfil ? imgPerfil.contains(e.target) : false;
+
+  if (!clickEnMenu && !clickEnImgPerfil) {
+    if (menuPerfil) menuPerfil.style.display = "none";
     if (window.ocultarSubmenuTimeout) clearTimeout(window.ocultarSubmenuTimeout);
   }
 });
 
-// --- Función para actualizar el total ---
+// --- Actualizar total del carrito ---
+
 function actualizarTotal() {
   let total = 0;
 
@@ -366,11 +383,12 @@ function actualizarTotal() {
 
   const totalAmount = document.querySelector('.total-amount strong');
   if (totalAmount) {
-    totalAmount.textContent = `${totalFormateado} dlls`;
+    totalAmount.textContent = `${totalFormateado} MXN`;
   }
 }
 
-// --- Submit del formulario para guardar el pedido con la dirección y carrito real ---
+// --- Enviar pedido ---
+
 document.getElementById('checkout-form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
