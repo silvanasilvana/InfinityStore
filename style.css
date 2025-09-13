@@ -742,10 +742,7 @@ margin-bottom: 15px;
     object-fit: contain;
     border-radius: 5px;
     margin: 10px 0; /* esto da espacio arriba y abajo */
-}
-
-
-@media (max-width: 991px) {
+}@media (max-width: 991px) {
   .franja-negra {
     padding-top: 50px;
   }
@@ -938,7 +935,7 @@ margin-bottom: 15px;
   }
 
   .ofert-1 img {
-    width: 70px;
+    width: 60px !important; /* más pequeño */
     height: auto;
     object-fit: contain;
     flex-shrink: 0;
@@ -949,12 +946,12 @@ margin-bottom: 15px;
   }
 
   .ofert-1 .ofert-txt h3 {
-    font-size: 18px;
+    font-size: 16px; /* más pequeño */
     margin: 0 0 5px;
   }
 
   .ofert-1 .ofert-txt p {
-    font-size: 14px;
+    font-size: 13px; /* más pequeño */
     margin: 0;
   }
 
@@ -965,28 +962,27 @@ margin-bottom: 15px;
     margin-bottom: 30px;
   }
 
-  .icons .icon-1 {
-    flex-basis: 80%;
-    max-width: 170px;
-    height: 150px;
-    padding: 10px 15px;
-    margin: 0 auto 20px;
-    box-sizing: border-box;
+  /* Fuerza texto pequeño en iconos para móviles */
+  .icons .icon-txt h3,
+  .icons .icon-txt H3 {
+    font-size: 12px !important; /* mucho más pequeño */
+    line-height: 1.2 !important;
+    margin-bottom: 2px !important;
+    text-align: center !important;
   }
 
-  .icons .icon-img img {
-    height: 90px;
-    width: auto;
-    object-fit: contain;
+  .icons .icon-txt p,
+  .icons .icon-txt P {
+    font-size: 10px !important; /* párrafo más pequeño */
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    text-align: center !important;
   }
 
-  .icons .icon-txt h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-
-  .icons .icon-txt p {
-    font-size: 14px;
+  .icons img {
+    width: 50px !important; /* iconos más pequeños */
+    height: auto !important;
+    object-fit: contain !important;
   }
 
   .logo span {
@@ -1017,10 +1013,16 @@ margin-bottom: 15px;
   }
 
   .blog-1 img {
-    width: 350px;
+    width: 100%;
+    max-width: 250px;
     height: auto;
-    margin: 0 auto 15px;
+    margin: 0 auto 10px;
     display: block;
+  }
+
+  .ofert-txt a.btn-4 {
+    font-size: 14px;
+    padding: 8px 12px;
   }
 
   /* --- MODAL --- */
@@ -1034,36 +1036,33 @@ margin-bottom: 15px;
 
   /* --- CARRITO CENTRADO --- */
   .submenu {
-  position: relative;
-}
-.submenu #carrito {
-  position: fixed !important;
-  top: 90px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 90vw !important;
-  max-width: 400px;
-  background-color: white;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  z-index: 9999;
-  display: none;
-  box-sizing: border-box;
-  overflow-y: auto;
-  max-height: 70vh;
-  
-}
+    position: relative;
+  }
+  .submenu #carrito {
+    position: fixed !important;
+    top: 90px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90vw !important;
+    max-width: 400px;
+    background-color: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    display: none;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 70vh;
+  }
 
-.submenu:hover #carrito,
-.submenu.activo #carrito,
-.submenu.mostrar-carrito #carrito {
-  position: fixed !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  right: auto !important;
-  top: 90px !important;
-}
-
-
+  .submenu:hover #carrito,
+  .submenu.activo #carrito,
+  .submenu.mostrar-carrito #carrito {
+    position: fixed !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    top: 90px !important;
+  }
 }

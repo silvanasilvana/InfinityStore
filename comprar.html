@@ -8,6 +8,7 @@
   <!-- Fuentes Google -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
+  <!-- Tus estilos originales -->
   <link rel="stylesheet" href="comprar.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -15,20 +16,17 @@
 
   <header class="header">
     <div class="menu container">
-
-      
-      
- <!-- Imagen de menú (hamburguesa) -->
-    <div class="mobile-menu">
-      <img src="images/barra.jpg" class="menu-icon" alt="Menú" id="menuToggle" />
-      <div class="menu-desplegable" id="menuDesplegable">
-        <ul>
-          <li><a href="gymsharkmujer.html">Mujer</a></li>
-          <li><a href="gymsharkhombre.html">Hombre</a></li>
-          <li><a href="accesorios.html">Accesorios</a></li>
-        </ul>
+      <!-- Imagen de menú (hamburguesa) -->
+      <div class="mobile-menu">
+        <img src="images/barra.jpg" class="menu-icon" alt="Menú" id="menuToggle" />
+        <div class="menu-desplegable" id="menuDesplegable">
+          <ul>
+            <li><a href="gymsharkmujer.html">Mujer</a></li>
+            <li><a href="gymsharkhombre.html">Hombre</a></li>
+            <li><a href="accesorios.html">Accesorios</a></li>
+          </ul>
+        </div>
       </div>
-    </div>
     
       <a href="index.html" class="logo">
         <img src="images/logo.PNG" alt="Logo" class="logo-img" />
@@ -43,6 +41,12 @@
           <li><a href="comprar.html" style="color:#5b6973; font-weight:700;">Comprar</a></li>
         </ul>
       </nav>
+
+      <!-- INICIO SESIÓN / PERFIL -->
+      <div class="login-status">
+        <span id="nombre-usuario"></span>
+        <span id="cerrar-sesion-text" style="cursor:pointer; margin-left:10px; color:red;">Cerrar sesión</span>
+      </div>
     </div>
   </header>
 
@@ -56,16 +60,19 @@
         <table id="lista-carrito" class="cart-table">
           <thead>
             <tr>
+              <th>Imagen</th>
               <th>Producto</th>
-              <th>Cantidad</th>
               <th>Precio Unitario</th>
-              <th>Subtotal</th>
+              <th>Cantidad</th>
+              <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
-            <!-- Aquí se inyectan los productos -->
+            <!-- Aquí se inyectan los productos con JS -->
           </tbody>
         </table>
+
+        <button id="vaciar-carrito" class="btn-vaciar">Vaciar Carrito</button>
       </section>
 
       <!-- Resumen y formulario lado derecho -->
@@ -85,128 +92,358 @@
             <label for="email">Correo electrónico:</label>
             <input type="email" id="email" name="email" required />
 
-            <!-- ...dentro de form id="checkout-form" -->
-<label for="direccion">Dirección de entrega:</label>
-<textarea id="direccion" name="direccion" rows="3" placeholder="Ingresa Tu Dirección." required></textarea>
-
-            
+            <label for="direccion">Dirección de entrega:</label>
+            <textarea id="direccion" name="direccion" rows="3" placeholder="Ingresa Tu Dirección." required></textarea>
 
             <label for="phone">Teléfono:</label>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Ejemplo: 8711234567" required />
+          <input type="tel" id="phone" name="phone" 
+   pattern="[0-9]{10}" 
+   placeholder="Ejemplo: 8711234567" required />
 
-            <button type="submit" class="btn-pay">Pagar</button>
           </form>
         </div>
+        <div id="paypal-button-container"></div>
       </section>
     </div>
   </main>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <!-- FIREBASE SDK MODULAR -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { 
+      getAuth, 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword, 
+      onAuthStateChanged, 
+      signOut, 
+      setPersistence, 
+      browserLocalPersistence,
+      updateProfile 
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-  <script>
-    // Configura Firebase aquí con tus datos
-   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyChkZHqONT27CD5CkV02KZUPSKyGrPFojc",
-  authDomain: "infinity-store-191c9.firebaseapp.com",
-  projectId: "infinity-store-191c9",
-  storageBucket: "infinity-store-191c9.firebasestorage.app",
-  messagingSenderId: "185404166630",
-  appId: "1:185404166630:web:898dcdb0c6891e811b4627",
-  measurementId: "G-9SWGH5N226"
-};
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    // Config Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyChkZHqONT27CD5CkV02KZUPSKyGrPFojc",
+      authDomain: "infinity-store-191c9.firebaseapp.com",
+      projectId: "infinity-store-191c9",
+      storageBucket: "infinity-store-191c9.appspot.com",
+      messagingSenderId: "185404166630",
+      appId: "1:185404166630:web:898dcdb0c6891e811b4627",
+      measurementId: "G-9SWGH5N226"
+    };
 
-    // Simulación de carrito, cambia por tu lógica real en script.js
-    const carritoProductos = [
-      { nombre: "Leggings", cantidad: 2, precio: 500 },
-      { nombre: "Top deportivo", cantidad: 1, precio: 200 }
-    ];
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const db = getFirestore(app);
 
-    // Escucha el submit del formulario
-    document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+    // Persistencia sesión
+    setPersistence(auth, browserLocalPersistence).catch(console.error);
+
+    // ELEMENTOS DOM
+    const nombreUsuarioSpan = document.getElementById("nombre-usuario");
+    const cerrarSesionText = document.getElementById("cerrar-sesion-text");
+    const lista = document.querySelector('#lista-carrito tbody');
+    const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+    const carritoProductos = [];
+
+    // FUNCIONES CARRITO
+    function insertarCarrito(elemento) {
+      const rowExistente = lista.querySelector(`tr[data-id="${elemento.id}"]`);
+      if (rowExistente) {
+        const cantidadTd = rowExistente.querySelector('.cantidad');
+        cantidadTd.textContent = parseInt(cantidadTd.textContent) + 1;
+        elemento.cantidad = parseInt(cantidadTd.textContent);
+      } else {
+        const row = document.createElement('tr');
+        row.setAttribute('data-id', elemento.id);
+        row.innerHTML = `
+          <td><img src="${elemento.imagen}" width="60px" alt="${elemento.titulo}"></td>
+          <td>${elemento.titulo}</td>
+          <td>$${(parseFloat(String(elemento.precio).replace(/[^0-9.]/g, '')) || 0).toFixed(2)}</td>
+
+          <td class="cantidad">${elemento.cantidad}</td>
+          <td><a href="#" class="borrar" data-id="${elemento.id}">x</a></td>
+        `;
+        lista.appendChild(row);
+      }
+      actualizarTotal();
+      guardarCarritoEnLocalStorage();
+      guardarCarritoActual();
+    }
+
+    function actualizarTotal() {
+      let total = 0;
+      lista.querySelectorAll('tr').forEach(tr => {
+        const cantidad = parseInt(tr.querySelector('.cantidad').textContent);
+        const precio = parseFloat(tr.children[2].textContent.replace(/[^0-9.]/g, '')) || 0;
+
+        total += cantidad * precio;
+      });
+      const totalAmount = document.querySelector('.total-amount strong');
+      if(totalAmount) totalAmount.textContent = `$${total.toFixed(2)}`;
+    }
+
+    function eliminarElemento(e) {
       e.preventDefault();
+      if (e.target.classList.contains('borrar')) {
+        const id = e.target.dataset.id;
+        lista.querySelector(`tr[data-id="${id}"]`).remove();
+        guardarCarritoEnLocalStorage();
+        guardarCarritoActual();
+        actualizarTotal();
+      }
+    }
 
+    function vaciarCarrito() {
+      lista.innerHTML = '';
+      guardarCarritoEnLocalStorage();
+      guardarCarritoActual();
+      actualizarTotal();
+    }
+
+    function guardarCarritoEnLocalStorage() {
+      const productosArray = [];
+      lista.querySelectorAll('tr').forEach(tr => {
+        productosArray.push({
+          id: tr.dataset.id,
+          imagen: tr.querySelector('td img').src,
+          titulo: tr.children[1].textContent,
+          precio: parseFloat(tr.children[2].textContent.replace(/[^0-9.]/g, '')) || 0,
+
+          cantidad: parseInt(tr.querySelector('.cantidad').textContent)
+        });
+      });
+      localStorage.setItem('carrito', JSON.stringify(productosArray));
+    }
+
+    function cargarCarritoDesdeLocalStorage() {
+      const carritoLocal = JSON.parse(localStorage.getItem('carrito')) || [];
+      carritoLocal.forEach(el => insertarCarrito(el));
+    }
+
+    async function guardarCarritoEnFirestore(userUid) {
+      const productosArray = [];
+      lista.querySelectorAll('tr').forEach(tr => {
+        productosArray.push({
+          id: tr.dataset.id,
+          imagen: tr.querySelector('td img').src,
+          titulo: tr.children[1].textContent,
+          precio: parseFloat(tr.children[2].textContent.replace(/[^0-9.]/g, '')) || 0,
+
+          cantidad: parseInt(tr.querySelector('.cantidad').textContent)
+        });
+      });
+      try {
+        await setDoc(doc(db, "carritos", userUid), { productos: productosArray });
+      } catch (error) {
+        console.error("Error guardando carrito:", error);
+      }
+    }
+
+    async function cargarCarritoDesdeFirestore(userUid) {
+      try {
+        const docRef = doc(db, "carritos", userUid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          lista.innerHTML = '';
+          docSnap.data().productos.forEach(el => insertarCarrito(el));
+        }
+      } catch (error) {
+        console.error("Error cargando carrito:", error);
+      }
+    }
+
+    function guardarCarritoActual() {
+      const user = auth.currentUser;
+      if (user) guardarCarritoEnFirestore(user.uid);
+    }
+
+    vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
+    lista.addEventListener('click', eliminarElemento);
+    
+
+    // INICIO/CIERRE SESIÓN
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        nombreUsuarioSpan.textContent = user.displayName || user.email;
+        cargarCarritoDesdeFirestore(user.uid);
+      } else {
+        nombreUsuarioSpan.textContent = "";
+      }
+    });
+
+    cerrarSesionText?.addEventListener('click', () => {
+      signOut(auth).then(() => {
+        nombreUsuarioSpan.textContent = "";
+      });
+    });
+
+    // CHECKOUT
+    document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const phone = document.getElementById('phone').value;
+      const direccion = document.getElementById('direccion').value;
 
-      let productosStr = carritoProductos.map(p => `${p.nombre} x${p.cantidad}`).join(', ');
-      let total = carritoProductos.reduce((acc, p) => acc + (p.cantidad * p.precio), 0);
+      const productosArray = [];
+      lista.querySelectorAll('tr').forEach(tr => {
+        productosArray.push({
+          id: tr.dataset.id,
+          titulo: tr.children[1].textContent,
+          precio: parseFloat(tr.children[2].textContent.replace('$','')),
+          cantidad: parseInt(tr.querySelector('.cantidad').textContent)
+        });
+      });
 
+      const total = productosArray.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
       try {
-        await db.collection('compras').add({
+        await addDoc(collection(db, 'compras'), {
           nombre: name,
           email: email,
           telefono: phone,
-          productos: productosStr,
+          direccion: direccion,
+          productos: productosArray,
           total: `$${total.toFixed(2)}`,
-          fecha: firebase.firestore.FieldValue.serverTimestamp()
+          fecha: serverTimestamp()
         });
-
-        alert('Gracias por tu compra. Pronto recibirás información para el pago.');
-
-        // Aquí puedes limpiar carrito y formulario si quieres
-        // document.getElementById('checkout-form').reset();
-        // carritoProductos = [];
-
-      } catch(error) {
-        alert('Error guardando el pedido: ' + error.message);
+        alert('Compra registrada correctamente.');
+        vaciarCarrito();
+      } catch (err) {
+        alert('Error en la compra: ' + err.message);
       }
     });
+
   </script>
 
-  
- 
- <!--  MENU HAMBURGUESA MEDIA MOVIL--> 
+<!-- PayPal SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AUtKy_013o7nVy3PuEXuLlUf731SCb4-vvi2wH6HeWbraHzVofCBvJ-gu_jyNNEaIgF6fE8jiPpgrjk_"></script>
+
 
 <script>
-  const menuIcon = document.getElementById('menuToggle');
-  const menuDesplegable = document.getElementById('menuDesplegable');
+  paypal.Buttons({
+    style: {
+      layout: 'vertical',
+      color: 'gold',
+      shape: 'rect',
+      label: 'pay'
+    },
+    createOrder: function(data, actions) {
+      // Obtener el total del carrito
+      const totalText = document.querySelector('.total-amount strong').textContent;
+      const total = parseFloat(totalText.replace('$','')) || 0;
 
-  let timeoutId;
-
-  // Función para mostrar menú y reiniciar temporizador
-  function mostrarMenu() {
-    menuDesplegable.style.display = 'block';
-
-    if (timeoutId) clearTimeout(timeoutId);
-
-    timeoutId = setTimeout(() => {
-      menuDesplegable.style.display = 'none';
-    }, 5000);
-  }
-
-  menuIcon.addEventListener('click', (e) => {
-    e.stopPropagation(); // Para que no se dispare el listener del documento
-    if (menuDesplegable.style.display === 'block') {
-      menuDesplegable.style.display = 'none';
-      if (timeoutId) clearTimeout(timeoutId);
-    } else {
-      mostrarMenu();
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: total.toFixed(2)
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert('Pago realizado por ' + details.payer.name.given_name);
+        // Aquí puedes vaciar el carrito después de pagar
+        vaciarCarrito();
+      });
+    },
+    onError: function(err) {
+      console.error(err);
+      alert('Hubo un error en el pago. Intenta de nuevo.');
     }
-  });
-
-  // Cancela temporizador si haces clic dentro del menú
-  menuDesplegable.addEventListener('click', (e) => {
-    e.stopPropagation(); // Evita que el clic se propague y cierre el menú
-    if (timeoutId) clearTimeout(timeoutId);
-  });
-
-  // Cierra el menú al hacer clic fuera del icono o menú
-  document.addEventListener('click', () => {
-    menuDesplegable.style.display = 'none';
-    if (timeoutId) clearTimeout(timeoutId);
-  });
+  }).render('#paypal-button-container');
 </script>
 
+  <!-- MENU HAMBURGUESA -->
+  <script>
+    const menuIcon = document.getElementById('menuToggle');
+    const menuDesplegable = document.getElementById('menuDesplegable');
+    let timeoutId;
 
+    function mostrarMenu() {
+      menuDesplegable.style.display = 'block';
+      if (timeoutId) clearTimeout(timeoutId);
 
+      timeoutId = setTimeout(() => {
+        menuDesplegable.style.display = 'none';
+      }, 5000);
+    }
 
-  <script type="module" src="script.js"></script>
+    menuIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (menuDesplegable.style.display === 'block') {
+        menuDesplegable.style.display = 'none';
+        if (timeoutId) clearTimeout(timeoutId);
+      } else {
+        mostrarMenu();
+      }
+    });
+
+    menuDesplegable.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (timeoutId) clearTimeout(timeoutId);
+    });
+
+    document.addEventListener('click', () => {
+      menuDesplegable.style.display = 'none';
+      if (timeoutId) clearTimeout(timeoutId);
+    });
+  </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const lista = document.querySelector('#lista-carrito tbody');
+  let productosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+  function renderizarCarrito() {
+    lista.innerHTML = '';
+    productosCarrito.forEach((producto, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><img src="${producto.imagen}" width="60"></td>
+        <td>${producto.titulo} ${producto.talla}</td>
+        <td>${producto.precio}</td>
+        <td>${producto.cantidad}</td>
+        <td><a href="#" class="borrar-producto" data-index="${index}">X</a></td>
+      `;
+      lista.appendChild(row);
+    });
+
+    lista.querySelectorAll('.borrar-producto').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const i = parseInt(btn.dataset.index);
+        productosCarrito.splice(i, 1);
+        localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+        renderizarCarrito();
+      });
+    });
+
+    actualizarTotal();
+  }
+
+  function actualizarTotal() {
+    let total = 0;
+    productosCarrito.forEach(p => {
+      const precio = parseFloat(p.precio.replace('$','')) || 0;
+      total += precio * p.cantidad;
+    });
+    document.querySelector('.total-amount strong').textContent = `$${total.toFixed(2)}`;
+  }
+
+  // Vaciar carrito
+  document.getElementById('vaciar-carrito').addEventListener('click', (e) => {
+    e.preventDefault();
+    productosCarrito = [];
+    localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+    renderizarCarrito();
+  });
+
+  renderizarCarrito();
+});
+</script>
+
 
 </body>
 </html>

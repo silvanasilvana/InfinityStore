@@ -13,9 +13,138 @@
   <!-- Fuente de Google -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Oswald:wght@200..700&family=Pacifico&family=Playwrite+AU+QLD:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sacramento&display=swap" rel="stylesheet">
 
-  <!-- Firebase -->
-  <script type="module">
-    // (tu código Firebase aquí, sin cambios)
+  
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  setPersistence,
+  browserLocalPersistence,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyChkZHqONT27CD5CkV02KZUPSKyGrPFojc",
+  authDomain: "infinity-store-191c9.firebaseapp.com",
+  projectId: "infinity-store-191c9",
+  storageBucket: "infinity-store-191c9.appspot.com",
+  messagingSenderId: "185404166630",
+  appId: "1:185404166630:web:898dcdb0c6891e811b4627",
+  measurementId: "G-9SWGH5N226"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const nombreUsuarioSpan = document.getElementById("nombre-usuario");
+  const imgPerfil = document.getElementById("img-perfil");
+  
+
+  const perfilMenu = document.getElementById("perfil-menu");
+  const cerrarSesionText = document.getElementById("cerrar-sesion-text");
+
+  // Funciones mostrar/cerrar login/registro
+  window.mostrarLogin = () => {
+    document.getElementById("loginModal").style.display = "block";
+    document.getElementById("registerModal").style.display = "none";
+  };
+  window.mostrarRegistro = () => {
+    document.getElementById("registerModal").style.display = "block";
+    document.getElementById("loginModal").style.display = "none";
+  };
+  window.cerrarLogin = () => document.getElementById("loginModal").style.display = "none";
+  window.cerrarRegistro = () => document.getElementById("registerModal").style.display = "none";
+
+  // Login
+  const loginForm = document.getElementById("login-form");
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => signInWithEmailAndPassword(auth, email, password))
+      .then(userCredential => {
+        alert("Inicio de sesión exitoso: " + userCredential.user.email);
+        cerrarLogin();
+      })
+      .catch(error => alert("Error al iniciar sesión: " + error.message));
+  });
+
+  // Registro
+  const registerForm = document.getElementById("register-form");
+  registerForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("reg-email").value;
+    const password = document.getElementById("reg-password").value;
+    const nombre = registerForm.querySelector("input[placeholder='Nombre completo']").value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        updateProfile(userCredential.user, { displayName: nombre });
+        alert("Cuenta creada exitosamente: " + userCredential.user.email);
+        cerrarRegistro();
+      })
+      .catch((error) => alert("Error al registrar: " + error.message));
+  });
+
+  // Cerrar sesión
+  if (cerrarSesionText) {
+    cerrarSesionText.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        nombreUsuarioSpan.textContent = "";
+        alert("Sesión cerrada");
+      } catch (error) {
+        alert("No se pudo cerrar sesión");
+      }
+    });
+  }
+
+  
+  // Mostrar nombre de usuario y perfil dinámico
+  imgPerfil.addEventListener("click", () => {
+    const user = auth.currentUser;
+    if (!user) {
+      mostrarLogin();
+    } else {
+      nombreUsuarioSpan.textContent = user.displayName || user.email;
+      if (perfilMenu) {
+        perfilMenu.style.display = perfilMenu.style.display === "block" ? "none" : "block";
+      }
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!imgPerfil.contains(e.target) && perfilMenu && !perfilMenu.contains(e.target)) {
+      perfilMenu.style.display = "none";
+    }
+  });
+
+  window.onclick = (event) => {
+    if (event.target.classList.contains("modal")) {
+      event.target.style.display = "none";
+    }
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      nombreUsuarioSpan.textContent = user.displayName || user.email;
+    } else {
+      nombreUsuarioSpan.textContent = "";
+    }
+  });
+
+  setPersistence(auth, browserLocalPersistence)
+    .then(() => console.log("Persistencia configurada"))
+    .catch((error) => console.error("Error al configurar persistencia:", error));
+});
+
   </script>
 </head>
 <script>
@@ -125,15 +254,18 @@
 </script>
 
 
+<!-- PERFIL -->
+<div class="submenu perfil-container">
+  <img src="images/perfil.png" id="img-perfil" alt="perfil" style="cursor:pointer;">
+  <div class="perfil-menu" id="perfil-menu">
+    <span id="nombre-usuario"></span>
+    <!-- boton cerrar sesion -->
+    <button id="cerrar-sesion-text" style="cursor:pointer;">Cerrar sesión</button>
+  </div>
+</div>
 
-      <div>
-        <ul>
-          <li class="submenu">
-            <img src="images/perfil.png" id="img-perfil" alt="perfil" style="cursor:pointer;" onclick="mostrarLogin()" />
-          </li>
-        </ul>
-      </div>
-    </div>
+
+    
   </header>
 
   <!-- Franja principal con imagen y título -->
@@ -167,7 +299,7 @@
         <input type="email" id="reg-email" placeholder="Correo electrónico" required />
         <input type="password" id="reg-password" placeholder="Contraseña" required />
         <button type="submit" class="btn-2">Crear cuenta</button>
-        <p>¿Ya tienes cuenta? <a href="#" onclick="mostrarLogin()">Iniciar sesión</a></p>
+<p>¿Ya tienes cuenta? <a href="#" onclick="mostrarLogin()">Iniciar sesión</a></p>
       </form>
     </div>
   </div>
@@ -604,7 +736,6 @@
 
 
 
-
   </main>
   </main>
   <!-- NUEVA SECCION--> 
@@ -655,6 +786,68 @@
 </script>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Función para actualizar el submenu del carrito
+  function actualizarMenuCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const lista = document.querySelector('#carrito tbody');
+    if (!lista) return;
+
+    lista.innerHTML = '';
+    carrito.forEach((item, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><img src="${item.imagen}" width="40" alt="${item.titulo}"></td>
+        <td>${item.titulo}</td>
+        <td>${item.precio}</td>
+        <td>${item.cantidad}</td>
+        <td><a href="#" class="borrar" data-id="${index}">x</a></td>
+      `;
+      lista.appendChild(row);
+    });
+  }
+
+  // Llamamos cada vez que agregamos un producto
+  document.querySelectorAll('.agregar-carrito').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const producto = btn.closest('.product');
+      const titulo = producto.querySelector('.product-name').textContent;
+      const precio = producto.querySelector('.precio').textContent;
+      const imagen = producto.querySelector('.img-front').src;
+
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.push({ titulo, precio, imagen, cantidad: 1 });
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+
+      actualizarMenuCarrito();
+    });
+  });
+
+  // Eliminar producto desde el submenu
+  document.querySelector('#carrito tbody').addEventListener('click', (e) => {
+    if (e.target.classList.contains('borrar')) {
+      const id = e.target.getAttribute('data-id');
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.splice(id, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      actualizarMenuCarrito();
+    }
+  });
+
+  // Vaciar carrito
+  document.getElementById('vaciar-carrito').addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.setItem('carrito', JSON.stringify([]));
+    actualizarMenuCarrito();
+  });
+
+  // Inicializamos la tabla cuando carga la página
+  actualizarMenuCarrito();
+});
+</script>
 
 
 <footer class="footer">

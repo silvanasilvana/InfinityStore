@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comprar 2 - Infinity Store</title>
+
+  <!-- Fuentes Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tus estilos -->
+  <link rel="stylesheet" href="comprar2.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="menu container">
+      <div class="mobile-menu">
+        <img src="images/barra.jpg" class="menu-icon" alt="Menú" id="menuToggle" />
+        <div class="menu-desplegable" id="menuDesplegable">
+          <ul>
+            <li><a href="gymsharkmujer.html">Mujer</a></li>
+            <li><a href="gymsharkhombre.html">Hombre</a></li>
+            <li><a href="accesorios.html">Accesorios</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="index.html" class="logo">
+        <img src="images/logo.PNG" alt="Logo" class="logo-img" />
+        <span>Infinity Store</span>
+      </a>
+
+      <nav class="navbar">
+        <ul>
+          <li><a href="gymsharkmujer.html"> Mujer </a></li>
+          <li><a href="gymsharkhombre.html"> Hombre </a></li>
+          <li><a href="accesorios.html"> Accesorios </a></li>
+          <li><a href="comprar2.html" style="color:#5b6973; font-weight:700;">Comprar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Carrito de Compra</h1>
+    <div class="checkout-wrapper">
+      <!-- Productos -->
+      <section class="cart-section">
+        <h2>Productos en tu bolsa</h2>
+        <table id="lista-carrito" class="cart-table">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Producto</th>
+              <th>Precio Unitario</th>
+              <th>Cantidad</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Productos cargados con JS -->
+          </tbody>
+        </table>
+        <button id="vaciar-carrito">Vaciar Carrito</button>
+      </section>
+
+      <!-- Resumen y formulario -->
+      <section class="summary-section">
+        <div class="total-section">
+          <h2>Resumen de compra</h2>
+          <p>Total a pagar:</p>
+          <p class="total-amount"><strong>$0.00</strong></p>
+        </div>
+
+        <div class="form-section">
+          <h2>Datos para la compra</h2>
+          <form id="checkout-form">
+            <label for="name">Nombre completo:</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="direccion">Dirección de entrega:</label>
+            <textarea id="direccion" name="direccion" rows="3" placeholder="Ingresa Tu Dirección." required></textarea>
+
+            <label for="phone">Teléfono:</label>
+            <input type="tel" id="phone" name="phone" pattern="^\d{10}$" placeholder="Ejemplo: 8711234567" required />
+
+            <button type="submit" class="btn-pay">Pagar</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- Script carrito + Firestore -->
+  <script>
+    // Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyChkZHqONT27CD5CkV02KZUPSKyGrPFojc",
+      authDomain: "infinity-store-191c9.firebaseapp.com",
+      projectId: "infinity-store-191c9",
+      storageBucket: "infinity-store-191c9.firebasestorage.app",
+      messagingSenderId: "185404166630",
+      appId: "1:185404166630:web:898dcdb0c6891e811b4627",
+      measurementId: "G-9SWGH5N226"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const tbodyCarrito = document.querySelector('#lista-carrito tbody');
+    const totalAmount = document.querySelector('.total-amount strong');
+    const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+
+    // Recuperar carrito de localStorage
+    let carritoProductos = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    function renderCarrito() {
+      tbodyCarrito.innerHTML = '';
+      let total = 0;
+      carritoProductos.forEach((p, index) => {
+        const subtotal = p.cantidad * p.precio;
+        total += subtotal;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><img src="${p.imagen}" width="60px" alt="${p.nombre}"></td>
+          <td>${p.nombre}</td>
+          <td>$${p.precio.toFixed(2)}</td>
+          <td>${p.cantidad}</td>
+          <td><a href="#" class="borrar" data-id="${index}">x</a></td>
+        `;
+        tbodyCarrito.appendChild(tr);
+      });
+      totalAmount.textContent = `$${total.toFixed(2)}`;
+    }
+
+    renderCarrito();
+
+    // Eliminar producto
+    tbodyCarrito.addEventListener('click', (e) => {
+      if (e.target.classList.contains('borrar')) {
+        const id = e.target.getAttribute('data-id');
+        carritoProductos.splice(id, 1);
+        localStorage.setItem('carrito', JSON.stringify(carritoProductos));
+        renderCarrito();
+      }
+    });
+
+    // Vaciar carrito
+    vaciarCarritoBtn.addEventListener('click', () => {
+      carritoProductos = [];
+      localStorage.setItem('carrito', JSON.stringify(carritoProductos));
+      renderCarrito();
+    });
+
+    // Checkout
+    document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const direccion = document.getElementById('direccion').value;
+
+      let productosStr = carritoProductos.map(p => `${p.nombre} x${p.cantidad}`).join(', ');
+      let total = carritoProductos.reduce((acc, p) => acc + (p.cantidad * p.precio), 0);
+
+      try {
+        await db.collection('compras').add({
+          nombre: name,
+          email: email,
+          telefono: phone,
+          direccion: direccion,
+          productos: productosStr,
+          total: `$${total.toFixed(2)}`,
+          fecha: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        alert('Compra registrada correctamente. Redirigiendo a PayPal...');
+        // Redirigir a PayPal
+      } catch (error) {
+        alert('Error en la compra: ' + error.message);
+      }
+    });
+
+    // MENU HAMBURGUESA
+    const menuIcon = document.getElementById('menuToggle');
+    const menuDesplegable = document.getElementById('menuDesplegable');
+    let timeoutId;
+
+    function mostrarMenu() {
+      menuDesplegable.style.display = 'block';
+      if (timeoutId) clearTimeout(timeoutId);
+
+      timeoutId = setTimeout(() => {
+        menuDesplegable.style.display = 'none';
+      }, 5000);
+    }
+
+    menuIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (menuDesplegable.style.display === 'block') {
+        menuDesplegable.style.display = 'none';
+        if (timeoutId) clearTimeout(timeoutId);
+      } else {
+        mostrarMenu();
+      }
+    });
+
+    menuDesplegable.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (timeoutId) clearTimeout(timeoutId);
+    });
+
+    document.addEventListener('click', () => {
+      menuDesplegable.style.display = 'none';
+      if (timeoutId) clearTimeout(timeoutId);
+    });
+  </script>
+
+  <!-- Tu script.js original -->
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

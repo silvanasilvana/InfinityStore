@@ -20,9 +20,7 @@
 </head>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
+  
  const firebaseConfig = {
   apiKey: "AIzaSyChkZHqONT27CD5CkV02KZUPSKyGrPFojc",
   authDomain: "infinity-store-191c9.firebaseapp.com",
@@ -33,9 +31,20 @@
   measurementId: "G-9SWGH5N226"
 };
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  setPersistence,
+  browserLocalPersistence,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+const auth = getAuth(initializeApp(firebaseConfig));
+
 
   // Mostrar modales
   window.mostrarLogin = function() {
@@ -56,52 +65,85 @@
     document.getElementById("registerModal").style.display = "none";
   };
 
-  // Iniciar sesión con Firebase
-  window.addEventListener("DOMContentLoaded", () => {
-    const loginForm = document.getElementById("login-form");
-    const registerForm = document.getElementById("register-form");
+  
 
-    loginForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+// Login
+const loginForm = document.getElementById("login-form");
+loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          alert("Inicio de sesión exitoso: " + user.email);
-          cerrarLogin();
-        })
-        .catch((error) => {
-          alert("Error al iniciar sesión: " + error.message);
-        });
-    });
+    setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+    return signInWithEmailAndPassword(auth, email, password);
+  })
+  .then((userCredential) => {
+    alert("Inicio de sesión exitoso: " + userCredential.user.email);
+    cerrarLogin();
+  })
+  .catch((error) => alert("Error al iniciar sesión: " + error.message));
 
-    // Registro
-    registerForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      const email = document.getElementById("reg-email").value;
-      const password = document.getElementById("reg-password").value;
+});
 
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          alert("Cuenta creada: " + user.email);
-          cerrarRegistro();
-        })
-        .catch((error) => {
-          alert("Error al registrarse: " + error.message);
-        });
-    });
-  });
+// Cerrar sesión
+const cerrarSesionText = document.getElementById("cerrar-sesion-text");
+const nombreUsuarioSpan = document.getElementById("nombre-usuario");
 
-  // Cerrar al hacer clic fuera del modal
-  window.onclick = function(event) {
-    if (event.target.classList.contains("modal")) {
-      event.target.style.display = "none";
+if (cerrarSesionText) {
+  cerrarSesionText.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      nombreUsuarioSpan.textContent = "";
+      alert("Sesión cerrada");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+      alert("No se pudo cerrar sesión");
     }
-  };
+  });
+}
+
+
+// Mostrar nombre de usuario y perfil dinámico
+const nombrePerfil = document.getElementById("nombre-usuario");
+const imgPerfil = document.getElementById("img-perfil");
+const perfilMenu = document.getElementById("perfil-menu");
+
+imgPerfil.addEventListener("click", () => {
+    const user = auth.currentUser;
+    if (!user) {
+        mostrarLogin();
+    } else {
+        nombrePerfil.textContent = user.displayName || user.email;
+        perfilMenu.style.display = perfilMenu.style.display === "block" ? "none" : "block";
+    }
+});
+
+document.addEventListener("click", (e) => {
+    if (!imgPerfil.contains(e.target) && !perfilMenu.contains(e.target)) {
+        perfilMenu.style.display = "none";
+    }
+});
+
+// Mantener estado de sesión
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        nombrePerfil.textContent = user.displayName || user.email;
+    } else {
+        nombrePerfil.textContent = "";
+        perfilMenu.style.display = "none";
+    }
+});
+
+// Cerrar modales al hacer click fuera
+window.onclick = (event) => {
+    if (event.target.classList.contains("modal")) {
+        event.target.style.display = "none";
+    }
+};
 </script>
+
+
 
 <body>
 
@@ -129,12 +171,12 @@
         <span>Infinity Store</span>
       </a>
 
-      <input type="checkbox" id="menu"/>
+      <input type="checkbox" id="menu-hamburguesa"/>
       <label for="menu">
         <img src="images/menu.png" class="menu-icono" alt="menu">
       </label>
 <div class="iconos-derecha">
-  <input type="checkbox" id="menu" style="display: none;">
+  <input type="checkbox" id="menuhamburguesa2" style="display: none;">
   <label for="menu" class="menu-icono">&#9776;</label>
 </div>
 
@@ -409,14 +451,15 @@
     const carrito = document.querySelector('#carrito');
     let timeout;
 
-    // Mostrar carrito 5 segundos al pasar el mouse
-    submenu.addEventListener('mouseenter', () => {
-      submenu.classList.add('mostrar-carrito');
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        submenu.classList.remove('mostrar-carrito');
-      }, 5000);
-    });
+   submenu.addEventListener('mouseenter', () => {
+  sincronizarCarrito(); // <-- Actualiza los productos desde localStorage
+  submenu.classList.add('mostrar-carrito');
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    submenu.classList.remove('mostrar-carrito');
+  }, 5000);
+});
+
 
     // Función para mostrar submenu 5 segundos al agregar producto
     function mostrarSubmenuCarrito() {
@@ -614,34 +657,45 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     insertarCarrito(infoElemento);
   }
+function insertarCarrito(elemento) {
+  const productosEnCarrito = lista.querySelectorAll('tr');
+  let encontrado = false;
 
-  function insertarCarrito(elemento) {
-    const productosEnCarrito = lista.querySelectorAll('tr');
-    let encontrado = false;
-
-    productosEnCarrito.forEach(row => {
-      const rowId = row.querySelector('a.borrar').getAttribute('data-id');
-      if (rowId === elemento.id) {
-        const cantidadTd = row.querySelector('.cantidad');
-        let cantidadActual = parseInt(cantidadTd.textContent);
-        cantidadActual++;
-        cantidadTd.textContent = cantidadActual;
-        encontrado = true;
-      }
-    });
-
-    if (!encontrado) {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td><img src="${elemento.imagen}" width="60px" alt="${elemento.titulo}"></td>
-        <td>${elemento.titulo}</td>
-        <td>${elemento.precio}</td>
-        <td class="cantidad">${elemento.cantidad}</td>
-        <td><a href="#" class="borrar" data-id="${elemento.id}">x</a></td>
-      `;
-      lista.appendChild(row);
+  productosEnCarrito.forEach(row => {
+    const rowId = row.querySelector('a.borrar').getAttribute('data-id');
+    if (rowId === elemento.id) {
+      const cantidadTd = row.querySelector('.cantidad');
+      let cantidadActual = parseInt(cantidadTd.textContent);
+      cantidadActual++;
+      cantidadTd.textContent = cantidadActual;
+      encontrado = true;
     }
+  });
+
+  if (!encontrado) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><img src="${elemento.imagen}" width="60px" alt="${elemento.titulo}"></td>
+      <td>${elemento.titulo}</td>
+      <td>${elemento.precio}</td>
+      <td class="cantidad">${elemento.cantidad}</td>
+      <td><a href="#" class="borrar" data-id="${elemento.id}">x</a></td>
+    `;
+    lista.appendChild(row);
   }
+
+  // 🔹 Guardar en localStorage para que comprar2.html lo lea
+  let carritoActual = JSON.parse(localStorage.getItem('carrito')) || [];
+  // Si ya está, solo actualizamos cantidad
+  const indexExistente = carritoActual.findIndex(p => p.id === elemento.id);
+  if (indexExistente !== -1) {
+    carritoActual[indexExistente].cantidad++;
+  } else {
+    carritoActual.push(elemento);
+  }
+  localStorage.setItem('carrito', JSON.stringify(carritoActual));
+  sincronizarCarrito();
+}
 
   function eliminarElemento(e) {
     e.preventDefault();
@@ -652,10 +706,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function vaciarCarrito(e) {
     e.preventDefault();
+
+    // Vaciar la tabla del carrito
     while (lista.firstChild) {
       lista.removeChild(lista.firstChild);
     }
-  }
+
+    // Vaciar el carrito en localStorage
+    localStorage.removeItem('carrito');
+
+    // Opcional: sincronizar si tienes función que actualiza la UI
+    // sincronizarCarrito();
+}
+
 });
 </script>
 
@@ -701,6 +764,8 @@ document.addEventListener('DOMContentLoaded', () => {
     menuDesplegable.style.display = 'none';
     if (timeoutId) clearTimeout(timeoutId);
   });
+
+  
 </script>
 
 
@@ -753,6 +818,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script type="module" src="script.js"></script>
 
-    
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const listaSubmenu = document.querySelector('#lista-carrito');
+  if(!listaSubmenu) return;
+
+  const carritoLocal = JSON.parse(localStorage.getItem('carrito')) || [];
+  let total = 0;
+
+  carritoLocal.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><img src="${item.imagen}" width="60px" alt="${item.titulo}"></td>
+      <td>${item.titulo}</td>
+      <td>$${parseFloat(item.precio).toFixed(2)}</td>
+      <td class="cantidad">${item.cantidad}</td>
+      <td><a href="#" class="borrar" data-id="${item.id}">x</a></td>
+    `;
+    listaSubmenu.appendChild(row);
+    total += item.cantidad * parseFloat(item.precio);
+  });
+
+  const totalAmount = document.querySelector('.total-amount strong');
+  if(totalAmount) totalAmount.textContent = `$${total.toFixed(2)}`;
+});
+</script>
+<script>
+  (function(){
+    // TITULOS un poquito más grandes
+    document.querySelectorAll('.icons.container .icon-1 .icon-txt h3').forEach(el=>{
+      el.style.setProperty('font-size','13px','important');  // antes 10px
+      el.style.setProperty('line-height','1.1','important');
+      el.style.setProperty('margin-bottom','3px','important');
+    });
+    // PÁRRAFOS un poquito más grandes
+    document.querySelectorAll('.icons.container .icon-1 .icon-txt p, .icons.container .icon-1 .icon-txt P').forEach(el=>{
+      el.style.setProperty('font-size','11px','important');  // antes 8px
+      el.style.setProperty('line-height','1.2','important');
+      el.style.setProperty('margin','0','important');
+    });
+    // IMÁGENES
+    document.querySelectorAll('.icons.container .icon-1 .icon-img img').forEach(el=>{
+      el.style.setProperty('height','40px','important');  // antes 36px
+      el.style.setProperty('width','auto','important');
+      el.style.setProperty('margin-bottom','4px','important');
+    });
+  })();
+</script>
+
 </body>
 </html>

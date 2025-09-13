@@ -14,9 +14,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Oswald:wght@200..700&family=Pacifico&family=Playwrite+AU+QLD:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sacramento&display=swap" rel="stylesheet">
 
   <!-- Firebase -->
-  <script type="module">
-    // (tu código Firebase aquí, sin cambios)
-  </script>
+  
+
+  
+
+</head>
+
+
+<script>
+
+  
+  function ordenarProductos() {
+    const valor = document.getElementById("ordenar").value;
+    const contenedor = document.querySelector(".product-content");
+    const productos = Array.from(contenedor.querySelectorAll(".product"));
+
+    productos.forEach(p => p.style.display = ""); // Mostrar todos al inicio
+
+    if (valor === "precio-asc" || valor === "precio-desc") {
+      productos.sort((a, b) => {
+        const precioA = parseFloat(a.querySelector(".precio").textContent.replace("$", ""));
+        const precioB = parseFloat(b.querySelector(".precio").textContent.replace("$", ""));
+        return valor === "precio-asc" ? precioA - precioB : precioB - precioA;
+      });
+      productos.forEach(p => contenedor.appendChild(p));
+    } else if (valor === "talla-xs" || valor === "talla-s" || valor === "talla-m") {
+      const tallaFiltrar = valor.split("-")[1].toUpperCase();
+      productos.forEach(p => {
+        const tallaProducto = p.querySelector(".product-size").textContent.replace(/[()]/g, "").toUpperCase();
+        if (tallaProducto === tallaFiltrar) {
+          p.style.display = ""; // Mostrar solo talla seleccionada
+        } else {
+          p.style.display = "none"; // Ocultar otras tallas
+        }
+      });
+    } else {
+      // Mostrar todos si no hay filtro ni orden
+      productos.forEach(p => p.style.display = "");
+    }
+  }
+</script>
+
 </head>
 <script>
   function ordenarProductos() {
@@ -88,9 +126,7 @@
     <li><a href="gymsharkmujer.html"> Mujer </a></li>
     <li><a href="gymsharkhombre.html"> Hombre </a></li>
     <li><a href="accesorios.html"> Accesorios </a></li>
-    <li>
-      <span id="nombre-usuario"></span>  <!-- Aquí -->
-    </li>
+   
   </ul>
 </nav>
       <div>
@@ -123,15 +159,16 @@
     window.location.href = 'comprar.html';
   });
 </script>
+<!-- PERFIL -->
+<div class="submenu perfil-container">
+  <img src="images/perfil.png" id="img-perfil" alt="perfil" style="cursor:pointer;">
+  <div class="perfil-menu" id="perfil-menu">
+    <span id="nombre-usuario"></span>
+    <!-- boton cerrar sesion -->
+    <button id="cerrar-sesion-text" style="cursor:pointer;">Cerrar sesión</button>
+  </div>
+</div>
 
-      <div>
-        <ul>
-          <li class="submenu">
-            <img src="images/perfil.png" id="img-perfil" alt="perfil" style="cursor:pointer;" onclick="mostrarLogin()" />
-          </li>
-        </ul>
-      </div>
-    </div>
   </header>
 
   <!-- Franja principal con imagen y título -->
@@ -203,7 +240,7 @@
 
     
     
-    <div class="product-content" id="lista-1">
+    <div class="product-content" id="lista-2">
 
 
 
@@ -303,44 +340,93 @@
     <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
   </div>
 </div>
-
-
-
-
-<!-- Firebase App -->
-
-
-
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const submenu = document.querySelector('.submenu');
-    let timeout;
+document.addEventListener('DOMContentLoaded', () => {
+  const carrito = document.querySelector('#lista-carrito tbody');
+  const botonesAgregar = document.querySelectorAll('.agregar-carrito');
+  const botonVaciar = document.getElementById('vaciar-carrito');
+  let productosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  renderizarCarrito();
 
-    // Mostrar carrito al pasar el mouse (opcional)
-    submenu.addEventListener('mouseenter', () => {
-      submenu.classList.add('mostrar-carrito');
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        submenu.classList.remove('mostrar-carrito');
-      }, 5000);
-    });
+  botonesAgregar.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const producto = e.target.closest('.product');
+      const infoProducto = {
+        nombre: producto.querySelector('.product-name').textContent,
+        precio: producto.querySelector('.precio').textContent,
+        talla: producto.querySelector('.product-size').textContent,
+        imagen: producto.querySelector('.img-front').src,
 
-    // Mostrar carrito al hacer clic en "Agregar al carrito"
-    function mostrarSubmenuCarrito() {
-      submenu.classList.add('mostrar-carrito');
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        submenu.classList.remove('mostrar-carrito');
-      }, 3000);
-    }
-
-    document.addEventListener('click', function (e) {
-      if (e.target.classList.contains('agregar-carrito')) {
-        mostrarSubmenuCarrito();
-      }
+        cantidad: 1
+      };
+      const index = productosCarrito.findIndex(p => p.nombre === infoProducto.nombre && p.talla === infoProducto.talla);
+      if (index !== -1) productosCarrito[index].cantidad++;
+      else productosCarrito.push(infoProducto);
+      localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+      renderizarCarrito();
+      mostrarSubmenuCarrito();
     });
   });
+
+  botonVaciar?.addEventListener('click', (e) => {
+    e.preventDefault();
+    productosCarrito = [];
+    localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+    renderizarCarrito();
+  });
+
+  function renderizarCarrito() {
+    if (!carrito) return;
+    carrito.innerHTML = '';
+    productosCarrito.forEach((producto, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><img src="${producto.imagen}" width="50"></td>
+        <td>${producto.nombre} ${producto.talla}</td>
+        <td>${producto.precio}</td>
+        <td>${producto.cantidad}</td>
+        <td><a href="#" class="borrar-producto" data-index="${index}">X</a></td>
+      `;
+      carrito.appendChild(row);
+    });
+    carrito.querySelectorAll('.borrar-producto').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const i = parseInt(btn.dataset.index);
+        productosCarrito.splice(i,1);
+        localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+        renderizarCarrito();
+      });
+    });
+  }
+
+  // Mostrar carrito al pasar mouse sobre la bolsa
+  const submenu = document.querySelector('.submenu');
+  let timeout;
+  function mostrarSubmenuCarrito() {
+    if (!submenu) return;
+    submenu.classList.add('mostrar-carrito');
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      submenu.classList.remove('mostrar-carrito');
+    }, 3000);
+  }
+
+  submenu?.addEventListener('mouseenter', () => {
+    submenu.classList.add('mostrar-carrito');
+    clearTimeout(timeout);
+  });
+  submenu?.addEventListener('mouseleave', () => {
+    timeout = setTimeout(() => {
+      submenu.classList.remove('mostrar-carrito');
+    }, 1000);
+  });
+});
 </script>
+
+
+
 
 
 
@@ -430,6 +516,91 @@
     menuDesplegable.style.display = 'none';
     if (timeoutId) clearTimeout(timeoutId);
   });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const carrito = document.querySelector('#lista-carrito tbody');
+  const botonesAgregar = document.querySelectorAll('.agregar-carrito');
+  const botonVaciar = document.getElementById('vaciar-carrito');
+  const nombreUsuarioSpan = document.getElementById("nombre-usuario");
+
+  // Carrito global
+  let productosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+  // Renderizar carrito
+  function renderizarCarrito() {
+    if (!carrito) return;
+    carrito.innerHTML = '';
+    productosCarrito.forEach((producto, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td><img src="${producto.imagen}" width="50"></td>
+        <td>${producto.nombre} ${producto.talla}</td>
+        <td>${producto.precio}</td>
+        <td>${producto.cantidad}</td>
+        <td><a href="#" class="borrar-producto" data-index="${index}">X</a></td>
+      `;
+      carrito.appendChild(row);
+    });
+    carrito.querySelectorAll('.borrar-producto').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const i = parseInt(btn.dataset.index);
+        productosCarrito.splice(i,1);
+        localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+        renderizarCarrito();
+      });
+    });
+  }
+
+  // Inicializa carrito
+  renderizarCarrito();
+
+  // Agregar productos
+  botonesAgregar.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const producto = e.target.closest('.product');
+      const infoProducto = {
+        nombre: producto.querySelector('.product-name').textContent,
+        precio: producto.querySelector('.precio').textContent,
+        talla: producto.querySelector('.product-size').textContent,
+        imagen: producto.querySelector('.img-front').src,
+        cantidad: 1
+      };
+      const index = productosCarrito.findIndex(p => p.nombre === infoProducto.nombre && p.talla === infoProducto.talla);
+      if (index !== -1) productosCarrito[index].cantidad++;
+      else productosCarrito.push(infoProducto);
+      localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+      renderizarCarrito();
+    });
+  });
+
+  // Vaciar carrito
+  botonVaciar?.addEventListener('click', (e) => {
+    e.preventDefault();
+    productosCarrito = [];
+    localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+    renderizarCarrito();
+  });
+
+  // Firebase login
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+  nombreUsuarioSpan.textContent = user.displayName || user.email;
+  cargarCarritoFirestore(user.uid).then(productos => {
+    productosCarrito = productos;
+    localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+    renderizarCarrito();
+  });
+} else {
+  nombreUsuarioSpan.textContent = "";
+}
+
+  });
+});
+
+
 </script>
 
 
@@ -470,7 +641,161 @@
    </div>
 </footer>
 
-  <script type="module" src="script.js"></script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+const db = getFirestore(app);
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  setPersistence,
+  browserLocalPersistence,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyChkZHqONT27CD5CkV02KZUPSKyGrPFojc",
+  authDomain: "infinity-store-191c9.firebaseapp.com",
+  projectId: "infinity-store-191c9",
+  storageBucket: "infinity-store-191c9.appspot.com",
+  messagingSenderId: "185404166630",
+  appId: "1:185404166630:web:898dcdb0c6891e811b4627",
+  measurementId: "G-9SWGH5N226"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Guardar carrito en Firestore
+async function guardarCarritoFirestore(userUid, carrito) {
+  try {
+    await setDoc(doc(db, "carritos", userUid), { productos: carrito });
+  } catch (error) {
+    console.error("Error guardando carrito en Firestore:", error);
+  }
+}
+
+// Cargar carrito desde Firestore
+async function cargarCarritoFirestore(userUid) {
+  try {
+    const docRef = doc(db, "carritos", userUid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data().productos || [];
+    }
+    return [];
+  } catch (error) {
+    console.error("Error cargando carrito de Firestore:", error);
+    return [];
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const nombreUsuarioSpan = document.getElementById("nombre-usuario");
+  const imgPerfil = document.getElementById("img-perfil");
+  
+
+  const perfilMenu = document.getElementById("perfil-menu");
+  const cerrarSesionText = document.getElementById("cerrar-sesion-text");
+
+  // Funciones mostrar/cerrar login/registro
+  window.mostrarLogin = () => {
+    document.getElementById("loginModal").style.display = "block";
+    document.getElementById("registerModal").style.display = "none";
+  };
+  window.mostrarRegistro = () => {
+    document.getElementById("registerModal").style.display = "block";
+    document.getElementById("loginModal").style.display = "none";
+  };
+  window.cerrarLogin = () => document.getElementById("loginModal").style.display = "none";
+  window.cerrarRegistro = () => document.getElementById("registerModal").style.display = "none";
+
+  // Login
+  const loginForm = document.getElementById("login-form");
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => signInWithEmailAndPassword(auth, email, password))
+      .then(userCredential => {
+        alert("Inicio de sesión exitoso: " + userCredential.user.email);
+        cerrarLogin();
+      })
+      .catch(error => alert("Error al iniciar sesión: " + error.message));
+  });
+
+  // Registro
+  const registerForm = document.getElementById("register-form");
+  registerForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("reg-email").value;
+    const password = document.getElementById("reg-password").value;
+    const nombre = registerForm.querySelector("input[placeholder='Nombre completo']").value;
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        updateProfile(userCredential.user, { displayName: nombre });
+        alert("Cuenta creada exitosamente: " + userCredential.user.email);
+        cerrarRegistro();
+      })
+      .catch((error) => alert("Error al registrar: " + error.message));
+  });
+
+  // Cerrar sesión
+  if (cerrarSesionText) {
+    cerrarSesionText.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        nombreUsuarioSpan.textContent = "";
+        alert("Sesión cerrada");
+      } catch (error) {
+        alert("No se pudo cerrar sesión");
+      }
+    });
+  }
+
+  
+  // Mostrar nombre de usuario y perfil dinámico
+  imgPerfil.addEventListener("click", () => {
+    const user = auth.currentUser;
+    if (!user) {
+      mostrarLogin();
+    } else {
+      nombreUsuarioSpan.textContent = user.displayName || user.email;
+      if (perfilMenu) {
+        perfilMenu.style.display = perfilMenu.style.display === "block" ? "none" : "block";
+      }
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!imgPerfil.contains(e.target) && perfilMenu && !perfilMenu.contains(e.target)) {
+      perfilMenu.style.display = "none";
+    }
+  });
+
+  window.onclick = (event) => {
+    if (event.target.classList.contains("modal")) {
+      event.target.style.display = "none";
+    }
+  };
+
+  
+  setPersistence(auth, browserLocalPersistence)
+    .then(() => console.log("Persistencia configurada"))
+    .catch((error) => console.error("Error al configurar persistencia:", error));
+});
+
+  </script>
+ 
+
 
 </body>
 </html>
