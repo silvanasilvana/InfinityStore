@@ -1,0 +1,215 @@
+/* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: #ffffff;
+  color: #1e1e1e;
+}
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+.productos {
+  max-width: 1400px;
+  margin: 100px auto;
+  padding: 0 40px;
+}
+
+/* =========================
+   HEADER
+========================= */
+.productos-header h1 {
+  margin-bottom: 100px;
+}
+.productos-header {
+  margin-bottom: 60px;
+}
+
+
+.productos-header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.productos-header span {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  margin-left: 10px;
+  color: #666;
+}
+
+.productos-barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  padding: 15px 0;
+  margin-bottom: 40px;
+}
+
+.filtrar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.ordenar {
+  font-weight: 500;
+}
+
+.ordenar select {
+  margin-left: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: white;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+.productos-content {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+}
+
+/* =========================
+   FILTROS
+========================= */
+.filtros {
+  border-right: 1px solid #333;
+  padding-right: 25px;
+}
+
+.filtro {
+  border-bottom: 1px solid #333;
+  padding: 18px 0;
+}
+
+.filtro p {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.filtro select {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background-color: #fff;
+}
+
+/* =========================
+   GRID PRODUCTOS
+========================= */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* =========================
+   CARD PRODUCTO
+========================= */
+.producto-card {
+  border: 1px solid #333;
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-6px);
+}
+
+.producto-card img {
+  width: 100%;
+  border-radius: 14px;
+  margin-bottom: 15px;
+
+  /* 👇 margen negro */
+  border: 1.5px solid #000;
+  padding: 6px;
+  background-color: #fff;
+}
+
+
+.producto-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.producto-card .sub {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.producto-card .precio {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* =========================
+   BOTÓN
+========================= */
+.producto-card button {
+  background-color: #0b5d45;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.producto-card button:hover {
+  background-color: #084534;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 1100px) {
+  .productos-content {
+    grid-template-columns: 1fr;
+  }
+
+  .filtros {
+    border-right: none;
+    border-bottom: 1px solid #333;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+  }
+
+  .productos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .productos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .productos {
+    padding: 0 20px;
+  }
+}

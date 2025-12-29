@@ -1,236 +1,117 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quiénes Somos - Infinity Store</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiénes Somos - Atónito</title>
 
-  <!-- Tus estilos generales -->
-  <link rel="stylesheet" href="style.css" />
-  <!-- Fuente de Google -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
-  <style>
-    /* Estilos específicos para esta página */
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f5f5f5;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    main.quienes-somos {
-      max-width: 900px;
-      margin: 60px auto 100px auto;
-      background: #fff;
-      padding: 40px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
-    }
-    main.quienes-somos h1 {
-      font-weight: 700;
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      color: #222;
-      text-align: center;
-    }
-    main.quienes-somos p {
-      line-height: 1.7;
-      font-size: 1.1rem;
-      margin-bottom: 20px;
-      text-align: justify;
-    }
-    main.quienes-somos img {
-      display: block;
-      margin: 30px auto;
-      max-width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
-    }
-  </style>
-
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="quienessomos.css">
 </head>
-<body class="gymshark">
+<body>
 
-  <!-- Navbar igual que tu código -->
-  <header class="header">
-    <div class="menu container">
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
 
-      
-      
- <!-- Imagen de menú (hamburguesa) -->
-    <div class="mobile-menu">
-      <img src="images/barra.jpg" class="menu-icon" alt="Menú" id="menuToggle" />
-      <div class="menu-desplegable" id="menuDesplegable">
-        <ul>
-          <li><a href="gymsharkmujer.html">Mujer</a></li>
-          <li><a href="gymsharkhombre.html">Hombre</a></li>
-          <li><a href="accesorios.html">Accesorios</a></li>
-        </ul>
-      </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay">
+      <h1>QUIÉNES SOMOS</h1>
+      <p>Pasión por la carne y el buen sabor en cada corte</p>
     </div>
-    
-      <a href="index.html" class="logo">
-        <img src="images/logo.PNG" alt="Logo" class="logo-img" />
-        <span>Infinity Store</span>
-      </a>
+  </section>
 
-      <input type="checkbox" id="menu" />
-      <label for="menu">
-        <img src="images/menu.png" class="menu-icono" alt="menu" />
-      </label>
+  <!-- CARD HISTORIA (COMO REFERENCIA) -->
+  <section class="historia-wrap">
+    <div class="historia-card">
 
-      <nav class="navbar">
-        <ul>
-          <li><a href="gymsharkmujer.html"> Mujer </a></li>
-          <li><a href="gymsharkhombre.html"> Hombre </a></li>
-          <li><a href="accesorios.html"> Accesorios </a></li>
-          <li><span id="nombre-usuario"></span></li>
-        </ul>
-      </nav>
+      <!-- TEXTO -->
+      <div class="historia-texto">
+        <h2>Nuestra Historia</h2>
 
-      <div>
-        <ul>
-          <li class="submenu">
-            <img src="images/bolsa.png" id="img-carrito" alt="carrito" />
-            <div id="carrito">
-              <table id="lista-carrito">
-                <thead>
-                  <tr>
-                    <th>Imagen</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-              <a href="#" id="vaciar-carrito" class="btn-2"> Vaciar Carrito </a>
+        <p>
+          En Atónito, nos dedicamos a seleccionar los mejores cortes de carne y
+          a ofrecer recetas sencillas para toda la familia. Nuestra pasión por
+          la calidad y el sabor nos ha llevado a crear experiencias gastronómicas únicas.
+        </p>
+
+        <!-- ICONOS INTERNOS -->
+        <ul class="historia-valores">
+          <li>
+            <span class="icon-circle check"></span>
+            <div>
+              <strong>Calidad</strong>
+              <p>Selección de cortes premium.</p>
+            </div>
+          </li>
+
+          <li>
+            <span class="icon-circle fork"></span>
+            <div>
+              <strong>Sabor</strong>
+              <p>Recetas que enamoran.</p>
+            </div>
+          </li>
+
+          <li>
+            <span class="icon-circle fire"></span>
+            <div>
+              <strong>Pasión</strong>
+              <p>Tradición y dedicación en cada preparación.</p>
             </div>
           </li>
         </ul>
+
+        <button class="btn-historia">Conócenos más</button>
       </div>
 
-      <script>
-        document.getElementById('img-carrito').addEventListener('click', () => {
-          window.location.href = 'comprar.html';
-        });
-      </script>
-
-      <div>
-        <ul>
-          <li class="submenu">
-            <img src="images/perfil.png" id="img-perfil" alt="perfil" style="cursor:pointer;" onclick="mostrarLogin()" />
-          </li>
-        </ul>
+      <!-- IMAGEN -->
+      <div class="historia-imagen">
+        <img src="images/quienesomos2.jpg" alt="Parrilla Atónito">
       </div>
+
     </div>
-  </header>
+  </section>
 
-  <!-- Contenido principal -->
-  <main class="quienes-somos">
-    <h1>Quiénes Somos</h1>
-    <p>
-      En <strong>Infinity Store</strong> nos apasiona ofrecer productos de la más alta calidad que combinen estilo, comodidad y funcionalidad. Somos un equipo comprometido con brindar una experiencia de compra excepcional, enfocándonos en la satisfacción total de nuestros clientes.
-    </p>
-    <p>
-      Desde nuestros inicios, hemos trabajado para construir una comunidad sólida y cercana, escuchando siempre tus necesidades y mejorando continuamente. Nuestra misión es ser tu tienda de confianza, donde encuentres las últimas tendencias y las mejores marcas para mujer, hombre y accesorios.
-    </p>
-    <p>
-      Valoramos la innovación, la transparencia y el compromiso con el medio ambiente, por eso seleccionamos cuidadosamente cada producto y colaboramos con proveedores responsables.
-    </p>
-   
-    <p>
-      Gracias por formar parte de nuestra historia. Te invitamos a descubrir todo lo que Infinity Store tiene para ti.
-    </p>
-  </main>
+  <!-- ICONOS GRANDES ABAJO -->
+  <section class="valores-bottom">
+    <div class="valores-grid">
 
-  <!-- NUEVA SECCION--> 
+      <div class="valor">
+        <span class="icon-circle big check"></span>
+        <h4>Calidad</h4>
+        <p>Selección de cortes premium.</p>
+      </div>
 
-  
- 
- <!--  MENU HAMBURGUESA MEDIA MOVIL--> 
+      <div class="valor">
+        <span class="icon-circle big fork"></span>
+        <h4>Sabor</h4>
+        <p>Recetas que enamoran.</p>
+      </div>
 
-<script>
-  const menuIcon = document.getElementById('menuToggle');
-  const menuDesplegable = document.getElementById('menuDesplegable');
+      <div class="valor">
+        <span class="icon-circle big fire"></span>
+        <h4>Pasión</h4>
+        <p>Tradición y dedicación en cada preparación.</p>
+      </div>
 
-  let timeoutId;
+    </div>
+  </section>
 
-  // Función para mostrar menú y reiniciar temporizador
-  function mostrarMenu() {
-    menuDesplegable.style.display = 'block';
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
 
-    if (timeoutId) clearTimeout(timeoutId);
+  <script>
+    fetch('navbar.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('navbar-container').innerHTML = d);
 
-    timeoutId = setTimeout(() => {
-      menuDesplegable.style.display = 'none';
-    }, 5000);
-  }
-
-  menuIcon.addEventListener('click', (e) => {
-    e.stopPropagation(); // Para que no se dispare el listener del documento
-    if (menuDesplegable.style.display === 'block') {
-      menuDesplegable.style.display = 'none';
-      if (timeoutId) clearTimeout(timeoutId);
-    } else {
-      mostrarMenu();
-    }
-  });
-
-  // Cancela temporizador si haces clic dentro del menú
-  menuDesplegable.addEventListener('click', (e) => {
-    e.stopPropagation(); // Evita que el clic se propague y cierre el menú
-    if (timeoutId) clearTimeout(timeoutId);
-  });
-
-  // Cierra el menú al hacer clic fuera del icono o menú
-  document.addEventListener('click', () => {
-    menuDesplegable.style.display = 'none';
-    if (timeoutId) clearTimeout(timeoutId);
-  });
-</script>
-
-
-<footer class="footer">
-   <div class="footer-content container">
-       
-       <div class="link"> 
-           <h3>Mi cuenta</h3>
-           <ul> 
-               <li><a href="propietario.html">Ingresar</a></li>
-              
-           </ul>
-       </div>
-
-         <div class="link"> 
-           <h3>Ayuda</h3>
-           <ul> 
-               <li><a href="https://wa.me/5218715952461?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Infinity%20Store" target="_blank">Contáctanos</a></li>
-              <li><a href="tel:+5218715952461">Teléfono</a></li>
-              <li><a href="https://www.instagram.com/infinitylstore?igsh=Nmx1YTNxeDA1N3Ft" target="_blank">Instagram</a></li>
-             
-              
-           </ul>
-       </div>
-
-       <div class="link"> 
-           <h3>Sobre Nosotros</h3>
-           <ul> 
-               <li><a href="quienessomos.html">Quienes Somos</a></li>
-               <li><a href="devoluciones.html">Devoluciones</a></li>
-               <li><a href="pago.html">Pago</a></li>
-           </ul>
-       </div>
-
-     
-
-   </div>
-</footer>
-
-
-  <script type="module" src="script.js"></script>
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('footer-container').innerHTML = d);
+  </script>
 
 </body>
 </html>

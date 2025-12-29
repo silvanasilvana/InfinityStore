@@ -1,0 +1,187 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'DM Sans', sans-serif;
+}
+
+body {
+  background: #d7d1c7;
+  background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+  background-size: 4px 4px;
+  color: #3a2e24;
+}
+
+.receta-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 140px 20px 60px;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: #c6bfb6;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.principal {
+  display: flex;
+  gap: 25px;
+}
+
+.principal img {
+  width: 350px;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+.info h2 {
+  margin-bottom: 10px;
+}
+
+.info h3 {
+  margin: 15px 0 10px;
+}
+
+.info ul {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.meta {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.mini-img {
+  width: 100%;
+  max-width: 220px;
+  margin: 15px 0;
+
+  /* 👇 lo nuevo */
+  border: 2px solid #a59e95;
+  border-radius: 16px;
+  padding: 4px;
+  background: #fff;
+}
+
+
+.especias {
+  display: flex;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.especias div {
+  text-align: center;
+}
+
+.especias img {
+  width: 100px;
+  display: block;
+  margin: 0 auto 8px;
+
+  /* 👇 borde negro + redondeado */
+  border: 2px solid #a59e95;
+  border-radius: 14px;
+  padding: 4px;
+ 
+}
+
+
+button {
+  background: #1f6b4f;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #14523c;
+}
+
+.card h4 {
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.card ul {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.tip {
+  background: #bfb7ad;
+}
+
+/* ===== BOTÓN CARRITO (CARNE) ===== */
+.btn-carrito {
+  margin-top: 4px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #1f6b4f;
+  border: none;
+  cursor: pointer;
+
+  /* 🔥 ESTO ES LA CLAVE */
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-carrito img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.btn-carrito:hover {
+  background: #14523c;
+}
+
+
+/* ===== ESPECIAS ===== */
+.especia-item {
+  text-align: center;
+}
+
+/* Botón comprar especias */
+.btn-comprar {
+  margin-top: 6px;
+  background: #1f6b4f;
+  color: white;
+  border: none;
+  border-radius: 18px;
+  padding: 6px 14px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-comprar:hover {
+  background: #14523c;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Parrilla</title>
+    <link rel="stylesheet" href="parrilla.css">
+    <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="style-navbar.css">
+   <link rel="stylesheet" href="footer.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    
+  <!-- Contenedor donde se cargará la Navbar -->
+  <div id="navbar-container"></div>
+
+   <!-- Contenedor FOOTER -->
+    <script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar el footer:', error));
+</script>
+
+<section class="parrilla">
+    <h1>PARRILLA</h1>
+
+    <div class="parrilla-grid">
+
+        <div class="parrilla-card">
+            <a href="RecetaParrilla1.html">
+                <img src="images\Recetaparrilla\1.jpg" alt="Receta 1">
+            </a>
+            <span> Bistec de Whisky y Durazno</span>
+        </div>
+
+        <div class="parrilla-card">
+            <a href="RecetaParrilla2.html">
+                <img src="images/Recetaparrilla/2.jpg" alt="Receta 2">
+            </a>
+            <span>Grilled Beef Kebabs</span>
+        </div>
+
+         <div class="parrilla-card">
+            <a href="RecetaParrilla3.html">
+                <img src="images/Recetaparrilla/3.jpg" alt="Receta 2">
+            </a>
+            <span>Churrasco a la Parrilla</span>
+        </div>
+
+         <div class="parrilla-card">
+            <a href="RecetaParrilla2.html">
+                <img src="images/Recetaparrilla/4.jpg" alt="Receta 2">
+            </a>
+            <span>Hawaiian Teriyaki Hamburguesa </span>
+        </div>
+
+        <div class="parrilla-card">
+            <a href="RecetaParrilla5.html">
+                <img src="images/Recetaparrilla/5.jpg" alt="Receta 2">
+            </a>
+            <span>Filete con mantequilla de ajo y salsa de parmesano</span>
+        </div>
+        
+         <div class="parrilla-card">
+            <a href="RecetaParrilla6.html">
+                <img src="images/Recetaparrilla/6.jpg" alt="Receta 2">
+            </a>
+            <span>Filete Firecracker y camarones a la parrilla</span>
+        </div>
+
+    </div>
+</section>
+
+
+  <!-- SCRIPT NAVBAR -->
+  <script>
+    // Cargar Navbar desde navbar.html
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error al cargar la Navbar:', error));
+  </script>
+
+  <script type="module" src="script.js"></script>
+  
+
+  <!-- FOOTER -->
+
+
+<div id="footer-container"></div>
+
+
+</body>
+</html>

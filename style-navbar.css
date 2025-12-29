@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* HEADER */
+.header {
+  height: 70px;
+  background: linear-gradient(90deg, #ffffff, #ffffff);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* CONTENEDOR */
+.menu {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+
+#img-carrito {
+  position: relative;
+  z-index: 2000;
+}
+
+.submenu {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img,
+.logo-img-text {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+#img-carrito {
+  object-fit: contain;
+  background: transparent;
+}
+/* NAVBAR */
+.navbar {
+  display: flex;
+  gap: 40px;
+}
+
+.navbar li a {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 19px;      /* Bebas se ve mejor un poco más grande */
+  font-weight: 400;
+  letter-spacing: 2px; /* Muy importante para Bebas */
+  color: #007b66;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s;
+}
+/* Transicion recetas y ubicacion de la navbar*/
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* Subrayado animado */
+.navbar li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: rgb(0, 0, 0);
+  transition: width 0.3s ease;
+}
+
+
+.navbar li a:hover::after {
+  width: 100%;
+}
+
+/* ICONOS DERECHA */
+.iconos-derecha {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ICONOS */
+#img-carrito,
+#img-perfil {
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  object-fit: cover; /* Mantiene proporciones y recorta si es necesario */
+}
+
+#img-carrito:hover,
+#img-perfil:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* SUBMENU */
+.submenu {
+  position: relative;
+}
+
+/* CARRITO */
+#carrito {
+  display: none;
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: #ffffff; /* Fondo blanco */
+  padding: 20px;
+  min-width: 360px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+.submenu:hover #carrito {
+  display: block;
+}
+
+/* TABLA CARRITO */
+#lista-carrito {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#carrito, 
+#lista-carrito th,
+#lista-carrito td {
+  color: #007b66; /* Verde oscuro */
+}
+
+#lista-carrito img {
+  width: 50px;
+  border-radius: 6px;
+}
+
+/* PERFIL MENU */
+.perfil-menu {
+  display: none;
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 12px;
+  padding: 14px;
+  width: 160px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.perfil-container:hover .perfil-menu {
+  display: block;
+}
+
+.perfil-menu span {
+  display: block;
+  color: #007b66; /* Texto verde */
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* BOTÓN PERFIL */
+#iniciar-sesion-text {
+  width: 100%;
+  background-color: #ffffff; /* Fondo blanco */
+  border: 1px solid #007b66; /* Borde verde */
+  color: #007b66; /* Texto verde */
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+#cerrar-sesion-text:hover,
+#iniciar-sesion-text:hover {
+  background-color: #007b66; /* Fondo verde al pasar el cursor */
+  color: #ffffff; /* Texto blanco */
+}
+/* MENU HAMBURGUESA */
+.menu-checkbox {
+  display: none;
+}
+
+.menu-icono {
+  display: none;
+  font-size: 28px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 991px) {
+
+  .menu-icono {
+    display: block;
+  }
+
+  .navbar {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    flex-direction: column;
+    background: rgba(0,0,0,0.95);
+    width: 220px;
+    border-radius: 14px;
+    padding: 15px 0;
+    gap: 18px;
+  }
+
+  .menu-checkbox:checked ~ .navbar {
+    display: flex;
+  }
+
+  .navbar li a {
+    padding: 8px 20px;
+  }
+
+  #carrito {
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;
+    max-width: 400px;
+  }
+}

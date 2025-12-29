@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cocina</title>
+
+    <link rel="stylesheet" href="parrilla.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-navbar.css">
+    <link rel="stylesheet" href="footer.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Contenedor donde se cargará la Navbar -->
+  <div id="navbar-container"></div>
+
+  <!-- Contenedor FOOTER -->
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error al cargar el footer:', error));
+  </script>
+
+  <!-- SECCIÓN COCINA -->
+  <section class="parrilla">
+      <h1>COCINA</h1>
+
+      <div class="parrilla-grid">
+
+          <div class="parrilla-card">
+              <a href="RCocina1.html">
+                  <img src="images/cocina/1.jpg" alt="Receta 1">
+              </a>
+              <span>Filete Mignon con Salsa de Mostaza y Parmesano</span>
+          </div>
+
+          <div class="parrilla-card">
+              <a href="RCocina2.html">
+                  <img src="images/cocina/2.jpg" alt="Receta 2">
+              </a>
+              <span>Costillitas BBQ</span>
+          </div>
+
+          <div class="parrilla-card">
+              <a href="RCocina3.html">
+                  <img src="images/cocina/3.png" alt="Receta 3">
+              </a>
+              <span>Ribeye al Sartén con Mantequilla y Romero</span>
+          </div>
+
+          <div class="parrilla-card">
+              <a href="RCocina4.html">
+                  <img src="images/cocina/4.jpg" alt="Receta 4">
+              </a>
+              <span>SMASH TACOS de Carne con Queso</span>
+          </div>
+
+          <div class="parrilla-card">
+              <a href="RCocina5.html">
+                  <img src="images/cocina/5.jpg" alt="Receta 5">
+              </a>
+              <span>Wrap de queso y carne </span>
+          </div>
+
+          <div class="parrilla-card">
+               <a href="RCocina6.html">
+                  <img src="images/cocina/6.png" alt="Receta 6">
+              </a>
+              <span>Steak sellado al sartén con Mantequilla </span>
+          </div>
+
+      </div>
+  </section>
+
+  <!-- SCRIPT NAVBAR -->
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error al cargar la Navbar:', error));
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+</body>
+</html>

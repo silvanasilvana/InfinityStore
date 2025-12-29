@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Receta Parrilla</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="parrilla.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="recetaparrilla.css">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <main class="receta-container">
+
+    <h1>BEEF STROGANOFF con Champiñones</h1>
+
+    <!-- BLOQUE PRINCIPAL -->
+    <section class="card principal">
+
+      <img src="images/diaadia/3.png" alt="Beef Stroganoff con champiñones">
+
+      <div class="info">
+        <h2>Stroganoff de Res Cremoso</h2>
+
+        <h3>INGREDIENTES</h3>
+<ul>
+  <li>• 500 g filete de res</li>
+  <li>• 1 cebolla morada</li>
+  <li>• 1 diente de ajo</li>
+  <li>• 2 puñados de champiñones o setas</li>
+  <li>• 1 cdta paprika</li>
+  <li>• Ralladura de 1 limón</li>
+  <li>• 1 nuez de mantequilla sin sal</li>
+  <li>• Aceite de oliva</li>
+  <li>• 1 copita de brandy</li>
+  <li>• 50 ml crema ácida</li>
+  <li>• Perejil fresco picado</li>
+  <li>• Sal y pimienta</li>
+</ul>
+
+        <div class="meta">
+          <span>⏱ Prep 10 min · Cocción 15 min</span>
+          <span>👤👤 Porciones 4</span>
+          <span>⭐ Dificultad: Fácil</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BLOQUES SECUNDARIOS -->
+    <section class="grid-2">
+
+      <!-- CORTE RECOMENDADO (SE DEJA IGUAL) -->
+      <div class="card">
+        <h3>Corte recomendado</h3>
+        <img src="images/carne1.jpg" class="mini-img" alt="Lomo de res">
+        <p><strong>Lomo de res</strong></p>
+        <p>Sellado rápido · 2–3 min</p>
+
+        <button class="btn-carrito">
+          <img src="images/logocarrito.png" alt="Carrito">
+        </button>
+      </div>
+
+      <!-- ESPECIAS (SE DEJAN IGUAL) -->
+      <div class="card">
+        <h3>Especias Recomendadas</h3>
+
+        <div class="especias">
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Paprika</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Pimienta negra</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Perejil</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PREPARACIÓN -->
+    <section class="card">
+      <h3>🔥 Preparación</h3>
+
+<ul>
+  <li>– Pica finamente la cebolla y el ajo; limpia y corta los champiñones.</li>
+  <li>– Aplana ligeramente el filete y córtalo en tiras.</li>
+  <li>– Mezcla la paprika, ralladura de limón, sal y pimienta y espolvorea la carne.</li>
+  <li>– Sofríe cebolla y ajo en un sartén con aceite a fuego medio.</li>
+  <li>– Añade los champiñones y la mantequilla; cocina hasta dorar.</li>
+  <li>– Retira los champiñones y sella la carne 2 minutos por lado.</li>
+  <li>– Incorpora nuevamente los champiñones, añade el brandy y reduce 1 minuto.</li>
+  <li>– Retira del fuego, agrega la crema ácida y el perejil.</li>
+  <li>– Sirve caliente acompañado de pan o arroz.</li>
+</ul>
+
+    </section>
+
+    <!-- TIP -->
+    <section class="card tip">
+      <h3>💡 Tip Antonito</h3>
+      <ul>
+        <li>No sobrecocines la carne para que quede jugosa.</li>
+        <li>Agrega la crema fuera del fuego para evitar que se corte.</li>
+        <li>Acompaña con pan rústico o papas.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- SCRIPTS -->
+  <script>
+    fetch('navbar.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('navbar-container').innerHTML = d);
+
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('footer-container').innerHTML = d);
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

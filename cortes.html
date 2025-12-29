@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cortes | Infinity Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="cortes.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- TIPOGRAFÍAS -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- NAVBAR -->
+<div id="navbar-container"></div>
+
+<!-- Contenedor FOOTER -->
+    <script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar el footer:', error));
+</script>
+
+<section class="productos">
+
+  <!-- HEADER -->
+  <div class="productos-header">
+    <h1>PRODUCTOS <span>(6 Productos)</span></h1>
+
+    <div class="productos-barra">
+      <div class="filtrar">Filtrar</div>
+
+      <div class="ordenar">
+        Ordenar por
+        <select id="ordenarPrecio">
+          <option value="">Seleccionar</option>
+          <option value="menor">Menor precio</option>
+          <option value="mayor">Mayor precio</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="productos-content">
+
+    <!-- FILTROS -->
+    <aside class="filtros">
+
+      <div class="filtro">
+        <p>Grado / Especialidad</p>
+        <select class="filtro-select" data-filter="grado">
+          <option value="">Todos</option>
+          <option value="premium">Premium</option>
+          <option value="clasico">Clásico</option>
+        </select>
+      </div>
+
+      <div class="filtro">
+        <p>Cortar</p>
+        <select class="filtro-select" data-filter="corte">
+          <option value="">Todos</option>
+          <option value="grueso">Grueso</option>
+          <option value="delgado">Delgado</option>
+        </select>
+      </div>
+
+      <div class="filtro">
+        <p>Dieta</p>
+        <select class="filtro-select" data-filter="dieta">
+          <option value="">Todos</option>
+          <option value="alta-proteina">Alta proteína</option>
+          <option value="baja-grasa">Baja grasa</option>
+        </select>
+      </div>
+
+      <div class="filtro">
+        <p>Cocción</p>
+        <select class="filtro-select" data-filter="coccion">
+          <option value="">Todos</option>
+          <option value="parrilla">Parrilla</option>
+          <option value="sarten">Sartén</option>
+        </select>
+      </div>
+
+      <div class="filtro">
+        <p>Estandar de corte</p>
+        <select class="filtro-select" data-filter="estandar">
+          <option value="">Todos</option>
+          <option value="americano">Americano</option>
+          <option value="argentino">Argentino</option>
+        </select>
+      </div>
+
+    </aside>
+
+    <!-- GRID PRODUCTOS -->
+    <div class="productos-grid">
+
+      <div class="producto-card"
+        data-grado="premium"
+        data-corte="grueso"
+        data-dieta="alta-proteina"
+        data-coccion="parrilla"
+        data-estandar="americano">
+
+        <img src="images/carne2.jpg">
+        <h3>Ribeye</h3>
+        <p class="sub">MONTECARLO</p>
+        <p class="precio">$483</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-grado="clasico"
+        data-corte="delgado"
+        data-dieta="baja-grasa"
+        data-coccion="sarten"
+        data-estandar="argentino">
+
+        <img src="images/carne2.jpg">
+        <h3>Sirloin</h3>
+        <p class="sub">MONTECARLO</p>
+        <p class="precio">$320</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-grado="premium"
+        data-corte="grueso"
+        data-dieta="alta-proteina"
+        data-coccion="parrilla"
+        data-estandar="argentino">
+
+        <img src="images/carne2.jpg">
+        <h3>New York</h3>
+        <p class="sub">MONTECARLO</p>
+        <p class="precio">$550</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-grado="clasico"
+        data-corte="delgado"
+        data-dieta="alta-proteina"
+        data-coccion="sarten"
+        data-estandar="americano">
+
+        <img src="images/carne2.jpg">
+        <h3>Arrachera</h3>
+        <p class="sub">MONTECARLO</p>
+        <p class="precio">$410</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-grado="premium"
+        data-corte="grueso"
+        data-dieta="baja-grasa"
+        data-coccion="parrilla"
+        data-estandar="americano">
+
+        <img src="images/carne2.jpg">
+        <h3>Filete</h3>
+        <p class="sub">MONTECARLO</p>
+        <p class="precio">$290</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-grado="clasico"
+        data-corte="delgado"
+        data-dieta="alta-proteina"
+        data-coccion="parrilla"
+        data-estandar="argentino">
+
+        <img src="images/carne2.jpg">
+        <h3>Top Sirloin</h3>
+        <p class="sub">MONTECARLO</p>
+        <p class="precio">$610</p>
+        <button>Ver producto</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- JS ORDENAR + FILTRAR -->
+<script>
+  const selectOrden = document.getElementById("ordenarPrecio");
+  const filtros = document.querySelectorAll(".filtro-select");
+  const grid = document.querySelector(".productos-grid");
+  const cards = Array.from(document.querySelectorAll(".producto-card"));
+
+  // ORDENAR
+  selectOrden.addEventListener("change", () => {
+    const sorted = [...cards].sort((a, b) => {
+      const precioA = parseInt(a.querySelector(".precio").innerText.replace("$", ""));
+      const precioB = parseInt(b.querySelector(".precio").innerText.replace("$", ""));
+
+      return selectOrden.value === "menor"
+        ? precioA - precioB
+        : precioB - precioA;
+    });
+
+    sorted.forEach(card => grid.appendChild(card));
+  });
+
+  // FILTRAR
+  filtros.forEach(filtro => {
+    filtro.addEventListener("change", aplicarFiltros);
+  });
+
+  function aplicarFiltros() {
+    cards.forEach(card => {
+      let visible = true;
+
+      filtros.forEach(filtro => {
+        const tipo = filtro.dataset.filter;
+        const valor = filtro.value;
+
+        if (valor && card.dataset[tipo] !== valor) {
+          visible = false;
+        }
+      });
+
+      card.style.display = visible ? "block" : "none";
+    });
+  }
+</script>
+
+<!-- CSRIPT NAVBAR -->
+
+  <!-- SCRIPTS -->
+  <script>
+    // Cargar Navbar desde navbar.html
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error al cargar la Navbar:', error));
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+  
+  <!-- FOOTER -->
+
+
+<div id="footer-container"></div>
+
+  
+</body>
+</html>

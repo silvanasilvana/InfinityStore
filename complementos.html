@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Complementos | Infinity Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="complementos.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+
+  
+
+  <!-- TIPOGRAFÍAS -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div id="navbar-container"></div>
+
+
+<!-- Contenedor FOOTER -->
+    <script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar el footer:', error));
+</script>
+
+
+<section class="productos">
+
+  <!-- HEADER -->
+  <div class="productos-header">
+    <h1>COMPLEMENTOS <span>(6 Productos)</span></h1>
+
+    <div class="productos-barra">
+      <div class="filtrar">Filtrar</div>
+
+      <div class="ordenar">
+        Ordenar por
+        <select id="ordenarPrecio">
+          <option value="">Seleccionar</option>
+          <option value="menor">Menor precio</option>
+          <option value="mayor">Mayor precio</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="productos-content">
+
+    <!-- FILTROS -->
+    <aside class="filtros">
+
+      <div class="filtro">
+        <p>Condimentos</p>
+        <select class="filtro-select" data-filter="condimento">
+          <option value="">Todos</option>
+          <option value="sal">Sal</option>
+          <option value="salsa">Salsa</option>
+        </select>
+      </div>
+
+      <div class="filtro">
+        <p>Especias</p>
+        <select class="filtro-select" data-filter="especia">
+          <option value="">Todos</option>
+          <option value="picante">Picante</option>
+          <option value="suave">Suave</option>
+        </select>
+      </div>
+
+    </aside>
+
+    <!-- GRID PRODUCTOS -->
+    <div class="productos-grid">
+
+      <div class="producto-card"
+        data-condimento="sal"
+        data-especia="suave">
+
+        <img src="images/complemento.png">
+        <h3>Sal de Parrilla</h3>
+        <p class="sub">ATONITO</p>
+        <p class="precio">$120</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-condimento="salsa"
+        data-especia="picante">
+
+        <img src="images/complemento.png">
+        <h3>Salsa Picante</h3>
+        <p class="sub">ATONITO</p>
+        <p class="precio">$95</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-condimento="sal"
+        data-especia="picante">
+
+        <img src="images/complemento.png">
+        <h3>Rub Ahumado</h3>
+        <p class="sub">ATONITO</p>
+        <p class="precio">$150</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-condimento="salsa"
+        data-especia="suave">
+
+        <img src="images/complemento.png">
+        <h3>Salsa BBQ</h3>
+        <p class="sub">ATONITO</p>
+        <p class="precio">$110</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-condimento="sal"
+        data-especia="suave">
+
+        <img src="images/complemento.png">
+        <h3>Sal Fina</h3>
+        <p class="sub">ATONITO</p>
+        <p class="precio">$80</p>
+        <button>Ver producto</button>
+      </div>
+
+      <div class="producto-card"
+        data-condimento="salsa"
+        data-especia="picante">
+
+        <img src="images/complemento.png">
+        <h3>Salsa Habanero</h3>
+        <p class="sub">ATONITO</p>
+        <p class="precio">$130</p>
+        <button>Ver producto</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- JS NAVBAR -->
+<script>
+  fetch('navbar.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('navbar-container').innerHTML = data;
+    });
+</script>
+
+<!-- JS ORDENAR + FILTRAR -->
+<script>
+  const selectOrden = document.getElementById("ordenarPrecio");
+  const filtros = document.querySelectorAll(".filtro-select");
+  const grid = document.querySelector(".productos-grid");
+  const cards = Array.from(document.querySelectorAll(".producto-card"));
+
+  selectOrden.addEventListener("change", () => {
+    const sorted = [...cards].sort((a, b) => {
+      const aP = parseInt(a.querySelector(".precio").innerText.replace("$",""));
+      const bP = parseInt(b.querySelector(".precio").innerText.replace("$",""));
+      return selectOrden.value === "menor" ? aP - bP : bP - aP;
+    });
+    sorted.forEach(card => grid.appendChild(card));
+  });
+
+  filtros.forEach(f => f.addEventListener("change", aplicarFiltros));
+
+  function aplicarFiltros() {
+    cards.forEach(card => {
+      let visible = true;
+      filtros.forEach(f => {
+        const tipo = f.dataset.filter;
+        const val = f.value;
+        if (val && card.dataset[tipo] !== val) visible = false;
+      });
+      card.style.display = visible ? "block" : "none";
+    });
+  }
+</script>
+
+
+  
+  <!-- FOOTER -->
+
+
+<div id="footer-container"></div>
+
+
+</body>
+</html>

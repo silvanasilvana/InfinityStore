@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Receta Cocina</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="cocina.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="recetacocina.css">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <main class="receta-container">
+
+    <h1>BISTECS DE CARNE con Salsa de Whisky y Durazno</h1>
+
+    <!-- BLOQUE PRINCIPAL -->
+    <section class="card principal">
+
+      <img src="images/RecetaCocina/1.jpg" alt="Bistecs con salsa de whisky y durazno">
+
+      <div class="info">
+        <h2>Salsa de Whisky y Durazno</h2>
+
+        <h3>INGREDIENTES</h3>
+        <ul>
+          <li>• 1 cda mantequilla sin sal</li>
+          <li>• ½ durazno grande, pelado y picado</li>
+          <li>• ¼ taza de chalota finamente picada</li>
+          <li>• 3 cdas azúcar morena oscura</li>
+          <li>• 2 cdas vinagre de sidra</li>
+          <li>• 2 cdas whisky</li>
+          <li>• 2 cdtas salsa Worcestershire</li>
+          <li>• ½ cdta caldo sabor carne</li>
+          <li>• ¼ cdta pimienta negra</li>
+          <li>• 2 filetes de lomo de res (6–7 oz)</li>
+        </ul>
+
+        <div class="meta">
+          <span>⏱ Prep 3 min · Cocción 16 min</span>
+          <span>👤👤 Porciones 2</span>
+          <span>⭐ Dificultad: Fácil</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BLOQUES SECUNDARIOS -->
+    <section class="grid-2">
+
+      <!-- CORTE RECOMENDADO -->
+      <div class="card">
+        <h3>Corte recomendado</h3>
+        <img src="images/carne1.jpg" class="mini-img" alt="Lomo de res">
+        <p><strong>Lomo de res</strong></p>
+        <p>Sartén · 6–8 min</p>
+
+        <button class="btn-carrito">
+          <img src="images/logocarrito.png" alt="Carrito">
+        </button>
+      </div>
+
+      <!-- ESPECIAS -->
+      <div class="card">
+        <h3>Especias Recomendadas</h3>
+
+        <div class="especias">
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Nombre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Nombre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Nombre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PREPARACIÓN -->
+    <section class="card">
+      <h3>🍳 Preparación</h3>
+
+      <h4>Salsa</h4>
+      <ul>
+        <li>– Derrite la mantequilla a fuego medio.</li>
+        <li>– Agrega el durazno y cocina 2 min.</li>
+        <li>– Incorpora la chalota y cocina 2 min más.</li>
+        <li>– Añade azúcar, vinagre, whisky, salsa, caldo y pimienta.</li>
+        <li>– Cocina 6 min hasta espesar.</li>
+        <li>– Licúa ligeramente y mantén caliente.</li>
+      </ul>
+
+      <h4>Carne</h4>
+      <ul>
+        <li>– Calienta una sartén a fuego medio-alto.</li>
+        <li>– Sazona los filetes con sal y pimienta.</li>
+        <li>– Cocina 6–8 min, volteando a la mitad.</li>
+        <li>– Deja reposar 5 min antes de servir.</li>
+      </ul>
+    </section>
+
+    <!-- TIP -->
+    <section class="card tip">
+      <h3>💡 Tip Antonito</h3>
+      <ul>
+        <li>Usa sartén de hierro para mejor sellado.</li>
+        <li>No muevas el bistec hasta que esté bien dorado.</li>
+        <li>Sirve la salsa caliente justo al final.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- SCRIPTS -->
+  <script>
+    fetch('navbar.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('navbar-container').innerHTML = d);
+
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('footer-container').innerHTML = d);
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

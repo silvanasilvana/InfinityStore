@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Receta Parrilla</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="parrilla.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="recetaparrilla.css">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <main class="receta-container">
+
+    <h1>STEAK SELLADO AL SARTÉN con Mantequilla y Romero</h1>
+
+    <!-- BLOQUE PRINCIPAL -->
+    <section class="card principal">
+
+      <img src="images/cocina/6.png" alt="Pan seared steak con mantequilla">
+
+      <div class="info">
+        <h2>Perfect Pan Seared Steak</h2>
+
+        <h3>INGREDIENTES</h3>
+<ul>
+  <li>• 2 steaks New York Strip, Ribeye o Top Sirloin (1¼” de grosor)</li>
+  <li>• 1 cdta sal de mar gruesa</li>
+  <li>• ½ cdta pimienta negra recién molida</li>
+  <li>• ½ cda aceite de alto punto de humo</li>
+  <li>• 2 cdas mantequilla sin sal</li>
+  <li>• 2 dientes de ajo aplastados</li>
+  <li>• 1 ramita de romero o tomillo fresco</li>
+</ul>
+
+        <div class="meta">
+          <span>⏱ Prep 5 min · Cocción 10 min</span>
+          <span>👤👤 Porciones 2–4</span>
+          <span>⭐ Dificultad: Media</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BLOQUES SECUNDARIOS -->
+    <section class="grid-2">
+
+      <!-- CORTE RECOMENDADO (NO SE MODIFICA) -->
+      <div class="card">
+        <h3>Corte recomendado</h3>
+        <img src="images/carne1.jpg" class="mini-img" alt="Corte de res">
+        <p><strong>Ribeye / New York Strip</strong></p>
+        <p>Sartén · Sellado fuerte</p>
+
+        <button class="btn-carrito">
+          <img src="images/logocarrito.png" alt="Carrito">
+        </button>
+      </div>
+
+      <!-- ESPECIAS (NO SE MODIFICA) -->
+      <div class="card">
+        <h3>Especias Recomendadas</h3>
+
+        <div class="especias">
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Sal de mar</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Pimienta negra</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Romero fresco</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PREPARACIÓN -->
+    <section class="card">
+      <h3>🔥 Preparación</h3>
+
+<ul>
+  <li>– Seca muy bien los steaks con papel de cocina.</li>
+  <li>– Déjalos reposar a temperatura ambiente 30–40 min.</li>
+  <li>– Sazona generosamente con sal y pimienta justo antes de cocinar.</li>
+  <li>– Calienta un sartén de hierro a fuego medio-alto hasta que esté muy caliente.</li>
+  <li>– Añade el aceite y coloca los steaks sin moverlos por 4 min.</li>
+  <li>– Voltea y cocina 3–4 min más para formar costra.</li>
+  <li>– Sella los bordes y la parte grasa 1 min.</li>
+  <li>– Baja el fuego, agrega mantequilla, ajo y romero.</li>
+  <li>– Baña la carne con la mantequilla durante 1 min.</li>
+  <li>– Retira cuando esté 5–10°F por debajo del punto deseado.</li>
+  <li>– Deja reposar 10 min antes de servir.</li>
+</ul>
+
+    </section>
+
+    <!-- TIP -->
+    <section class="card tip">
+      <h3>💡 Tip Antonito</h3>
+      <ul>
+        <li>El sartén debe estar bien caliente antes de poner la carne.</li>
+        <li>No muevas el steak hasta que forme costra.</li>
+        <li>Siempre deja reposar para que quede jugoso.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- SCRIPTS -->
+  <script>
+    fetch('navbar.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('navbar-container').innerHTML = d);
+
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('footer-container').innerHTML = d);
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

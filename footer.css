@@ -1,0 +1,88 @@
+.footer {
+    font-family: 'DM Sans', sans-serif;
+    color: #ffffff;
+}
+
+/* FRANJA PRINCIPAL */
+.footer-top {
+    background-color: #007b66;
+    padding: 40px 60px;
+}
+
+/* MENÚ */
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.footer-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* CONTENIDO CENTRAL */
+.footer-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+/* LOGO */
+.footer-logo img {
+    width: 400px;
+}
+
+/* DIVISOR */
+.footer-divider {
+    width: 3px;
+    height: 180px;
+    background-color: #ffffff;
+}
+
+/* TEXTO */
+.footer-info p {
+    margin: 0 0 20px 0;
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+.footer-info .telefono {
+    margin-top: 20px;
+}
+
+/* FRANJA VERDE OSCURO */
+.footer-bottom {
+    background-color: #115c4c;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-bottom a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 30px;
+}
+
+.footer-bottom span {
+    margin-left: auto;
+}
+
+/* FRANJA NEGRA */
+.footer-black {
+    background-color: #000000;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.footer-black .canva {
+    opacity: 0.7;
+}

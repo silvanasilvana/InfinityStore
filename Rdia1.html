@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Receta Parrilla</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="parrilla.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="recetaparrilla.css">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <main class="receta-container">
+
+    <h1> Bowl de Carne</h1>
+
+    <!-- BLOQUE PRINCIPAL -->
+    <section class="card principal">
+
+      <img src="images/diaadia/1.jpg" alt="Korean Beef Bowl">
+
+      <div class="info">
+        <h2>Korean Beef Bowls – The EASY Way!</h2>
+
+        <h3>INGREDIENTES</h3>
+<ul>
+  <li>• 500 g carne molida de res (93% magra recomendado)</li>
+  <li>• ½ cebolla blanca o amarilla picada</li>
+  <li>• 3 cdas salsa de soya</li>
+  <li>• 2 cdas azúcar morena</li>
+  <li>• 2 dientes de ajo finamente picados</li>
+  <li>• 1 cdta jengibre fresco rallado</li>
+  <li>• 1 cdta aceite de ajonjolí</li>
+  <li>• ½ cdta ajo en polvo</li>
+  <li>• ½ cdta cebolla en polvo</li>
+  <li>• ¼ cdta hojuelas de chile (opcional)</li>
+  <li>• 1 cdta fécula de maíz</li>
+  <li>• ¼ taza agua</li>
+  <li>• Arroz blanco cocido para servir</li>
+</ul>
+
+        <div class="meta">
+          <span>⏱ Prep 20 min </span>
+          <span>👤👤👤👤 Porciones 4</span>
+          <span>⭐ Dificultad: Fácil</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BLOQUES SECUNDARIOS -->
+    <section class="grid-2">
+
+      <!-- CORTE RECOMENDADO (NO SE MODIFICA) -->
+      <div class="card">
+        <h3>Corte recomendado</h3>
+        <img src="images/carne1.jpg" class="mini-img" alt="Corte de res">
+        <p><strong>Carne molida de res</strong></p>
+        <p>Sartén · Cocción rápida</p>
+
+        <button class="btn-carrito">
+          <img src="images/logocarrito.png" alt="Carrito">
+        </button>
+      </div>
+
+      <!-- ESPECIAS (NO SE MODIFICA) -->
+      <div class="card">
+        <h3>Especias Recomendadas</h3>
+
+        <div class="especias">
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Ajo</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Jengibre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Ajonjolí</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PREPARACIÓN -->
+    <section class="card">
+      <h3>🔥 Preparación</h3>
+
+<ul>
+  <li>– Cocina la carne molida en un sartén grande a fuego medio-alto.</li>
+  <li>– Agrega la cebolla picada y cocina hasta que esté suave.</li>
+  <li>– Escurre el exceso de grasa si es necesario.</li>
+  <li>– Mezcla la salsa de soya, azúcar morena, ajo, jengibre y aceite de ajonjolí.</li>
+  <li>– Incorpora ajo en polvo, cebolla en polvo y hojuelas de chile.</li>
+  <li>– Disuelve la fécula de maíz en el agua y agrégala a la salsa.</li>
+  <li>– Vierte la salsa sobre la carne y cocina 2–3 minutos hasta que espese.</li>
+  <li>– Sirve caliente sobre arroz blanco.</li>
+  <li>– Acompaña con col rallada, zanahoria, pepino o spicy mayo.</li>
+</ul>
+
+    </section>
+
+    <!-- TIP -->
+    <section class="card tip">
+      <h3>💡 Tip Antonito</h3>
+      <ul>
+        <li>Usa carne magra para evitar exceso de grasa.</li>
+        <li>Puedes preparar la carne con anticipación para meal prep.</li>
+        <li>Personaliza el bowl con tus toppings favoritos.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- SCRIPTS -->
+  <script>
+    fetch('navbar.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('navbar-container').innerHTML = d);
+
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('footer-container').innerHTML = d);
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

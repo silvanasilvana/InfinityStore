@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Receta Parrilla</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="parrilla.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="recetaparrilla.css">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <main class="receta-container">
+
+    <h1>QUESADILLAS DE CARNE MOLIDA con Queso Dorado</h1>
+
+    <!-- BLOQUE PRINCIPAL -->
+    <section class="card principal">
+
+      <img src="images/diaadia/2.jpg" alt="Ground Beef Quesadillas">
+
+      <div class="info">
+        <h2>Cheesy Ground Beef Quesadillas – The EASY Way!</h2>
+
+        <h3>INGREDIENTES</h3>
+<ul>
+  <li>• 500 g carne molida de res extra magra</li>
+  <li>• ½ cebolla blanca picada</li>
+  <li>• 1 cdta chile en polvo</li>
+  <li>• ½ cdta orégano seco</li>
+  <li>• ½ cdta sal</li>
+  <li>• ½ cdta ajo en polvo</li>
+  <li>• ½ cdta comino molido</li>
+  <li>• Queso cheddar rallado (o mezcla de quesos)</li>
+  <li>• Tortillas de harina grandes</li>
+  <li>• Mantequilla para dorar</li>
+</ul>
+
+        <div class="meta">
+          <span>⏱ Prep 10 min </span>
+          <span>👤Individual</span>
+          <span>⭐ Dificultad: Fácil</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BLOQUES SECUNDARIOS -->
+    <section class="grid-2">
+
+      <!-- CORTE RECOMENDADO (NO SE MODIFICA) -->
+      <div class="card">
+        <h3>Corte recomendado</h3>
+        <img src="images/carne1.jpg" class="mini-img" alt="Corte de res">
+        <p><strong>Carne molida de res</strong></p>
+        <p>Sartén · Dorado rápido</p>
+
+        <button class="btn-carrito">
+          <img src="images/logocarrito.png" alt="Carrito">
+        </button>
+      </div>
+
+      <!-- ESPECIAS (NO SE MODIFICA) -->
+      <div class="card">
+        <h3>Especias Recomendadas</h3>
+
+        <div class="especias">
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Comino</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Chile en polvo</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Ajo en polvo</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PREPARACIÓN -->
+    <section class="card">
+      <h3>🔥 Preparación</h3>
+
+<ul>
+  <li>– Dora la carne molida junto con la cebolla en un sartén grande.</li>
+  <li>– Escurre el exceso de grasa.</li>
+  <li>– Agrega chile en polvo, orégano, sal, ajo en polvo y comino.</li>
+  <li>– Cocina 2–3 minutos para integrar sabores.</li>
+  <li>– Retira la carne del sartén.</li>
+  <li>– Coloca una tortilla en el sartén con un poco de mantequilla.</li>
+  <li>– Espolvorea queso, agrega carne y más queso.</li>
+  <li>– Dobla la tortilla y cocina hasta dorar por ambos lados.</li>
+  <li>– Retira y corta en 3–4 triángulos.</li>
+</ul>
+
+    </section>
+
+    <!-- TIP -->
+    <section class="card tip">
+      <h3>💡 Tip Antonito</h3>
+      <ul>
+        <li>Usa carne magra para evitar quesadillas grasosas.</li>
+        <li>Sirve recién hechas para máxima textura crujiente.</li>
+        <li>Puedes añadir champiñones, pimiento o jalapeño.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- SCRIPTS -->
+  <script>
+    fetch('navbar.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('navbar-container').innerHTML = d);
+
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('footer-container').innerHTML = d);
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

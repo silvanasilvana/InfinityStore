@@ -1,0 +1,128 @@
+/* HERO */
+.hero {
+  height: 55vh;
+  min-height: 420px;
+  background: url("images/quienesomos4.jpg") center/cover no-repeat;
+}
+
+.hero-overlay {
+  height: 100%;
+  background: rgba(0,0,0,.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+}
+
+/* HISTORIA CARD */
+.historia-wrap {
+  background: #eee9e4;
+  padding: 4rem 1rem;
+}
+
+.historia-card {
+  max-width: 1200px;
+  margin: auto;
+  background: #f7f4f1;
+  border-radius: 20px;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3rem;
+}
+
+.historia-imagen img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+/* ICONOS LISTA */
+.historia-valores {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.historia-valores li {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.icon-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #1f5d50;
+}
+
+/* BOTÓN */
+.btn-historia {
+  background: #1f5d50;
+  color: white;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* ICONOS ABAJO */
+.valores-bottom {
+  background: #eee9e4;
+  padding: 3rem 1rem;
+}
+
+.valores-grid {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  text-align: center;
+  gap: 2rem;
+}
+
+.icon-circle.big {
+  width: 70px;
+  height: 70px;
+  margin: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .historia-card {
+    grid-template-columns: 1fr;
+  }
+  .valores-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* CENTRAR ICONOS DENTRO DEL CÍRCULO */
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ICONOS POR TIPO */
+.icon-circle.check::before {
+  content: "✓";
+}
+
+.icon-circle.fork::before {
+  content: "🍴";
+}
+
+.icon-circle.fire::before {
+  content: "🔥";
+}
+
+/* ICONOS GRANDES ABAJO */
+.icon-circle.big {
+  font-size: 32px;
+}

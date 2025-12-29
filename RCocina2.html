@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Receta Parrilla</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="parrilla.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="recetaparrilla.css">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <main class="receta-container">
+
+    <h1>COSTILLAS DE CERDO AL HORNO tiernas y jugosas</h1>
+
+    <!-- BLOQUE PRINCIPAL -->
+    <section class="card principal">
+
+      <img src="images/Recetaparrilla/2.jpg" alt="Costillas de cerdo al horno">
+
+      <div class="info">
+        <h2>Costillas al Horno Jugosas</h2>
+
+        <h3>INGREDIENTES</h3>
+<ul>
+  <li>• 1 costillar de cerdo</li>
+  <li>• Salsa barbacoa al gusto</li>
+  <li>• 1 cdta ajo en polvo</li>
+  <li>• 1 cdta cebolla en polvo</li>
+  <li>• Hierbas aromáticas (romero, tomillo u orégano)</li>
+  <li>• Sal y pimienta al gusto</li>
+  <li>• Aceite de oliva</li>
+</ul>
+
+        <div class="meta">
+          <span>⏱ Prep 20 min · Cocción 120 min</span>
+          <span>👤👤 Porciones 3–4</span>
+          <span>⭐ Dificultad: Fácil</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BLOQUES SECUNDARIOS -->
+    <section class="grid-2">
+
+      <!-- CORTE RECOMENDADO (SE DEJA IGUAL) -->
+      <div class="card">
+        <h3>Corte recomendado</h3>
+        <img src="images/carne1.jpg" class="mini-img" alt="Lomo de res">
+        <p><strong>Lomo de res</strong></p>
+        <p>Asado directo · 6–8 min</p>
+
+        <button class="btn-carrito">
+          <img src="images/logocarrito.png" alt="Carrito">
+        </button>
+
+      </div>
+
+      <!-- ESPECIAS (SE DEJAN IGUAL) -->
+      <div class="card">
+        <h3>Especias Recomendadas</h3>
+
+        <div class="especias">
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Nombre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Nombre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Nombre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PREPARACIÓN -->
+    <section class="card">
+      <h3>🔥 Preparación</h3>
+
+<ul>
+  <li>– Coloca el costillar de cerdo en una bandeja para horno.</li>
+  <li>– Salpimenta y unta con aceite de oliva.</li>
+  <li>– Añade ajo en polvo, cebolla en polvo, hierbas aromáticas y salsa barbacoa.</li>
+  <li>– Cubre y deja macerar en el refrigerador durante 1–2 horas.</li>
+  <li>– Precalienta el horno a 160 °C durante 10 minutos.</li>
+  <li>– Envuelve el costillar en papel aluminio.</li>
+  <li>– Hornea a 140–160 °C durante 90 minutos.</li>
+  <li>– Apaga el horno y deja reposar 10 minutos.</li>
+  <li>– Retira el papel aluminio y sirve con la guarnición deseada.</li>
+</ul>
+
+    </section>
+
+    <!-- TIP -->
+    <section class="card tip">
+      <h3>💡 Tip Antonito</h3>
+      <ul>
+        <li>El marinado previo es clave para lograr costillas más jugosas.</li>
+        <li>El horneado lento permite que la carne se desprenda del hueso.</li>
+        <li>Puedes dorarlas al final bajo el grill para un acabado más crujiente.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- SCRIPTS -->
+  <script>
+    fetch('navbar.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('navbar-container').innerHTML = d);
+
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('footer-container').innerHTML = d);
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

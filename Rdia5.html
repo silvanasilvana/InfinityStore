@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Receta Sartén</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="parrilla.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="recetaparrilla.css">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <main class="receta-container">
+
+    <h1>GROUND BEEF AND POTATOES</h1>
+
+    <!-- BLOQUE PRINCIPAL -->
+    <section class="card principal">
+
+      <img src="images/diaadia/5.jpg" alt="Ground beef con papas">
+
+      <div class="info">
+        <h2>Carne Molida con Papas en Sartén</h2>
+
+        <h3>INGREDIENTES</h3>
+        <ul>
+          <li>• 450 g carne molida de res</li>
+          <li>• 4 papas medianas, peladas y en cubos</li>
+          <li>• 1 cebolla mediana, picada</li>
+          <li>• 2 dientes de ajo, picados</li>
+          <li>• 1 cucharada de aceite de oliva</li>
+          <li>• 1 cdta paprika</li>
+          <li>• ¼ cdta comino</li>
+          <li>• ½ cdta pimienta negra</li>
+          <li>• ½ cdta sal</li>
+          <li>• ¼ taza de caldo de res (opcional)</li>
+          <li>• Perejil fresco picado (para decorar)</li>
+        </ul>
+
+        <div class="meta">
+          <span>⏱ Prep 10 min · Cocción 25 min</span>
+          <span>👤👤 Porciones 4</span>
+          <span>⭐ Dificultad: Fácil</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BLOQUES SECUNDARIOS -->
+    <section class="grid-2">
+
+      <!-- CORTE RECOMENDADO -->
+      <div class="card">
+        <h3>Corte recomendado</h3>
+        <img src="images/carne1.jpg" class="mini-img" alt="Carne molida de res">
+        <p><strong>Carne molida de res</strong></p>
+        <p>Sartén · 8–10 min</p>
+
+        <button class="btn-carrito">
+          <img src="images/logocarrito.png" alt="Carrito">
+        </button>
+      </div>
+
+      <!-- ESPECIAS -->
+      <div class="card">
+        <h3>Especias Recomendadas</h3>
+
+        <div class="especias">
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Paprika">
+            <p>Paprika</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Comino">
+            <p>Comino</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Pimienta">
+            <p>Pimienta Negra</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PREPARACIÓN -->
+    <section class="card">
+      
+      <h2>Preparación</h2>
+      <ol>
+        <li>
+          - Calienta el aceite de oliva en una sartén grande a fuego medio. Agrega la carne molida
+          y cocínala durante <strong>8–10 minutos</strong>, rompiéndola con una cuchara hasta que
+          esté bien dorada.
+        </li>
+
+        <li>
+          - Retira el exceso de grasa si es necesario. Añade la cebolla picada y el ajo,
+          sofríe durante <strong>2–3 minutos</strong> hasta que la cebolla esté transparente.
+        </li>
+
+        <li>
+          - Incorpora las papas en cubos junto con la paprika, el comino, la sal y la pimienta.
+          Cocina a fuego medio, moviendo ocasionalmente, durante <strong>15–20 minutos</strong>
+          hasta que las papas estén suaves y ligeramente doradas.
+        </li>
+
+        <li>
+          - Si notas que las papas se están secando, agrega poco a poco el caldo de res
+          para ayudar a que se cocinen sin quemarse.
+        </li>
+
+        <li>
+          - Retira del fuego, ajusta la sazón si es necesario y decora con perejil fresco
+          picado antes de servir.
+        </li>
+      </ol>
+
+    </section>
+
+    <!-- TIP -->
+    <section class="card tip">
+      <h3>💡 Tip Antonito</h3>
+      <ul>
+        <li>Puedes agregar pimiento, zanahoria o chícharos para más verduras.</li>
+        <li>Si te gusta picante, añade chile en polvo o hojuelas de chile.</li>
+        <li>Las papas cambray o camote también funcionan perfecto.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- SCRIPTS -->
+  <script>
+    fetch('navbar.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('navbar-container').innerHTML = d);
+
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('footer-container').innerHTML = d);
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>

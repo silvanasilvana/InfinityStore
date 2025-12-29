@@ -1,870 +1,287 @@
-<!DOCTYPE html>
+<!DO
+
+TYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="style.css">
-
-</head>
-<!DOCTYPE html>
-
-
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATONITO</title>
   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="style-navbar.css">
+   <link rel="stylesheet" href="footer.css">
+
 </head>
-
-<script type="module">
-  
- const firebaseConfig = {
-  apiKey: "AIzaSyChkZHqONT27CD5CkV02KZUPSKyGrPFojc",
-  authDomain: "infinity-store-191c9.firebaseapp.com",
-  projectId: "infinity-store-191c9",
-  storageBucket: "infinity-store-191c9.appspot.com",
-  messagingSenderId: "185404166630",
-  appId: "1:185404166630:web:898dcdb0c6891e811b4627",
-  measurementId: "G-9SWGH5N226"
-};
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  setPersistence,
-  browserLocalPersistence,
-  updateProfile
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
-const auth = getAuth(initializeApp(firebaseConfig));
-
-
-  // Mostrar modales
-  window.mostrarLogin = function() {
-    document.getElementById("loginModal").style.display = "block";
-    document.getElementById("registerModal").style.display = "none";
-  };
-
-  window.mostrarRegistro = function() {
-    document.getElementById("registerModal").style.display = "block";
-    document.getElementById("loginModal").style.display = "none";
-  };
-
-  window.cerrarLogin = function() {
-    document.getElementById("loginModal").style.display = "none";
-  };
-
-  window.cerrarRegistro = function() {
-    document.getElementById("registerModal").style.display = "none";
-  };
-
-  
-
-// Login
-const loginForm = document.getElementById("login-form");
-loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    setPersistence(auth, browserLocalPersistence)
-  .then(() => {
-    return signInWithEmailAndPassword(auth, email, password);
-  })
-  .then((userCredential) => {
-    alert("Inicio de sesión exitoso: " + userCredential.user.email);
-    cerrarLogin();
-  })
-  .catch((error) => alert("Error al iniciar sesión: " + error.message));
-
-});
-
-// Cerrar sesión
-const cerrarSesionText = document.getElementById("cerrar-sesion-text");
-const nombreUsuarioSpan = document.getElementById("nombre-usuario");
-
-if (cerrarSesionText) {
-  cerrarSesionText.addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-      nombreUsuarioSpan.textContent = "";
-      alert("Sesión cerrada");
-    } catch (error) {
-      console.error("Error al cerrar sesión:", error);
-      alert("No se pudo cerrar sesión");
-    }
-  });
-}
-
-
-// Mostrar nombre de usuario y perfil dinámico
-const nombrePerfil = document.getElementById("nombre-usuario");
-const imgPerfil = document.getElementById("img-perfil");
-const perfilMenu = document.getElementById("perfil-menu");
-
-imgPerfil.addEventListener("click", () => {
-    const user = auth.currentUser;
-    if (!user) {
-        mostrarLogin();
-    } else {
-        nombrePerfil.textContent = user.displayName || user.email;
-        perfilMenu.style.display = perfilMenu.style.display === "block" ? "none" : "block";
-    }
-});
-
-document.addEventListener("click", (e) => {
-    if (!imgPerfil.contains(e.target) && !perfilMenu.contains(e.target)) {
-        perfilMenu.style.display = "none";
-    }
-});
-
-// Mantener estado de sesión
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        nombrePerfil.textContent = user.displayName || user.email;
-    } else {
-        nombrePerfil.textContent = "";
-        perfilMenu.style.display = "none";
-    }
-});
-
-// Cerrar modales al hacer click fuera
-window.onclick = (event) => {
-    if (event.target.classList.contains("modal")) {
-        event.target.style.display = "none";
-    }
-};
-</script>
-
-
-
 <body>
 
-  <header class="header">
-    <div class="menu container">
+  <!-- Contenedor donde se cargará la Navbar -->
+  <div id="navbar-container"></div>
 
-
-      
- <!-- Imagen de menú (hamburguesa) -->
-    <div class="mobile-menu">
-      <img src="images/barra.jpg" class="menu-icon" alt="Menú" id="menuToggle" />
-      <div class="menu-desplegable" id="menuDesplegable">
-        <ul>
-          <li><a href="gymsharkmujer.html">Mujer</a></li>
-          <li><a href="gymsharkhombre.html">Hombre</a></li>
-          <li><a href="accesorios.html">Accesorios</a></li>
-        </ul>
-      </div>
-    </div>
-
-
-
-      <a href="index.html" class="logo">
-        <img src="images/logo.PNG" alt="Logo" class="logo-img">
-        <span>Infinity Store</span>
-      </a>
-
-      <input type="checkbox" id="menu-hamburguesa"/>
-      <label for="menu">
-        <img src="images/menu.png" class="menu-icono" alt="menu">
-      </label>
-<div class="iconos-derecha">
-  <input type="checkbox" id="menuhamburguesa2" style="display: none;">
-  <label for="menu" class="menu-icono">&#9776;</label>
-</div>
-
-<nav class="navbar">
-  <ul>
-    <li><a href="gymsharkmujer.html"> Mujer </a></li>
-    <li><a href="gymsharkhombre.html"> Hombre </a></li>
-    <li><a href="accesorios.html"> Accesorios </a></li>
-    <li><span id="nombre-usuario"></span></li>
-  </ul>
-</nav>
-
-
-      <div>
-        <ul>
-          <li class="submenu">
-            <img src="images/bolsa.png" id="img-carrito" alt="carrito">
-            <div id="carrito">
-              <table id="lista-carrito">
-                <thead>
-                  <tr>
-                    <th>Imagen</th>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-              <a href="#" id="vaciar-carrito" class="btn-2"> Vaciar Carrito </a>
-            </div>
-          </li>
-        </ul>
-      </div>
-   
-      
-      <!-- SCRIPT PARA DIRIJIRME DE LA BOLSA A CARRITO -->
-<script>
-  document.getElementById('img-carrito').addEventListener('click', () => {
-    window.location.href = 'comprar.html';
-  });
-</script>
-
-
-<!-- PERFIL -->
-
-<div class="submenu perfil-container">
-  <img src="images/perfil.png" id="img-perfil" alt="perfil" style="cursor:pointer;">
-  <div class="perfil-menu" id="perfil-menu">
-    
-    <span id="nombre-usuario"></span>
-     <!-- boton cerrar sesion -->
-    <button id="cerrar-sesion-text" style="cursor:pointer;">Cerrar sesión</button>
-  </div>
-</div>
-
-
-
-
-  
-  </header>
-
-  <div class="franja-negra">
-      <div class="header-content container">
-      <div class="header-img">
-        <img src="images/principal.png" alt="">
-      </div>
-      <div class="header-txt">
-        <h1> Ofertas Especiales</h1>
-        <p> Estrena las mejores prendas</p>
-        <a href="gymsharkhombre.html" class="btn-1">Comprar</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL LOGIN -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="cerrarLogin()">&times;</span>
-      <h2>Iniciar Sesión</h2>
-      <form id="login-form">
-        <input type="email" id="email" placeholder="Correo electrónico" required>
-        <input type="password" id="password" placeholder="Contraseña" required>
-        <button type="submit" class="btn-2">Entrar</button>
-        <p>¿No tienes cuenta? <a href="#" onclick="mostrarRegistro()">Registrarme</a></p>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL REGISTRO -->
-  <div id="registerModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="cerrarRegistro()">&times;</span>
-      <h2>Registrarse</h2>
-      <form id="register-form">
-        <input type="text" id="nombre" placeholder="Nombre completo" required>
-
-        <input type="email" id="reg-email" placeholder="Correo electrónico" required>
-        <input type="password" id="reg-password" placeholder="Contraseña" required>
-        <button type="submit" class="btn-2">Crear cuenta</button>
-        <p>¿Ya tienes cuenta? <a href="#" onclick="mostrarLogin()">Iniciar sesión</a></p>
-      </form>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Seccion Dos -->
-
-    <section class="ofert"> 
-       <!-- Sección subsección1 -->
-<div class="ofert-1"> 
-    <div class="ofert-img">
-        <img src="images/gymshark.png" alt="">
-    </div>
-    <div class="ofert-txt">
-        <h3>GymShark</h3>
-        <a href="gymshark.html" class="btn-2">Información</a>
-    </div>
-</div>
-
-        <!-- Seccion subseccion2-->
-
-          <div class="ofert-1"> 
-            <div class="ofert-img">
-               <img src="images/lululemon.png" alt="">
-            </div>
-            <div class="ofert-txt">
-                <h3> Lululemon </h3>
-                <a href="lululemon.html" class="btn-2">Informacion</a>
-            </div>
-        </div>
-        
-         <!-- Seccion subseccion3-->
-
-          <div class="ofert-1"> 
-            <div class="ofert-img">
-                <img src="images/alo.png" alt="">
-            </div>
-            <div class="ofert-txt">
-                <h3> Alo </h3>
-                <a href="alo.html" class="btn-2">Informacion</a>
-            </div>
-        </div>
-
-    </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Seccion 3 PRODUCTOS VENTA-->
-     
-        
-    <div id="carrito-submenu">
-    <main class="products container" id="lista-1"> 
-        <h2> Productos Populares</h2>
-        
-     <div class="product-content"> 
-                <!--1 producto-->
-         <div class="product"> 
-                <img src="images/pop1.jpg" alt="">
-                <div class="product-txt"> 
-                <h3> Power T-Shirt ( S ) </h3>
-                <p class="precio"> $43.2</p>
-                <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
-
-            </div>
-          </div>
-
-           <!--2 producto-->
-
-             <div class="product"> 
-                <img src="images/pop2.jpg" alt="">
-                <div class="product-txt"> 
-                <h3> Critical Cut Off Tank ( XS ) </h3>
-                <p class="precio"> $48 </p>
-                <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
-
-            </div>
-          </div>
-
-            <!--3 producto-->  
-           <div class="product"> 
-                <img src="images/pop3.jpg" alt="">
-                <div class="product-txt"> 
-                <h3> Arrival Tank ( M )</h3>
-                <p class="precio"> $40 </p>
-                <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
-
-            </div>
-          </div>
-
-            <!--3 producto-->  
-           <div class="product"> 
-                <img src="images/pop4.jpg" alt="">
-                <div class="product-txt"> 
-                <h3> Everyday Seamless Crop Top ( S ) </h3>
-                <p class="precio"> $48</p>
-                <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
-
-            </div>
-          </div>
-
-           <!--3 producto-->  
-           <div class="product"> 
-                <img src="images/pop5.jpg" alt="">
-                <div class="product-txt"> 
-                <h3> Graphic Oversized T-Shirt ( S )</h3>
-                <p class="precio"> $76</p>
-                <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
-
-            </div>
-          </div>
-
-             <!--3 producto-->        
-
-             <div class="product"> 
-                <img src="images/pop6.jpg" alt="">
-                <div class="product-txt"> 
-                <h3>  Graphic Oversized T-Shirt ( XS )</h3>
-                <p class="precio"> $60</p>
-                <a href="#" class="agregar-carrito btn-2" data-id="">Agregar al Carrito</a>
-
-            </div>
-          </div>
-
-     </div>
-     </div>
-        <!--SCRIPT JAVA PARA QUE SE MUESTRE MENU POR 3 SEG-->     
-
-   <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const submenu = document.querySelector('.submenu');
-    const carrito = document.querySelector('#carrito');
-    let timeout;
-
-   submenu.addEventListener('mouseenter', () => {
-  sincronizarCarrito(); // <-- Actualiza los productos desde localStorage
-  submenu.classList.add('mostrar-carrito');
-  clearTimeout(timeout);
-  timeout = setTimeout(() => {
-    submenu.classList.remove('mostrar-carrito');
-  }, 5000);
-});
-
-
-    // Función para mostrar submenu 5 segundos al agregar producto
-    function mostrarSubmenuCarrito() {
-      submenu.classList.add('mostrar-carrito');
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        submenu.classList.remove('mostrar-carrito');
-      }, 3000);
-    }
-
-    // Intercepta el botón de agregar al carrito
-    document.addEventListener('click', function (e) {
-      if (e.target.classList.contains('agregar-carrito')) {
-        mostrarSubmenuCarrito();
-      }
-    });
-  });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-     
-    </main>
-
-
-
-        <!-- SECCIÓN VIDEO FRANJA -->
-     
-        <!-- Sección Video Franja Full Width -->
-        <section class="video-franja">
-         <video autoplay muted loop playsinline>
-         <source src="video/principal2.mp4" type="video/mp4">
-         Tu navegador no soporta la reproducción de video.
-        </video>
-        <div class="video-overlay">
-         <h2>Infinity Style</h2>
-            <p>Explora la nueva colección</p>
-        </div>
-        </section>
-
-
-
-        <!-- Seccion Nueva-->    
-
-      <section class="icons container"> 
-
-            <!-- subseccion--> 
-            <div class="icon-1"> 
-                <div class="icon-img"> 
-                    <img src="images/Funcional.png" alt="">
-                </div>
-                <div class="icon-txt"> 
-                    <h3> Entrenamiento Funcional </h3>
-                         <P> 
-                            Utiliza la ropa adecuada para entrenar
-                         </P>
-                </div>
-            </div>
-
-
-
-             <!-- subseccion--> 
-            <div class="icon-1"> 
-                <div class="icon-img"> 
-                    <img src="images/correr.png" alt="">
-                </div>
-                <div class="icon-txt"> 
-                    <h3>Correr & Cardio</h3>
-                         <P> 
-                              Utiliza la ropa adecuada para entrenar
-                         </P>
-                </div>
-            </div>
-
-
-
-
-             <!-- subseccion--> 
-            <div class="icon-1"> 
-                <div class="icon-img"> 
-                    <img src="images/yoga.png" alt="">
-                </div>
-                <div class="icon-txt"> 
-                    <h3>Pilates & Movimiento Suave
-                        </h3>
-                         <P> 
-                             Utiliza la ropa adecuada para entrenar
-                         </P>
-                </div>
-            </div>
-
-
-
-        </section>
-
-        <!-- Nueva Seccion--> 
-       <section class="blog container"> 
-       
-    
-        <div class="blog-1"> 
-            <img src="images/mujer.png" alt="">
-            
-            <div class="ofert-txt">
-                <a href="gymsharkmujer.html" class="btn-4">Comprar Mujer</a>
-            </div>
-
-        </div>
-       
-        
-
-
-
-       <!-- Subseccion--> 
-      <div class="blog-1"> 
-            <img src="images/hombre.png" alt="">
-            
-            <div class="ofert-txt">
-                <a href="gymsharkhombre.html" class="btn-4">Comprar Hombre</a>
-            </div>
-
-        </div>
-     
-
-
-
-        
-        <!-- Subseccion--> 
-         <div class="blog-1"> 
-            <img src="images/accesorios.png" alt="">
-            
-            <div class="ofert-txt">
-                <a href="accesorios.html" class="btn-4">Accesorios</a>
-            </div>
-
-        </div>
-       
-   </section>   
-
-
-  <!-- LOG IN--> 
-
-
-<!-- Aquí va todo tu contenido HTML, incluyendo el <main> que mostraste -->
-
-<main class="products container" id="lista-1"> 
-  <!-- tus productos aquí (igual que el código que pusiste) -->
-</main>
-
-<!-- Al final de todo el body, antes de cerrarlo, pegas este script: -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const carrito = document.getElementById('carrito');
-  const elementos1 = document.querySelector('.product-content');
-  const lista = document.querySelector('#lista-carrito tbody');
-  const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
-
-  // Asignar IDs únicos a los botones
-  const productos = document.querySelectorAll('.product');
-  productos.forEach((producto, index) => {
-    const btn = producto.querySelector('.agregar-carrito');
-    if (btn) {
-      btn.setAttribute('data-id', index + 1);
-    }
-  });
-
-  // Eventos
-  elementos1.addEventListener('click', comprarElemento);
-  carrito.addEventListener('click', eliminarElemento);
-  vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
-
-  function comprarElemento(e) {
-    e.preventDefault();
-    if (e.target.classList.contains('agregar-carrito')) {
-      const elemento = e.target.closest('.product');
-      leerDatosElemento(elemento, e.target);
-    }
-  }
-
-  function leerDatosElemento(elemento, boton) {
-    const infoElemento = {
-      imagen: elemento.querySelector('img').src,
-      titulo: elemento.querySelector('h3').textContent,
-      precio: elemento.querySelector('.precio').textContent,
-      id: boton.getAttribute('data-id'),
-      cantidad: 1
-    };
-    insertarCarrito(infoElemento);
-  }
-function insertarCarrito(elemento) {
-  const productosEnCarrito = lista.querySelectorAll('tr');
-  let encontrado = false;
-
-  productosEnCarrito.forEach(row => {
-    const rowId = row.querySelector('a.borrar').getAttribute('data-id');
-    if (rowId === elemento.id) {
-      const cantidadTd = row.querySelector('.cantidad');
-      let cantidadActual = parseInt(cantidadTd.textContent);
-      cantidadActual++;
-      cantidadTd.textContent = cantidadActual;
-      encontrado = true;
-    }
-  });
-
-  if (!encontrado) {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td><img src="${elemento.imagen}" width="60px" alt="${elemento.titulo}"></td>
-      <td>${elemento.titulo}</td>
-      <td>${elemento.precio}</td>
-      <td class="cantidad">${elemento.cantidad}</td>
-      <td><a href="#" class="borrar" data-id="${elemento.id}">x</a></td>
-    `;
-    lista.appendChild(row);
-  }
-
-  // 🔹 Guardar en localStorage para que comprar2.html lo lea
-  let carritoActual = JSON.parse(localStorage.getItem('carrito')) || [];
-  // Si ya está, solo actualizamos cantidad
-  const indexExistente = carritoActual.findIndex(p => p.id === elemento.id);
-  if (indexExistente !== -1) {
-    carritoActual[indexExistente].cantidad++;
-  } else {
-    carritoActual.push(elemento);
-  }
-  localStorage.setItem('carrito', JSON.stringify(carritoActual));
-  sincronizarCarrito();
-}
-
-  function eliminarElemento(e) {
-    e.preventDefault();
-    if (e.target.classList.contains('borrar')) {
-      e.target.closest('tr').remove();
-    }
-  }
-
-  function vaciarCarrito(e) {
-    e.preventDefault();
-
-    // Vaciar la tabla del carrito
-    while (lista.firstChild) {
-      lista.removeChild(lista.firstChild);
-    }
-
-    // Vaciar el carrito en localStorage
-    localStorage.removeItem('carrito');
-
-    // Opcional: sincronizar si tienes función que actualiza la UI
-    // sincronizarCarrito();
-}
-
-});
-</script>
-
-
- 
- <!--  MENU HAMBURGUESA MEDIA MOVIL--> 
-
-<script>
-  const menuIcon = document.getElementById('menuToggle');
-  const menuDesplegable = document.getElementById('menuDesplegable');
-
-  let timeoutId;
-
-  // Función para mostrar menú y reiniciar temporizador
-  function mostrarMenu() {
-    menuDesplegable.style.display = 'block';
-
-    if (timeoutId) clearTimeout(timeoutId);
-
-    timeoutId = setTimeout(() => {
-      menuDesplegable.style.display = 'none';
-    }, 5000);
-  }
-
-  menuIcon.addEventListener('click', (e) => {
-    e.stopPropagation(); // Para que no se dispare el listener del documento
-    if (menuDesplegable.style.display === 'block') {
-      menuDesplegable.style.display = 'none';
-      if (timeoutId) clearTimeout(timeoutId);
-    } else {
-      mostrarMenu();
-    }
-  });
-
-  // Cancela temporizador si haces clic dentro del menú
-  menuDesplegable.addEventListener('click', (e) => {
-    e.stopPropagation(); // Evita que el clic se propague y cierre el menú
-    if (timeoutId) clearTimeout(timeoutId);
-  });
-
-  // Cierra el menú al hacer clic fuera del icono o menú
-  document.addEventListener('click', () => {
-    menuDesplegable.style.display = 'none';
-    if (timeoutId) clearTimeout(timeoutId);
-  });
-
-  
-</script>
-
-
-
-
-
-</body>
-</html>
-
-  <!-- NUEVA SECCION--> 
-<footer class="footer">
-   <div class="footer-content container">
-       
-       <div class="link"> 
-           <h3>Mi cuenta</h3>
-           <ul> 
-               <li><a href="propietario.html">Ingresar</a></li>
-              
-           </ul>
-       </div>
-
-         <div class="link"> 
-           <h3>Ayuda</h3>
-           <ul> 
-               <li><a href="https://wa.me/5218715952461?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20Infinity%20Store" target="_blank">Contáctanos</a></li>
-              <li><a href="tel:+5218715952461">Teléfono</a></li>
-              <li><a href="https://www.instagram.com/infinitylstore?igsh=Nmx1YTNxeDA1N3Ft" target="_blank">Instagram</a></li>
-             
-              
-           </ul>
-       </div>
-
-       <div class="link"> 
-           <h3>Sobre Nosotros</h3>
-           <ul> 
-               <li><a href="quienessomos.html">Quienes Somos</a></li>
-               <li><a href="devoluciones.html">Devoluciones</a></li>
-               <li><a href="pago.html">Pago</a></li>
-           </ul>
-       </div>
-
-     
-
-   </div>
-</footer>
-
-
-
-
-
-<script type="module" src="script.js"></script>
-
+   <!-- Contenedor FOOTER -->
     <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const listaSubmenu = document.querySelector('#lista-carrito');
-  if(!listaSubmenu) return;
-
-  const carritoLocal = JSON.parse(localStorage.getItem('carrito')) || [];
-  let total = 0;
-
-  carritoLocal.forEach(item => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td><img src="${item.imagen}" width="60px" alt="${item.titulo}"></td>
-      <td>${item.titulo}</td>
-      <td>$${parseFloat(item.precio).toFixed(2)}</td>
-      <td class="cantidad">${item.cantidad}</td>
-      <td><a href="#" class="borrar" data-id="${item.id}">x</a></td>
-    `;
-    listaSubmenu.appendChild(row);
-    total += item.cantidad * parseFloat(item.precio);
-  });
-
-  const totalAmount = document.querySelector('.total-amount strong');
-  if(totalAmount) totalAmount.textContent = `$${total.toFixed(2)}`;
-});
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar el footer:', error));
 </script>
+
+  
+  <!-- CONTENIDO PORTADA -->
+<main>
+  <!-- Imagen de portada con texto inclinado -->
+<section class="portada">
+  <h1 class="portada-titulo">
+    El poder <br>
+    del fuego <br>
+    nos une
+  </h1>
+  <img src="images/Portada.png" alt="Portada Infinity Store">
+</section>
+
+
+  <!-- CONTENIDO SECCION 2 -->
+   <!-- NUESTROS CORTES -->
+<!-- CONTENIDO SECCION 2 --> 
+<!-- NUESTROS CORTES -->
+<section class="nuestros-cortes">
+  <h2>Nuestros Cortes</h2>
+  <div class="cortes-container">
+
+    <!-- Ribeye -->
+    <div class="corte-card">
+      <div class="corte-img">
+        <img src="images/carne2.jpg" alt="Ribeye">
+      </div>
+      <h3>Ribeye</h3>
+      <p>Rápido a la parrilla</p>
+      <button>Comprar</button>
+    </div>
+
+    <!-- Arrachera -->
+    <div class="corte-card">
+      <div class="corte-img">
+        <img src="images/carne2.jpg" alt="Arrachera">
+      </div>
+      <h3>Arrachera</h3>
+      <p>Fácil de marinar</p>
+      <button>Comprar</button>
+    </div>
+
+    <!-- New York -->
+    <div class="corte-card">
+      <div class="corte-img">
+        <img src="images/carne2.jpg" alt="New York">
+      </div>
+      <h3>New York</h3>
+      <p>Hazlo al sartén</p>
+      <button>Comprar</button>
+    </div>
+
+    <!-- Sirloin -->
+    <div class="corte-card">
+      <div class="corte-img">
+        <img src="images/carne2.jpg" alt="Sirloin">
+      </div>
+      <h3>Sirloin</h3>
+      <p>Buena elección</p>
+      <button>Comprar</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- UBICACION -->
+<section class="ubicacion" id="ubicacion">
+  <div class="ubicacion-container">
+    <div class="ubicacion-texto">
+      <h2>Ubicación</h2>
+      <p>
+        Paseo de las Flores y Paseo del Campestre s/n,<br>
+        Colonia Campestre La Rosita,<br>
+        C.P. 27250, Torreón, Coahuila, México
+      </p>
+      <!-- Botón que lleva a Google Maps -->
+      <a href="https://www.google.com/maps/place/Paseo+de+las+Flores+y+Paseo+del+Campestre,+Torreón,+Coahuila,+México" target="_blank" class="btn-mapa">
+        Ver en Google Maps
+      </a>
+    </div>
+    <div class="ubicacion-mapa">
+      <!-- Imagen que también lleva a Google Maps -->
+      <a href="https://www.google.com/maps/place/Paseo+de+las+Flores+y+Paseo+del+Campestre,+Torreón,+Coahuila,+México" target="_blank">
+        <img src="images/mapa.png" alt="Ver Ubicación">
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+  <!-- RECETAS -->
+   <!-- RECETAS -->
+<section class="recetas" id="recetas">
+  <h2>RECETAS SENCILLAS</h2>
+
+  <div class="recetas-container">
+
+    <a href="parrilla.html" class="receta-card">
+      <img src="images/Parrilla.jpg" alt="Parrilla">
+      <span>Parrilla</span>
+    </a>
+
+    <a href="cocina.html" class="receta-card">
+      <img src="images/cocina.png" alt="Cocina">
+      <span>Cocina</span>
+    </a>
+
+    <a href="diaadia.html" class="receta-card">
+      <img src="images/diadia.jpg" alt="Día a día">
+      <span>Día a día</span>
+    </a>
+
+  </div>
+</section>
+
+
+
+ <!-- COMO ES ATONITO -->
+  <section class="atonito">
+  <h2>¿CÓMO ES ATONITO?</h2>
+
+  <div class="atonito-container">
+
+    <div class="atonito-card">
+      <img src="images/frescura.png" alt="Calidad">
+      <span>Cortes Frescos Diarios</span>
+    </div>
+
+    <div class="atonito-card">
+      <img src="images/sencillo.png" alt="Proceso">
+      <span>Preparación Facil</span>
+    </div>
+
+    <div class="atonito-card">
+      <img src="images/paratodos.png" alt="Sabor">
+      <span>Recomendado Por Familias</span>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+ <!-- CERTIFICACIONES-->
+<section class="certificaciones">
+
+  <!-- VIDEO DE FONDO -->
+  <video class="certificaciones-bg" autoplay muted loop playsinline>
+    <source src="video/parrilla2.mp4" type="video/mp4">
+    Tu navegador no soporta video.
+  </video>
+
+  <!-- CONTENIDO ENCIMA -->
+  <div class="certificaciones-content">
+    <h2>NUESTRAS CERTIFICACIONES</h2>
+  <div class="certificaciones-container">
+    <img src="images/certificado.png" alt="Certificación 1">
+    <img src="images/certificado.png" alt="Certificación 2">
+    <img src="images/certificado.png" alt="Certificación 3">
+    <img src="images/certificado.png" alt="Certificación 4">
+  </div>
+
+  <!-- FILA 2 -->
+  <div class="certificaciones-container segunda-fila">
+    <img src="images/certificado.png" alt="Certificación 5">
+    <img src="images/certificado.png" alt="Certificación 6">
+    <img src="images/certificado.png" alt="Certificación 7">
+    <img src="images/certificado.png" alt="Certificación 8">
+  </div>
+</div>
+
+</section>
+
+
+  <!-- SCRIPTS -->
+
+ <!-- TRANSICION RECETAS Y UBICACION  -->
+
 <script>
-  (function(){
-    // TITULOS un poquito más grandes
-    document.querySelectorAll('.icons.container .icon-1 .icon-txt h3').forEach(el=>{
-      el.style.setProperty('font-size','13px','important');  // antes 10px
-      el.style.setProperty('line-height','1.1','important');
-      el.style.setProperty('margin-bottom','3px','important');
+  function centerSectionById(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const elementTop = target.getBoundingClientRect().top + window.scrollY;
+    const offset = window.innerHeight / 2 - target.offsetHeight / 2;
+
+    window.scrollTo({
+      top: elementTop - offset,
+      behavior: 'smooth'
     });
-    // PÁRRAFOS un poquito más grandes
-    document.querySelectorAll('.icons.container .icon-1 .icon-txt p, .icons.container .icon-1 .icon-txt P').forEach(el=>{
-      el.style.setProperty('font-size','11px','important');  // antes 8px
-      el.style.setProperty('line-height','1.2','important');
-      el.style.setProperty('margin','0','important');
-    });
-    // IMÁGENES
-    document.querySelectorAll('.icons.container .icon-1 .icon-img img').forEach(el=>{
-      el.style.setProperty('height','40px','important');  // antes 36px
-      el.style.setProperty('width','auto','important');
-      el.style.setProperty('margin-bottom','4px','important');
-    });
-  })();
+  }
+
+  // Esperamos a que todo el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Cargar Navbar
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+
+        // Scroll centrado al hacer click en navbar
+        const links = document.querySelectorAll('#navbar-container a[href^="index.html#"]');
+        links.forEach(link => {
+          link.addEventListener('click', e => {
+            e.preventDefault();
+            const id = link.getAttribute('href').split('#')[1];
+            centerSectionById(id);
+            history.pushState(null, null, '#' + id);
+          });
+        });
+
+        // Si llegamos con hash desde otra página, centramos la sección
+        if (window.location.hash) {
+          const hashId = window.location.hash.substring(1);
+          // Pequeña espera para asegurar que el DOM y navbar estén listos
+          setTimeout(() => centerSectionById(hashId), 100);
+        }
+
+      })
+      .catch(err => console.error(err));
+  });
 </script>
+
+
+
+
+  <!-- SCRIPT NAVBAR -->
+  <script>
+    // Cargar Navbar desde navbar.html
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error al cargar la Navbar:', error));
+  </script>
+
+  <script type="module" src="script.js"></script>
+  
+
+  <!-- FOOTER -->
+
+
+<div id="footer-container"></div>
+
 
 </body>
 </html>
+
+
+</body>
+</html>
+
+

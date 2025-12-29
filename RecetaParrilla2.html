@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Receta Parrilla</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="parrilla.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="recetaparrilla.css">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div id="navbar-container"></div>
+
+  <main class="receta-container">
+
+    <h1>Brochetas de Carne a la Parrilla</h1>
+
+    <!-- BLOQUE PRINCIPAL -->
+    <section class="card principal">
+
+      <img src="images/Recetaparrilla/2.jpg" alt="Brochetas de carne a la parrilla">
+
+      <div class="info">
+        <h2>Grilled Beef Kebabs</h2>
+<h3>INGREDIENTES</h3>
+<ul>
+  <li>• 700 g de punta de sirloin de res, en cubos</li>
+  <li>• 3 cdas aceite de oliva</li>
+  <li>• 2 cdas vinagre de vino tinto</li>
+  <li>• 1 cdta ajo granulado</li>
+  <li>• 1 cdta comino molido</li>
+  <li>• 1 cdta paprika dulce</li>
+  <li>• 1 cdta orégano seco</li>
+  <li>• Sal kosher al gusto</li>
+  <li>• Pimienta negra al gusto</li>
+  <li>• 1 cebolla dulce en trozos</li>
+  <li>• Pimiento rojo en cubos</li>
+  <li>• Pimiento amarillo en cubos</li>
+  <li>• Pimiento naranja en cubos</li>
+  <li>• Tzatziki para servir</li>
+</ul>
+
+
+        <div class="meta">
+          <span>⏱ Prep 15 min · Marinado 4–8 h · Cocción 12 min</span>
+          <span>👤👤👤 Porciones 3–4</span>
+          <span>⭐ Dificultad: Fácil</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- BLOQUES SECUNDARIOS -->
+    <section class="grid-2">
+
+      <!-- CORTE RECOMENDADO (SE QUEDA IGUAL) -->
+      <div class="card">
+        <h3>Corte recomendado</h3>
+        <img src="images/carne1.jpg" class="mini-img" alt="Sirloin de res">
+        <p><strong>Sirloin de res</strong></p>
+        <p>Asado directo · 10–12 min</p>
+
+        <button class="btn-carrito">
+          <img src="images/logocarrito.png" alt="Carrito">
+        </button>
+      </div>
+
+      <!-- ESPECIAS (SE QUEDA IGUAL) -->
+      <div class="card">
+        <h3>Especias Recomendadas</h3>
+
+        <div class="especias">
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Nombre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Nombre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+          <div class="especia-item">
+            <img src="images/complemento.png" alt="Especia">
+            <p>Nombre</p>
+            <button class="btn-comprar">Comprar</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PREPARACIÓN -->
+    <section class="card">
+      <h3>🔥 Preparación</h3>
+
+ <h4>Marinado</h4>
+<ul>
+  <li>– Coloca la carne en un bowl grande o bolsa hermética.</li>
+  <li>– Agrega aceite, vinagre, ajo, comino, paprika, orégano, sal y pimienta.</li>
+  <li>– Mezcla bien hasta cubrir toda la carne.</li>
+  <li>– Marina en refrigeración mínimo 4 horas (ideal 6–8 h).</li>
+</ul>
+
+
+      <h4>Parrilla</h4>
+<ul>
+  <li>– Precalienta la parrilla a fuego medio-alto.</li>
+  <li>– Ensarta la carne en brochetas alternando con cebolla y pimientos.</li>
+  <li>– Asa sobre fuego directo, girando cada 3–4 min.</li>
+  <li>– Cocina 10–12 min hasta dorar y alcanzar el término deseado.</li>
+  <li>– Deja reposar 5 min antes de servir.</li>
+</ul>
+
+    </section>
+
+    <!-- TIP -->
+    <section class="card tip">
+      <h3>💡 Tip Antonito</h3>
+      <ul>
+        <li>Si usas brochetas de madera, remójalas 30–60 min antes.</li>
+        <li>Corta carne y verduras del mismo tamaño para cocción uniforme.</li>
+        <li>Sirve en una charola grande con tzatziki y pan pita caliente.</li>
+        <li>Reposar la carne ayuda a que quede más jugosa.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer-container"></div>
+
+  <!-- SCRIPTS -->
+  <script>
+    fetch('navbar.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('navbar-container').innerHTML = d);
+
+    fetch('footer.html')
+      .then(r => r.text())
+      .then(d => document.getElementById('footer-container').innerHTML = d);
+  </script>
+
+  <script type="module" src="script.js"></script>
+
+</body>
+</html>
